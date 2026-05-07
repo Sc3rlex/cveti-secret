@@ -79,7 +79,7 @@ const Header = ({ activePage, onNavigate }) => {
         </button>
         {/* Logo centered */}
         <div onClick={() => go('home')} style={{ position:'absolute', left:'50%', transform:'translateX(-50%)', cursor:'pointer' }}>
-          <span style={{ fontFamily:"'Cinzel',serif", fontSize:'13px', fontWeight:600, letterSpacing:'0.08em', color:'#f0e8d0', whiteSpace:'nowrap' }}>Cveti's Secret</span>
+          <img src="assets/logo-ring-bronze.png" alt="Cveti's Secret" style={{ height:'34px', display:'block' }} />
         </div>
         {/* Phone */}
         <div style={{ marginLeft:'auto' }}>
@@ -118,11 +118,12 @@ const Header = ({ activePage, onNavigate }) => {
   // Desktop
   return (
     <header style={{ position:'fixed', top:0, left:0, right:0, zIndex:100, background:'rgba(10,10,10,0.96)', backdropFilter:'blur(10px)', borderBottom:'1px solid rgba(255,255,255,0.06)', height:'64px', display:'flex', alignItems:'center', padding:'0 36px' }}>
+      {/* Logo left */}
       <div onClick={() => onNavigate('home')} style={{ cursor:'pointer', flexShrink:0 }}>
-        <span style={{ fontFamily:"'Cinzel',serif", fontSize:'15px', fontWeight:600, letterSpacing:'0.08em', color:'#f0e8d0' }}>Cveti's Secret</span>
+        <img src="assets/logo-ring-bronze.png" alt="Cveti's Secret" style={{ height:'46px', display:'block' }} />
       </div>
-      <div style={{ width:'1px', height:'22px', background:'rgba(255,255,255,0.25)', margin:'0 28px', flexShrink:0 }} />
-      <nav style={{ display:'flex', gap:'36px', alignItems:'center' }}>
+      {/* Nav centered */}
+      <nav style={{ flex:1, display:'flex', gap:'36px', alignItems:'center', justifyContent:'center' }}>
         {navLinks.map(link => (
           <span key={link.id} onClick={() => onNavigate(link.id)}
             style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.06em', color: activePage===link.id ? '#c9a84c' : 'rgba(240,232,208,0.75)', cursor:'pointer', transition:'color 0.3s ease', whiteSpace:'nowrap' }}
@@ -131,7 +132,12 @@ const Header = ({ activePage, onNavigate }) => {
           >{link.label}</span>
         ))}
       </nav>
-      <div style={{ flex:1 }} />
+      {/* Phone right */}
+      <a href={`tel:${PHONE}`} style={{ flexShrink:0, display:'flex', alignItems:'center', gap:'8px', padding:'9px 18px', borderRadius:'4px', border:'1px solid rgba(201,168,76,0.5)', color:'#c9a84c', textDecoration:'none', fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.12em', transition:'all 0.3s ease' }}
+        onMouseEnter={e=>{e.currentTarget.style.background='rgba(201,168,76,0.08)';e.currentTarget.style.borderColor='#c9a84c';}}
+        onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor='rgba(201,168,76,0.5)';}}>
+        <PhoneIcon /> Запази час
+      </a>
     </header>
   );
 };
@@ -570,8 +576,17 @@ const Contact = () => {
   );
 };
 
+// ── Before/After Data — set image paths here ─────────────────────
+// Set 'before' and 'after' to paths like 'assets/before-balaj.jpg'
+// Leave as '' to show a placeholder until you add the image files
+const BEFORE_AFTER_DATA = [
+  { label: 'Балаж',   before: '', after: '' },
+  { label: 'Омбре',   before: '', after: '' },
+  { label: 'Маникюр', before: '', after: '' },
+];
+
 // ── Before/After Slider (touch + mouse) ──────────────────────────
-const BeforeAfterSlider = ({ label }) => {
+const BeforeAfterSlider = ({ label, before, after }) => {
   const isMobile = useIsMobile();
   const [pos, setPos] = React.useState(50);
   const [active, setActive] = React.useState(false);
@@ -595,13 +610,21 @@ const BeforeAfterSlider = ({ label }) => {
       onTouchStart={e => { dragging.current = true; setActive(true); setTouchedOnce(true); updatePos(e.touches[0].clientX); }}
       onTouchMove={e => { e.preventDefault(); if (dragging.current) updatePos(e.touches[0].clientX); }}
       onTouchEnd={() => { dragging.current = false; setActive(false); }}
-      style={{ position:'relative', width: isMobile ? '80vw' : '280px', maxWidth:'320px', height:'320px', borderRadius:'10px', overflow:'hidden', border:'1px solid rgba(201,168,76,0.3)', cursor: isMobile ? 'grab' : 'col-resize', flexShrink:0, userSelect:'none', touchAction:'none' }}
+      style={{ position:'relative', width: isMobile ? '100%' : '300px', maxWidth: isMobile ? '480px' : '300px', height:'300px', borderRadius:'10px', overflow:'hidden', border:'1px solid rgba(201,168,76,0.3)', cursor: isMobile ? 'grab' : 'col-resize', flexShrink:0, userSelect:'none', touchAction:'none' }}
     >
-      <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg,#1a2a10,#0d1a08,#0a0d0a)', display:'flex', alignItems:'center', justifyContent:'center' }}>
-        <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.14em', color:'rgba(201,168,76,0.3)', textTransform:'uppercase' }}>После</span>
+      {/* After — background, visible on right */}
+      <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg,#1a2a10,#0d1a08,#0a0d0a)', display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden' }}>
+        {after
+          ? <img src={after} alt="после" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+          : <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.14em', color:'rgba(201,168,76,0.3)', textTransform:'uppercase' }}>После</span>
+        }
       </div>
-      <div style={{ position:'absolute', inset:0, clipPath:`inset(0 ${100-pos}% 0 0)`, transition: active?'none':'clip-path 0.05s ease', background:'linear-gradient(135deg,#2a1e08,#1a1208,#0d0d0d)', display:'flex', alignItems:'center', justifyContent:'center' }}>
-        <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.14em', color:'rgba(201,168,76,0.3)', textTransform:'uppercase' }}>Преди</span>
+      {/* Before — clipped, visible on left */}
+      <div style={{ position:'absolute', inset:0, clipPath:`inset(0 ${100-pos}% 0 0)`, transition: active?'none':'clip-path 0.05s ease', background:'linear-gradient(135deg,#2a1e08,#1a1208,#0d0d0d)', display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden' }}>
+        {before
+          ? <img src={before} alt="преди" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+          : <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.14em', color:'rgba(201,168,76,0.3)', textTransform:'uppercase' }}>Преди</span>
+        }
       </div>
       <div style={{ position:'absolute', top:0, bottom:0, left:`${pos}%`, width:'2px', background:'linear-gradient(180deg,transparent,#c9a84c 20%,#f5e6a3 50%,#c9a84c 80%,transparent)', transform:'translateX(-50%)', boxShadow:'0 0 8px rgba(201,168,76,0.6)', pointerEvents:'none' }} />
       <div style={{ position:'absolute', top:'50%', left:`${pos}%`, transform:'translate(-50%,-50%)', width:'36px', height:'36px', borderRadius:'50%', background:'linear-gradient(135deg,#f5e6a3,#c9a84c)', boxShadow:'0 0 12px rgba(201,168,76,0.7)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'12px', color:'#0a0a0a', fontWeight:700, pointerEvents:'none' }}>⇔</div>
@@ -635,7 +658,7 @@ const InstagramEmbed = ({ url }) => {
   }, [url]);
   return (
     <div className="ig-wrapper" ref={wrapperRef}>
-      <blockquote className="instagram-media" data-instgrm-captioned data-instgrm-permalink={`${url}?utm_source=ig_embed&utm_campaign=loading`} data-instgrm-version="14"
+      <blockquote className="instagram-media" data-instgrm-permalink={`${url}?utm_source=ig_embed&utm_campaign=loading`} data-instgrm-version="14"
         style={{ background:'#FFF', border:0, margin:0, maxWidth:'326px', minWidth:'326px', padding:0, width:'326px' }} />
     </div>
   );
@@ -661,15 +684,15 @@ const Gallery = () => {
         </div>
         <div style={{ marginBottom:'40px', paddingRight: isMobile ? '20px' : '40px' }}>
           <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', color:'rgba(201,168,76,0.45)', textTransform:'uppercase', marginBottom:'16px' }}>Преди & След — {isMobile ? 'плъзни' : 'движи мишката'}</div>
-          <div style={{ display:'flex', gap:'20px', overflowX:'auto', paddingBottom:'8px' }}>
-            {['Балаж','Омбре','Маникюр'].map((label,i) => <BeforeAfterSlider key={i} label={label} />)}
+          <div style={{ display:'flex', flexDirection: isMobile ? 'column' : 'row', gap:'20px', alignItems: isMobile ? 'center' : undefined, justifyContent: isMobile ? undefined : 'center', paddingBottom: isMobile ? '0' : '8px' }}>
+            {(isMobile ? BEFORE_AFTER_DATA.slice(0,2) : BEFORE_AFTER_DATA).map((d,i) => <BeforeAfterSlider key={i} label={d.label} before={d.before} after={d.after} />)}
           </div>
         </div>
         <div style={{ position:'relative' }}>
           <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', color:'rgba(201,168,76,0.45)', textTransform:'uppercase', marginBottom:'16px' }}>Instagram</div>
           {!isMobile && <button onClick={()=>scroll(-1)} style={{ position:'absolute', left:'-20px', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'rgba(10,10,10,0.9)', border:'1px solid rgba(201,168,76,0.3)', borderRadius:'50%', width:'36px', height:'36px', color:'#c9a84c', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>‹</button>}
           {!isMobile && <button onClick={()=>scroll(1)} style={{ position:'absolute', right:'20px', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'rgba(10,10,10,0.9)', border:'1px solid rgba(201,168,76,0.3)', borderRadius:'50%', width:'36px', height:'36px', color:'#c9a84c', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>›</button>}
-          <div ref={scrollRef} style={{ display:'flex', gap:'16px', overflowX:'auto', paddingBottom:'16px', paddingRight: isMobile ? '20px' : '40px', scrollbarWidth:'none', msOverflowStyle:'none' }}>
+          <div ref={scrollRef} style={{ display:'flex', gap:'16px', overflowX:'auto', paddingBottom:'16px', paddingRight: isMobile ? '20px' : '40px', scrollbarWidth:'none', msOverflowStyle:'none', justifyContent:'center' }}>
             {INSTAGRAM_POSTS.map((url, i) => <InstagramEmbed key={i} url={url} />)}
           </div>
         </div>
