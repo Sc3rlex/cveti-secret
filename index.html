@@ -23,7 +23,7 @@
   .ig-wrapper iframe { width:326px !important; }
   .cat-tabs::-webkit-scrollbar { display:none; }
 </style>
-<script async src="//www.instagram.com/embed.js"></script>
+<!-- embed.js is loaded dynamically by React after mount -->
 </head>
 <body>
 <div id="root"></div>
@@ -743,23 +743,40 @@ const BeforeAfterSlider = ({ label, before, after }) => {
 
 // ── Gallery ───────────────────────────────────────────────────────
 const INSTAGRAM_POSTS = [
-  'https://www.instagram.com/p/DR10m44iJie/?img_index=1',
+  'https://www.instagram.com/p/DWs7LU6jMVh/',
   'https://www.instagram.com/p/DScSloDDUJY/',
   'https://www.instagram.com/p/DScSloDDUJY/',
 ];
 
+// Loads Instagram embed.js once, then processes all blockquotes
+const loadInstagramEmbed = () => {
+  return new Promise(resolve => {
+    if (window.instgrm) { resolve(); return; }
+    const existing = document.querySelector('script[src*="instagram.com/embed"]');
+    if (existing) { existing.addEventListener('load', resolve); return; }
+    const s = document.createElement('script');
+    s.src = 'https://www.instagram.com/embed.js';
+    s.async = true;
+    s.onload = resolve;
+    document.body.appendChild(s);
+  });
+};
+
 const InstagramEmbed = ({ url }) => {
-  const wrapperRef = React.useRef(null);
   React.useEffect(() => {
-    const process = () => { if (window.instgrm) window.instgrm.Embeds.process(); };
-    const delays = [100, 500, 1000, 2000, 4000];
-    const timers = delays.map(d => setTimeout(process, d));
-    return () => timers.forEach(clearTimeout);
+    loadInstagramEmbed().then(() => {
+      if (window.instgrm) window.instgrm.Embeds.process();
+    });
   }, [url]);
   return (
-    <div className="ig-wrapper" ref={wrapperRef}>
-      <blockquote className="instagram-media" data-instgrm-permalink={`${url}?utm_source=ig_embed&utm_campaign=loading`} data-instgrm-version="14"
-        style={{ background:'#FFF', border:0, margin:0, maxWidth:'326px', minWidth:'326px', padding:0, width:'326px' }} />
+    <div className="ig-wrapper">
+      <blockquote
+        className="instagram-media"
+        data-instgrm-permalink={url}
+        data-instgrm-version="14"
+        data-instgrm-captionhidden="1"
+        style={{ background:'#FFF', border:0, margin:0, maxWidth:'326px', minWidth:'326px', padding:0, width:'326px' }}
+      ></blockquote>
     </div>
   );
 };
