@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cveti's Secret — Академия</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:#0a0a0a; color:#f0e8d0; font-family:'Cormorant Garamond',serif; -webkit-font-smoothing:antialiased; }
+  .acad-input { width:100%; background:#1a1a1a; border:1px solid rgba(184,115,51,0.25); border-radius:5px; padding:12px 16px; font-family:'Cormorant Garamond',serif; font-size:16px; color:#f0e8d0; outline:none; transition:border-color 0.3s ease; }
+  .acad-input:focus { border-color:rgba(184,115,51,0.6); box-shadow:0 0 12px rgba(184,115,51,0.1); }
+  .acad-input::placeholder { color:#6e5e42; }
+  textarea.acad-input { resize:vertical; min-height:90px; }
+  div::-webkit-scrollbar { display:none; }
+  select.acad-input { cursor:pointer; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b87333' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+const useIsMobile = () => {
+  const [m, setM] = React.useState(() => window.innerWidth < 768);
+  React.useEffect(() => {
+    const h = () => setM(window.innerWidth < 768);
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
+  }, []);
+  return m;
+};
+
+const PHONE = '+359000000000';
+
+const PhoneIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.68 13.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.6a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 18z"/>
+  </svg>
+);
+
+// ── Header ────────────────────────────────────────────────────────
+const Header = () => {
+  const isMobile = useIsMobile();
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  const navLinks = [
+    { id:'home',    label:'Начало',   href:'index.html' },
+    { id:'services',label:'Услуги',   href:'index.html#services' },
+    { id:'salon',   label:'Салонът',  href:'index.html#salon' },
+    { id:'gallery', label:'Галерия',  href:'index.html#gallery' },
+    { id:'contact', label:'Контакти', href:'index.html#contact' },
+  ];
+
+  React.useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  if (isMobile) return (
+    <>
+      <header style={{ position:'fixed', top:0, left:0, right:0, zIndex:100, background:'rgba(10,10,10,0.96)', backdropFilter:'blur(10px)', borderBottom:'1px solid rgba(255,255,255,0.06)', height:'56px', display:'flex', alignItems:'center', padding:'0 16px' }}>
+        <button onClick={() => setMenuOpen(true)} style={{ background:'transparent', border:'none', cursor:'pointer', padding:'8px 8px 8px 0', display:'flex', flexDirection:'column', gap:'5px', flexShrink:0 }}>
+          {[0,1,2].map(i => <div key={i} style={{ width:'22px', height:'2px', background:'#b87333', borderRadius:'2px' }} />)}
+        </button>
+        <a href="index.html" style={{ position:'absolute', left:'50%', transform:'translateX(-50%)', cursor:'pointer', textDecoration:'none' }}>
+          <img src="assets/logo-ring-bronze.png" alt="Cveti's Secret" style={{ height:'34px', display:'block' }} />
+        </a>
+        <div style={{ marginLeft:'auto' }}>
+          <a href={`tel:${PHONE}`} style={{ display:'flex', alignItems:'center', justifyContent:'center', width:'36px', height:'36px', borderRadius:'50%', border:'1px solid rgba(184,115,51,0.5)', color:'#b87333', textDecoration:'none' }}>
+            <PhoneIcon />
+          </a>
+        </div>
+      </header>
+
+      <div style={{ position:'fixed', inset:0, zIndex:200, pointerEvents: menuOpen ? 'all' : 'none' }}>
+        <div onClick={() => setMenuOpen(false)} style={{ position:'absolute', inset:0, background:'rgba(0,0,0,0.75)', opacity: menuOpen ? 1 : 0, transition:'opacity 0.3s ease' }} />
+        <div style={{ position:'absolute', left:0, top:0, bottom:0, width:'75vw', maxWidth:'300px', background:'#0c0c0c', borderRight:'1px solid rgba(184,115,51,0.15)', transform: menuOpen ? 'translateX(0)' : 'translateX(-100%)', transition:'transform 0.38s cubic-bezier(0.16,1,0.3,1)', display:'flex', flexDirection:'column', overflow:'hidden' }}>
+          <div style={{ height:'2px', background:'linear-gradient(90deg,#b87333,rgba(184,115,51,0.1))', flexShrink:0 }} />
+          <div style={{ padding:'28px 24px 22px', borderBottom:'1px solid rgba(184,115,51,0.08)' }}>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:'15px', fontWeight:600, letterSpacing:'0.12em', background:'linear-gradient(90deg,#edd9bc,#b87333)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>Cveti's Secret</div>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', fontStyle:'italic', color:'#9e8e6a', marginTop:'3px', letterSpacing:'0.1em' }}>Academy</div>
+          </div>
+          <nav style={{ flex:1, padding:'12px 0', overflowY:'auto' }}>
+            {navLinks.map(link => (
+              <a key={link.id} href={link.href} style={{ display:'block', padding:'15px 24px', cursor:'pointer', fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.12em', textTransform:'uppercase', color:'rgba(240,232,208,0.55)', borderLeft:'2px solid transparent', background:'transparent', transition:'all 0.2s ease', textDecoration:'none' }}>
+                {link.label}
+              </a>
+            ))}
+            <a href="academy.html" style={{ display:'block', padding:'15px 24px', fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.12em', textTransform:'uppercase', color:'#b87333', borderLeft:'2px solid #b87333', background:'rgba(184,115,51,0.05)', textDecoration:'none' }}>
+              Академия ✦
+            </a>
+          </nav>
+          <div style={{ padding:'20px 24px', borderTop:'1px solid rgba(184,115,51,0.08)' }}>
+            <a href={`tel:${PHONE}`} style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'8px', padding:'13px', borderRadius:'6px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.14em', textTransform:'uppercase', color:'#0a0a0a', textDecoration:'none' }}>
+              <PhoneIcon /> Запази час
+            </a>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
+  return (
+    <header style={{ position:'fixed', top:0, left:0, right:0, zIndex:100, background:'rgba(10,10,10,0.96)', backdropFilter:'blur(10px)', borderBottom:'1px solid rgba(255,255,255,0.06)', height:'76px', display:'flex', alignItems:'center', padding:'0 40px' }}>
+      <a href="index.html" style={{ cursor:'pointer', flexShrink:0, textDecoration:'none' }}>
+        <img src="assets/logo-ring-bronze.png" alt="Cveti's Secret" style={{ height:'60px', display:'block' }} />
+      </a>
+      <nav style={{ flex:1, display:'flex', gap:'40px', alignItems:'center', justifyContent:'center' }}>
+        {navLinks.map(link => (
+          <a key={link.id} href={link.href}
+            style={{ fontFamily:"'Cinzel',serif", fontSize:'14px', letterSpacing:'0.1em', color:'rgba(240,232,208,0.8)', cursor:'pointer', transition:'color 0.3s ease', whiteSpace:'nowrap', textDecoration:'none' }}
+            onMouseEnter={e => e.target.style.color='#b87333'}
+            onMouseLeave={e => e.target.style.color='rgba(240,232,208,0.8)'}
+          >{link.label}</a>
+        ))}
+        <a href="academy.html"
+          style={{ fontFamily:"'Cinzel',serif", fontSize:'14px', letterSpacing:'0.1em', color:'#b87333', cursor:'pointer', transition:'color 0.3s ease', whiteSpace:'nowrap', textDecoration:'none' }}
+        >Академия</a>
+      </nav>
+      <a href={`tel:${PHONE}`} style={{ flexShrink:0, display:'flex', alignItems:'center', gap:'9px', padding:'11px 22px', borderRadius:'4px', border:'1px solid rgba(184,115,51,0.5)', color:'#b87333', textDecoration:'none', fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.12em', transition:'all 0.3s ease' }}
+        onMouseEnter={e=>{e.currentTarget.style.background='rgba(184,115,51,0.08)';e.currentTarget.style.borderColor='#b87333';}}
+        onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor='rgba(184,115,51,0.5)';}}>
+        <PhoneIcon /> Запази час
+      </a>
+    </header>
+  );
+};
+
+// ── Academy data ──────────────────────────────────────────────────
+const COURSES = [
+  { id:'cut',    icon:'✂',  title:'Подстригване',       subtitle:'Техники за рязане & оформяне', duration:'2 дни' },
+  { id:'color',  icon:'🎨', title:'Боядисване & Балаж', subtitle:'Колоризация, омбре, кичури',    duration:'3 дни' },
+  { id:'style',  icon:'💫', title:'Прически & Плитки',  subtitle:'Официални & ежедневни стилове', duration:'2 дни' },
+  { id:'tools',  icon:'💨', title:'Маша & Изправяне',   subtitle:'Работа с уреди & термозащита',  duration:'1 ден'  },
+  { id:'nails',  icon:'💅', title:'Маникюр & Педикюр',  subtitle:'Гел, акрил & класически техники',duration:'3 дни' },
+  { id:'makeup', icon:'💄', title:'Грим',               subtitle:'Дневен, вечерен & сватбен грим', duration:'2 дни' },
+  { id:'full',   icon:'⭐', title:'Пълна програма',     subtitle:'Всички модули включени',         duration:'2 сед.' },
+];
+
+const DURATIONS = [
+  { id:'demo',    label:'Демо урок',      desc:'1–2 ч.  · Запознавателно занятие' },
+  { id:'weekend', label:'Уикенд курс',    desc:'Събота + Неделя · 2 пълни дни' },
+  { id:'week',    label:'Седмичен курс',  desc:'5 дни · Пон – Пет' },
+  { id:'full',    label:'Пълна програма', desc:'По договаряне · Индивидуален план' },
+];
+
+// ── Wizard ────────────────────────────────────────────────────────
+const AcademyWizard = () => {
+  const isMobile = useIsMobile();
+  const [step, setStep] = React.useState(1);
+  const [course, setCourse] = React.useState(null);
+  const [duration, setDuration] = React.useState(null);
+  const [date, setDate] = React.useState('');
+  const [form, setForm] = React.useState({ name:'', phone:'', email:'', notes:'' });
+  const [submitted, setSubmitted] = React.useState(false);
+
+  const canNext1 = !!course;
+  const canNext2 = !!duration && !!date;
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  // Step indicator
+  const StepDot = ({ n, label }) => {
+    const done    = step > n;
+    const active  = step === n;
+    return (
+      <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
+        <div style={{ width:'36px', height:'36px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, background: done ? '#b87333' : active ? 'transparent' : 'transparent', border: done ? 'none' : active ? '2px solid #b87333' : '2px solid rgba(184,115,51,0.25)', transition:'all 0.4s ease' }}>
+          {done
+            ? <span style={{ color:'#0a0a0a', fontSize:'14px', fontWeight:700 }}>✓</span>
+            : <span style={{ fontFamily:"'Cinzel',serif", fontSize:'13px', fontWeight:600, color: active ? '#b87333' : 'rgba(184,115,51,0.35)' }}>{n}</span>
+          }
+        </div>
+        {!isMobile && <span style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.14em', textTransform:'uppercase', color: active ? '#edd9bc' : done ? '#b87333' : 'rgba(240,232,208,0.3)', whiteSpace:'nowrap' }}>{label}</span>}
+      </div>
+    );
+  };
+
+  const StepConnector = ({ n }) => (
+    <div style={{ flex:1, height:'1px', background: step > n ? 'linear-gradient(90deg,#b87333,rgba(184,115,51,0.4))' : 'rgba(184,115,51,0.15)', transition:'background 0.4s ease', margin:'0 8px' }} />
+  );
+
+  // ── Step 1 — Choose course ──
+  const Step1 = () => (
+    <div>
+      <div style={{ textAlign:'center', marginBottom: isMobile ? '32px' : '44px' }}>
+        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, marginBottom:'8px' }}>Избери курс</h3>
+        <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em' }}>Кое умение искаш да развиеш?</p>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap: isMobile ? '12px' : '16px', marginBottom:'40px' }}>
+        {COURSES.map(c => {
+          const sel = course?.id === c.id;
+          return (
+            <div key={c.id} onClick={() => setCourse(c)}
+              style={{ background: sel ? 'rgba(184,115,51,0.12)' : '#1a1a1a', border:`1.5px solid ${sel ? '#b87333' : 'rgba(184,115,51,0.2)'}`, borderRadius:'12px', padding: isMobile ? '18px 12px' : '22px 16px', cursor:'pointer', textAlign:'center', transition:'all 0.3s ease', boxShadow: sel ? '0 0 24px rgba(184,115,51,0.2)' : 'none', transform: sel ? 'translateY(-2px)' : 'translateY(0)' }}
+              onMouseEnter={e => { if(!sel) e.currentTarget.style.borderColor='rgba(184,115,51,0.5)'; }}
+              onMouseLeave={e => { if(!sel) e.currentTarget.style.borderColor='rgba(184,115,51,0.2)'; }}
+            >
+              <div style={{ fontSize: isMobile ? '28px' : '32px', marginBottom:'8px', lineHeight:1 }}>{c.icon}</div>
+              <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '10px' : '12px', fontWeight:600, letterSpacing:'0.1em', color: sel ? '#edd9bc' : '#b87333', marginBottom:'6px' }}>{c.title}</div>
+              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', color:'rgba(240,232,208,0.45)', lineHeight:1.4, marginBottom:'10px' }}>{c.subtitle}</div>
+              <div style={{ display:'inline-block', background:'rgba(184,115,51,0.1)', border:'1px solid rgba(184,115,51,0.2)', borderRadius:'12px', padding:'3px 10px', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.1em', color:'rgba(184,115,51,0.7)' }}>{c.duration}</div>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ textAlign:'center' }}>
+        <button onClick={() => canNext1 && setStep(2)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color: canNext1 ? '#0a0a0a' : 'rgba(240,232,208,0.3)', background: canNext1 ? 'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)' : 'rgba(255,255,255,0.06)', border:'none', borderRadius:'6px', padding:'14px 44px', cursor: canNext1 ? 'pointer' : 'not-allowed', transition:'all 0.35s ease', boxShadow: canNext1 ? '0 4px 20px rgba(184,115,51,0.3)' : 'none' }}>
+          Напред →
+        </button>
+      </div>
+    </div>
+  );
+
+  // ── Step 2 — Choose duration + date ──
+  const Step2 = () => (
+    <div>
+      <div style={{ textAlign:'center', marginBottom: isMobile ? '32px' : '44px' }}>
+        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, marginBottom:'8px' }}>Избери дата</h3>
+        <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em' }}>Кога искаш да започнеш?</p>
+      </div>
+
+      {/* Selected course reminder */}
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'12px', marginBottom:'36px' }}>
+        <div style={{ background:'rgba(184,115,51,0.08)', border:'1px solid rgba(184,115,51,0.25)', borderRadius:'8px', padding:'10px 20px', display:'inline-flex', alignItems:'center', gap:'10px' }}>
+          <span style={{ fontSize:'20px' }}>{course?.icon}</span>
+          <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.12em', color:'#b87333' }}>{course?.title}</span>
+        </div>
+      </div>
+
+      {/* Duration */}
+      <div style={{ marginBottom:'32px' }}>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'14px' }}>Продължителност</div>
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap:'12px' }}>
+          {DURATIONS.map(d => {
+            const sel = duration?.id === d.id;
+            return (
+              <div key={d.id} onClick={() => setDuration(d)}
+                style={{ background: sel ? 'rgba(184,115,51,0.1)' : '#1a1a1a', border:`1.5px solid ${sel ? '#b87333' : 'rgba(184,115,51,0.2)'}`, borderRadius:'10px', padding:'14px 16px', cursor:'pointer', transition:'all 0.3s ease' }}
+              >
+                <div style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', fontWeight:600, letterSpacing:'0.1em', color: sel ? '#edd9bc' : '#b87333', marginBottom:'4px' }}>{d.label}</div>
+                <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', color:'rgba(240,232,208,0.4)', lineHeight:1.4 }}>{d.desc}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Date picker */}
+      <div style={{ marginBottom:'40px' }}>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'14px' }}>Желана дата за начало</div>
+        <input
+          type="date"
+          value={date}
+          min={new Date().toISOString().split('T')[0]}
+          onChange={e => setDate(e.target.value)}
+          className="acad-input"
+          style={{ maxWidth: isMobile ? '100%' : '260px', colorScheme:'dark' }}
+        />
+      </div>
+
+      <div style={{ display:'flex', justifyContent:'center', gap:'16px', flexWrap:'wrap' }}>
+        <button onClick={() => setStep(1)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(240,232,208,0.5)', background:'transparent', border:'1px solid rgba(184,115,51,0.2)', borderRadius:'6px', padding:'13px 32px', cursor:'pointer', transition:'all 0.3s ease' }}
+          onMouseEnter={e => e.currentTarget.style.borderColor='rgba(184,115,51,0.5)'}
+          onMouseLeave={e => e.currentTarget.style.borderColor='rgba(184,115,51,0.2)'}
+        >← Назад</button>
+        <button onClick={() => canNext2 && setStep(3)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color: canNext2 ? '#0a0a0a' : 'rgba(240,232,208,0.3)', background: canNext2 ? 'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)' : 'rgba(255,255,255,0.06)', border:'none', borderRadius:'6px', padding:'14px 44px', cursor: canNext2 ? 'pointer' : 'not-allowed', transition:'all 0.35s ease', boxShadow: canNext2 ? '0 4px 20px rgba(184,115,51,0.3)' : 'none' }}>
+          Напред →
+        </button>
+      </div>
+    </div>
+  );
+
+  // ── Step 3 — Personal details ──
+  const Step3 = () => submitted ? (
+    <div style={{ textAlign:'center', padding: isMobile ? '40px 20px' : '60px 40px' }}>
+      <div style={{ fontSize:'56px', marginBottom:'20px' }}>✦</div>
+      <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '44px' : '60px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, marginBottom:'14px' }}>Благодарим ти!</h3>
+      <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'18px', fontWeight:300, color:'rgba(240,232,208,0.7)', lineHeight:1.7, marginBottom:'32px', maxWidth:'480px', margin:'0 auto 32px' }}>
+        Заявката ти за <strong style={{ color:'#b87333' }}>{course?.title}</strong> беше изпратена успешно. Ще се свържем с теб в рамките на 24 часа за потвърждение.
+      </p>
+      <a href="index.html" style={{ display:'inline-flex', alignItems:'center', gap:'10px', fontFamily:"'Cinzel',serif", fontSize:'11px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', borderRadius:'5px', padding:'13px 28px', textDecoration:'none', boxShadow:'0 4px 20px rgba(184,115,51,0.3)' }}>
+        Към сайта
+      </a>
+    </div>
+  ) : (
+    <div>
+      <div style={{ textAlign:'center', marginBottom: isMobile ? '32px' : '44px' }}>
+        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, marginBottom:'8px' }}>Твоите данни</h3>
+        <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em' }}>Последна стъпка — попълни контактна информация</p>
+      </div>
+
+      {/* Summary card */}
+      <div style={{ background:'rgba(184,115,51,0.06)', border:'1px solid rgba(184,115,51,0.2)', borderRadius:'10px', padding:'16px 20px', marginBottom:'32px', display:'flex', flexWrap:'wrap', gap:'20px', justifyContent:'center' }}>
+        <div style={{ textAlign:'center' }}>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginBottom:'4px' }}>Курс</div>
+          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', color:'#edd9bc' }}>{course?.icon} {course?.title}</div>
+        </div>
+        <div style={{ width:'1px', background:'rgba(184,115,51,0.2)', alignSelf:'stretch' }} />
+        <div style={{ textAlign:'center' }}>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginBottom:'4px' }}>Продължителност</div>
+          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', color:'#edd9bc' }}>{duration?.label}</div>
+        </div>
+        <div style={{ width:'1px', background:'rgba(184,115,51,0.2)', alignSelf:'stretch' }} />
+        <div style={{ textAlign:'center' }}>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginBottom:'4px' }}>Дата</div>
+          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', color:'#edd9bc' }}>{new Date(date + 'T00:00:00').toLocaleDateString('bg-BG', { day:'numeric', month:'long', year:'numeric' })}</div>
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:'16px', maxWidth:'560px', margin:'0 auto' }}>
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap:'16px' }}>
+          <div>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'8px' }}>Имена *</div>
+            <input required className="acad-input" placeholder="Три имена" value={form.name} onChange={e => setForm(f=>({...f, name:e.target.value}))} />
+          </div>
+          <div>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'8px' }}>Телефон *</div>
+            <input required className="acad-input" placeholder="+359 ..." type="tel" value={form.phone} onChange={e => setForm(f=>({...f, phone:e.target.value}))} />
+          </div>
+        </div>
+        <div>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'8px' }}>Имейл</div>
+          <input className="acad-input" placeholder="example@mail.com" type="email" value={form.email} onChange={e => setForm(f=>({...f, email:e.target.value}))} />
+        </div>
+        <div>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'8px' }}>Допълнителни въпроси</div>
+          <textarea className="acad-input" placeholder="Напиши ако имаш въпроси или специални изисквания..." value={form.notes} onChange={e => setForm(f=>({...f, notes:e.target.value}))} />
+        </div>
+        <div style={{ display:'flex', justifyContent:'center', gap:'16px', flexWrap:'wrap', marginTop:'8px' }}>
+          <button type="button" onClick={() => setStep(2)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(240,232,208,0.5)', background:'transparent', border:'1px solid rgba(184,115,51,0.2)', borderRadius:'6px', padding:'13px 32px', cursor:'pointer', transition:'all 0.3s ease' }}
+            onMouseEnter={e => e.currentTarget.style.borderColor='rgba(184,115,51,0.5)'}
+            onMouseLeave={e => e.currentTarget.style.borderColor='rgba(184,115,51,0.2)'}
+          >← Назад</button>
+          <button type="submit" style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', border:'none', borderRadius:'6px', padding:'14px 44px', cursor:'pointer', transition:'all 0.35s ease', boxShadow:'0 4px 20px rgba(184,115,51,0.3)' }}>
+            Изпрати заявката ✦
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+
+  return (
+    <section style={{ background:'#111', padding: isMobile ? '100px 20px 80px' : '120px 40px 100px', minHeight:'100vh', position:'relative', overflow:'hidden' }}>
+      <div style={{ position:'absolute', top:0, left:'50%', transform:'translateX(-50%)', width:'600px', height:'300px', background:'radial-gradient(ellipse at center,rgba(184,115,51,0.06) 0%,transparent 70%)', pointerEvents:'none' }} />
+      <div style={{ maxWidth:'960px', margin:'0 auto' }}>
+
+        {/* Step indicators */}
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'center', marginBottom: isMobile ? '48px' : '64px', maxWidth:'480px', margin:'0 auto', marginBottom: isMobile ? '48px' : '64px' }}>
+          <StepDot n={1} label="Избери курс" />
+          <StepConnector n={1} />
+          <StepDot n={2} label="Дата & срок" />
+          <StepConnector n={2} />
+          <StepDot n={3} label="Твоите данни" />
+        </div>
+
+        {/* Step panels */}
+        <div style={{ opacity:1, transition:'opacity 0.3s ease' }}>
+          {step === 1 && <Step1 />}
+          {step === 2 && <Step2 />}
+          {step === 3 && <Step3 />}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ── Hero ──────────────────────────────────────────────────────────
+const AcademyHero = () => {
+  const isMobile = useIsMobile();
+  const [vis, setVis] = React.useState(false);
+  React.useEffect(() => { const t = setTimeout(() => setVis(true), 150); return () => clearTimeout(t); }, []);
+  return (
+    <section style={{ position:'relative', width:'100%', height: isMobile ? '60vh' : '55vh', minHeight:'360px', background:'#0a0a0a', overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center', paddingTop: isMobile ? '56px' : '76px' }}>
+      <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at 50% 80%, rgba(184,115,51,0.12) 0%, #080808 65%)' }} />
+      <div style={{ position:'absolute', bottom:0, left:'50%', transform:'translateX(-50%)', width:'1px', height:'40%', background:'linear-gradient(to bottom,transparent,rgba(184,115,51,0.3))' }} />
+      <div style={{ position:'relative', zIndex:2, textAlign:'center', padding:'0 24px', opacity:vis?1:0, transform:vis?'translateY(0)':'translateY(24px)', transition:'opacity 0.9s ease,transform 0.9s ease' }}>
+        <div style={{ display:'inline-flex', alignItems:'center', gap:'12px', marginBottom:'18px' }}>
+          <div style={{ width:'32px', height:'1px', background:'linear-gradient(90deg,transparent,#b87333)' }} />
+          <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.7)' }}>Професионално обучение</span>
+          <div style={{ width:'32px', height:'1px', background:'linear-gradient(90deg,#b87333,transparent)' }} />
+        </div>
+        <h1 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '56px' : '80px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1, marginBottom:'16px' }}>
+          Cveti's Secret Academy
+        </h1>
+        <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '16px' : '20px', fontWeight:300, fontStyle:'italic', color:'rgba(240,232,208,0.65)', letterSpacing:'0.06em', maxWidth:'540px', margin:'0 auto 28px', lineHeight:1.7 }}>
+          Научи занаята от майсторите. Избери своя курс, запази дата и стартирай кариерата си в красотата.
+        </p>
+        <div style={{ display:'flex', alignItems:'center', gap:'16px', justifyContent:'center', flexWrap:'wrap' }}>
+          {['7 курса','Сертификат','Малки групи'].map(badge => (
+            <span key={badge} style={{ background:'rgba(184,115,51,0.08)', border:'1px solid rgba(184,115,51,0.25)', borderRadius:'20px', padding:'6px 16px', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.8)' }}>{badge}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ── Footer ────────────────────────────────────────────────────────
+const Footer = () => {
+  const isMobile = useIsMobile();
+  const navLinks = [
+    { label:'Начало',   href:'index.html' },
+    { label:'Услуги',   href:'index.html#services' },
+    { label:'Салонът',  href:'index.html#salon' },
+    { label:'Галерия',  href:'index.html#gallery' },
+    { label:'Контакти', href:'index.html#contact' },
+    { label:'Академия', href:'academy.html' },
+  ];
+  return (
+    <footer style={{ background:'#080808', borderTop:'1px solid rgba(184,115,51,0.15)', padding: isMobile ? '48px 20px 28px' : '64px 40px 32px', position:'relative' }}>
+      <div style={{ maxWidth:'1200px', margin:'0 auto' }}>
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr', gap: isMobile ? '36px' : '48px', marginBottom: isMobile ? '36px' : '48px' }}>
+          <div>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:'18px', fontWeight:700, letterSpacing:'0.2em', textTransform:'uppercase', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'6px' }}>Cveti's Secret</div>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'#9e8e6a', letterSpacing:'0.14em', marginBottom:'16px' }}>Academy</div>
+            <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', fontWeight:300, color:'#6e5e42', lineHeight:1.7 }}>Превърни страстта си към красотата в професия с нашите курсове.</p>
+          </div>
+          <div>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.5)', marginBottom:'18px' }}>Навигация</div>
+            <div style={{ display:'flex', flexDirection: isMobile ? 'row' : 'column', flexWrap:'wrap', gap: isMobile ? '10px 24px' : '10px' }}>
+              {navLinks.map(link => (
+                <a key={link.label} href={link.href} style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontWeight:300, color:'#9e8e6a', cursor:'pointer', letterSpacing:'0.06em', transition:'color 0.3s ease', textDecoration:'none' }}
+                  onMouseEnter={e => e.target.style.color='#b87333'}
+                  onMouseLeave={e => e.target.style.color='#9e8e6a'}
+                >{link.label}</a>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.5)', marginBottom:'18px' }}>Работно Време</div>
+            {[['Пон – Пет','09:00 – 20:00'],['Събота','10:00 – 18:00'],['Неделя','Почивен']].map(([day,time]) => (
+              <div key={day} style={{ display:'flex', justifyContent:'space-between', gap:'16px', marginBottom:'8px' }}>
+                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', fontWeight:300, color:'#6e5e42' }}>{day}</span>
+                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', color:time==='Почивен'?'#4a3e2a':'#d4c5a0' }}>{time}</span>
+              </div>
+            ))}
+            <div style={{ marginTop:'20px', fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'#9e8e6a' }}>София, Лозенец</div>
+          </div>
+        </div>
+        <div style={{ height:'1px', background:'linear-gradient(90deg,transparent,rgba(184,115,51,0.2),transparent)', marginBottom:'24px' }} />
+        <div style={{ display:'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent:'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? '12px' : '0' }}>
+          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', color:'#4a3e2a', letterSpacing:'0.06em' }}>© {new Date().getFullYear()} Cveti's Secret Academy. Всички права запазени.</div>
+          <div style={{ display:'flex', gap:'20px' }}>
+            {['Facebook','Instagram'].map(s => (
+              <span key={s} style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.14em', color:'#6e5e42', cursor:'pointer', textTransform:'uppercase', transition:'color 0.3s ease' }}
+                onMouseEnter={e=>e.target.style.color='#b87333'}
+                onMouseLeave={e=>e.target.style.color='#6e5e42'}
+              >{s}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+// ── App ───────────────────────────────────────────────────────────
+const App = () => (
+  <div>
+    <Header />
+    <AcademyHero />
+    <AcademyWizard />
+    <Footer />
+  </div>
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

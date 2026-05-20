@@ -96,7 +96,7 @@ const Header = ({ activePage, onNavigate }) => {
           <div style={{ height:'2px', background:'linear-gradient(90deg,#b87333,rgba(184,115,51,0.1))', flexShrink:0 }} />
           <div style={{ padding:'28px 24px 22px', borderBottom:'1px solid rgba(184,115,51,0.08)' }}>
             <div style={{ fontFamily:"'Cinzel',serif", fontSize:'15px', fontWeight:600, letterSpacing:'0.12em', background:'linear-gradient(90deg,#edd9bc,#b87333)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>Cveti's Secret</div>
-            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', fontStyle:'italic', color:'#9e8e6a', marginTop:'3px', letterSpacing:'0.1em' }}>Beauty Salon</div>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', fontStyle:'italic', color:'#e0dbce', marginTop:'3px', letterSpacing:'0.1em' }}>Beauty Salon</div>
           </div>
           <nav style={{ flex:1, padding:'12px 0', overflowY:'auto' }}>
             {navLinks.map(link => (
@@ -104,6 +104,9 @@ const Header = ({ activePage, onNavigate }) => {
                 {link.label}
               </div>
             ))}
+            <a href="academy.html" style={{ display:'block', padding:'15px 24px', cursor:'pointer', fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.12em', textTransform:'uppercase', color:'#b87333', borderLeft:'2px solid rgba(184,115,51,0.4)', background:'rgba(184,115,51,0.03)', textDecoration:'none' }}>
+              Академия ✦
+            </a>
           </nav>
           <div style={{ padding:'20px 24px', borderTop:'1px solid rgba(184,115,51,0.08)' }}>
             <a href={`tel:${PHONE}`} style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'8px', padding:'13px', borderRadius:'6px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.14em', textTransform:'uppercase', color:'#0a0a0a', textDecoration:'none' }}>
@@ -126,11 +129,16 @@ const Header = ({ activePage, onNavigate }) => {
       <nav style={{ flex:1, display:'flex', gap:'44px', alignItems:'center', justifyContent:'center' }}>
         {navLinks.map(link => (
           <span key={link.id} onClick={() => onNavigate(link.id)}
-            style={{ fontFamily:"'Cinzel',serif", fontSize:'14px', letterSpacing:'0.1em', color: activePage===link.id ? '#b87333' : 'rgba(240,232,208,0.8)', cursor:'pointer', transition:'color 0.3s ease', whiteSpace:'nowrap' }}
+            style={{ fontFamily:"'Cinzel',serif", fontSize:'20px', letterSpacing:'0.1em', color: activePage===link.id ? '#b87333' : 'rgba(240,232,208,0.8)', cursor:'pointer', transition:'color 0.3s ease', whiteSpace:'nowrap' }}
             onMouseEnter={e => e.target.style.color='#b87333'}
             onMouseLeave={e => e.target.style.color=activePage===link.id?'#b87333':'rgba(240,232,208,0.8)'}
           >{link.label}</span>
         ))}
+        <a href="academy.html"
+          style={{ fontFamily:"'Cinzel',serif", fontSize:'20px', letterSpacing:'0.1em', color:'rgba(240,232,208,0.8)', cursor:'pointer', transition:'color 0.3s ease', whiteSpace:'nowrap', textDecoration:'none' }}
+          onMouseEnter={e => e.target.style.color='#b87333'}
+          onMouseLeave={e => e.target.style.color='rgba(240,232,208,0.8)'}
+        >Академия</a>
       </nav>
       {/* Phone right */}
       <a href={`tel:${PHONE}`} style={{ flexShrink:0, display:'flex', alignItems:'center', gap:'9px', padding:'11px 22px', borderRadius:'4px', border:'1px solid rgba(184,115,51,0.5)', color:'#b87333', textDecoration:'none', fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.12em', transition:'all 0.3s ease' }}
@@ -175,7 +183,7 @@ const Hero = ({ onNavigate }) => {
         <div style={{ opacity:btnVis?1:0, transform:btnVis?'translateY(0)':'translateY(16px)', transition:'opacity 0.7s ease,transform 0.7s ease' }}>
           <button onClick={() => onNavigate('contact')} style={{ display:'inline-flex', alignItems:'center', gap:'12px', fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.12em', color:'#f0e8d0', background:'transparent', border:'1px solid rgba(240,232,208,0.5)', borderRadius:'4px', padding:'12px 20px 12px 24px', cursor:'pointer' }}>
             Запази час
-            <span style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', width:'28px', height:'28px', borderRadius:'50%', background:'rgba(240,232,208,0.12)', fontSize:'14px' }}>↗</span>
+            <span style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', width:'28px', height:'28px', borderRadius:'50%', background:'rgba(240,232,208,0.12)', fontSize:'20px' }}>↗</span>
           </button>
         </div>
       </div>
@@ -201,7 +209,7 @@ const Hero = ({ onNavigate }) => {
               onMouseEnter={e => { e.currentTarget.style.borderColor='#b87333'; e.currentTarget.style.color='#b87333'; e.currentTarget.style.boxShadow='0 0 16px rgba(184,115,51,0.2)'; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(240,232,208,0.5)'; e.currentTarget.style.color='#f0e8d0'; e.currentTarget.style.boxShadow='none'; }}>
               Запази час
-              <span style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', width:'28px', height:'28px', borderRadius:'50%', background:'rgba(240,232,208,0.12)', fontSize:'14px', color:'inherit' }}>↗</span>
+              <span style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', width:'28px', height:'28px', borderRadius:'50%', background:'rgba(240,232,208,0.12)', fontSize:'20px', color:'inherit' }}>↗</span>
             </button>
           </div>
         </div>
@@ -220,38 +228,33 @@ const BOOKING_DEFAULT = 'https://www.fresha.com'; // default fallback URL
 
 const SERVICES_DATA = [
   { category:'Сешоари и прически', items:[
-    { name:'Прическа',              price:'61,33€',       link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?menu=true&pId=1251448&utm_content=link_in_bio&utm_medium=social&utm_source=ig&cartId=a1fd325d-44de-481e-aec0-07bd94712219' },
-    { name:'Подстригване + Сешоар', price:'от 30,68€',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?menu=true&pId=1251448&utm_content=link_in_bio&utm_medium=social&utm_source=ig&cartId=a1fd325d-44de-481e-aec0-07bd94712219' },
-    { name:'Маша',                  price:'от 25,57€',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?menu=true&pId=1251448&utm_content=link_in_bio&utm_medium=social&utm_source=ig&cartId=a1fd325d-44de-481e-aec0-07bd94712219' },
-    { name:'Сешоар прав + преса',   price:'от 23,01€',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?menu=true&pId=1251448&utm_content=link_in_bio&utm_medium=social&utm_source=ig&cartId=a1fd325d-44de-481e-aec0-07bd94712219' },
-    { name:'Мъжко подстригване',    price:'от 20,45€',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?menu=true&pId=1251448&utm_content=link_in_bio&utm_medium=social&utm_source=ig&cartId=a1fd325d-44de-481e-aec0-07bd94712219' },
-    { name:'Сешоар прав/небрежен',  price:'от 25,57€',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?menu=true&pId=1251448&utm_content=link_in_bio&utm_medium=social&utm_source=ig&cartId=a1fd325d-44de-481e-aec0-07bd94712219' },
+    { name:'Прическа',              price:'61,33 €',       link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17955778&pId=1251448&cartId=cac7e362-236b-4982-a588-e6bd4dde2ef4' },
+    { name:'Подстригване + Сешоар', price:'от 30,68 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15324389&pId=1251448' },
+    { name:'Маша',                  price:'от 25,57 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15295768&pId=1251448' },
+    { name:'Сешоар прав + преса',   price:'от 23,01 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15295743&pId=1251448' },
+    { name:'Мъжко подстригване',    price:'от 20,45 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17646655&pId=1251448&cartId=0349db5c-1bba-4a5a-b42a-6d6b7918a166' },
+    { name:'Сешоар прав/небрежен',  price:'от 25,57 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15289882&pId=1251448' },
   ]},
   { category:'Боядисване', items:[
-    { name:'Балаж',                 price:'от 120 лв.',   link:'' },
-    { name:'Омбре',                 price:'от 100 лв.',   link:'' },
-    { name:'Цялостно боядисване',   price:'от 60 лв.',    link:'' },
-    { name:'Кичури',                price:'от 80 лв.',    link:'' },
+    { name:'Боя корен + тонер + сешоар',            price:'от 95 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A22735901&pId=1251448&cartId=fbcc1131-a2ca-4201-af31-273911556622' },
+    { name:'Обезцветяване корен + тонер + сешоар',  price:'от 95 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A22735875&pId=1251448&cartId=5886883a-5928-4ca2-b8b6-59235a08cc3f' },
+    { name:'Тонер + сешоар',                        price:'от 81,81 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682355&pId=1251448&cartId=e8227cd2-5d80-4943-8a53-f66d371d3a35' },
+    { name:'Боядисване цяла коса + сешоар',         price:'от 95 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15326779&pId=1251448' },
+    { name:'Боя корен + сешоар',                    price:'от 65 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682303&pId=1251448&cartId=433380f9-7283-458f-8e60-839186ed4816' },
+    { name:'Добавка подстригване',                  price:'от 65 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682266&pId=1251448&cartId=98bec827-0260-4973-bb48-bf81dea14fc3' },
   ]},
-  { category:'Прически', items:[
-    { name:'Официална прическа',    price:'от 80 лв.',    link:'' },
-    { name:'Ежедневна прическа',    price:'от 40 лв.',    link:'' },
-    { name:'Плитка',                price:'от 50 лв.',    link:'' },
+  { category:'Балеаж', items:[
+    { name:'Корекция на цвят',  price:'от 230 €',       link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A23787471&pId=1251448' },
+    { name:'Балеаж контур',     price:'от 127,83 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15327573&pId=1251448' },
+    { name:'Балеаж',            price:'от 178,96 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15289884&pId=1251448' },
   ]},
-  { category:'Нокти', items:[
-    { name:'Маникюр (класически)',  price:'25 лв.',       link:'' },
-    { name:'Маникюр (гел)',         price:'40 лв.',       link:'' },
-    { name:'Педикюр (класически)',  price:'30 лв.',       link:'' },
-    { name:'Педикюр (СПА)',         price:'50 лв.',       link:'' },
+  { category:'Терапии', items:[
+    { name:'Терапия Innovatis',   price:'от 80 €',       link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A23209612&pId=1251448' },
+    { name:'Терапия + сешоар',    price:'от 61,36 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15324487&pId=1251448' },
+    { name:'Кератинова терапия ', price:'от 178,96 €',   link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15324462&pId=1251448' },
   ]},
-  { category:'Грим', items:[
-    { name:'Дневен грим',           price:'60 лв.',       link:'' },
-    { name:'Вечерен грим',          price:'80 лв.',       link:'' },
-    { name:'Сватбен грим',          price:'от 150 лв.',   link:'' },
-  ]},
-  { category:'Масаж', items:[
-    { name:'Релаксиращ масаж',      price:'70 лв.',       link:'' },
-    { name:'Антицелулитен масаж',   price:'80 лв.',       link:'' },
+  { category:'Поставяне на екстеншъни', items:[
+    { name:'Екстеншъни поставяне',   price:'от 15,34 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15326447&pId=1251448' },
   ]},
 ];
 
@@ -261,7 +264,7 @@ const ServiceCard = ({ service, mobile, onClick }) => {
     <div onClick={onClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ background:'#1a1a1a', border:`1px solid ${hovered?'rgba(184,115,51,0.65)':'rgba(184,115,51,0.3)'}`, borderRadius:'12px', boxShadow:hovered?'inset 0 0 24px rgba(184,115,51,0.1),0 8px 40px rgba(0,0,0,0.8),0 0 24px rgba(184,115,51,0.2)':'inset 0 0 20px rgba(184,115,51,0.05),0 4px 24px rgba(0,0,0,0.6)', padding: mobile ? '40px 24px' : '36px 24px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', cursor:'pointer', transform:hovered?'scale(1.02)':'scale(1)', transition:'all 0.4s ease', position:'relative', overflow:'hidden', minHeight: mobile ? '160px' : '140px', gap:'8px' }}>
       <div style={{ position:'absolute', inset:0, background:`radial-gradient(ellipse at center,${hovered?'rgba(184,115,51,0.07)':'rgba(184,115,51,0.03)'} 0%,transparent 70%)`, transition:'all 0.4s ease', pointerEvents:'none' }} />
       <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: mobile ? '44px' : '36px', background:'linear-gradient(135deg,#edd9bc 0%,#b87333 50%,#7a4520 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, position:'relative', zIndex:1, textAlign:'center' }}>{service.category}</div>
-      <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', letterSpacing:'0.14em', textTransform:'uppercase', color:'#9e8e6a', position:'relative', zIndex:1 }}>{service.items.length} услуги</div>
+      <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', letterSpacing:'0.14em', textTransform:'uppercase', color:'#e0dbce', position:'relative', zIndex:1 }}>{service.items.length} услуги</div>
       <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.14em', textTransform:'uppercase', color:hovered?'rgba(184,115,51,0.8)':'rgba(184,115,51,0.35)', position:'relative', zIndex:1, transition:'color 0.3s ease', marginTop:'4px' }}>Виж услугите ↓</div>
     </div>
   );
@@ -295,8 +298,8 @@ const ServicesOverlay = ({ open, onClose, initialCategory }) => {
         <div style={{ height:'2px', background:'linear-gradient(90deg,transparent,#b87333 30%,#edd9bc 50%,#b87333 70%,transparent)', flexShrink:0 }} />
         {/* Header */}
         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding: isMobile ? '14px 20px' : '24px 48px 16px', borderBottom:'1px solid rgba(184,115,51,0.1)', flexShrink:0 }}>
-          <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '34px' : '42px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1 }}>Нашите услуги</h2>
-          <button onClick={onClose} style={{ background:'transparent', border:'1px solid rgba(184,115,51,0.3)', borderRadius:'50%', width:'36px', height:'36px', color:'#b87333', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'sans-serif', flexShrink:0 }}>✕</button>
+          <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '34px' : '42px', background:'linear-gradient(135deg,#edd9bc,#e0dbce 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1 }}>Нашите услуги</h2>
+          <button onClick={onClose} style={{ background:'transparent', border:'1px solid rgba(184,115,51,0.3)', borderRadius:'50%', width:'36px', height:'36px', color:'#e0dbce', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'sans-serif', flexShrink:0 }}>✕</button>
         </div>
 
         {isMobile ? (
@@ -389,7 +392,7 @@ const Services = ({ onNavigate }) => {
             {displayed.map((s,i) => <ServiceCard key={i} service={s} mobile={isMobile} onClick={() => openAt(i)} />)}
           </div>
           <div style={{ textAlign:'center' }}>
-            <button onClick={() => openAt(0)} style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', fontWeight:600, letterSpacing:'0.18em', textTransform:'uppercase', color:'#b87333', background:'transparent', border:'1.5px solid rgba(184,115,51,0.5)', borderRadius:'6px', padding:'13px 40px', cursor:'pointer', transition:'all 0.4s ease' }}
+            <button onClick={() => openAt(0)} style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', fontWeight:600, letterSpacing:'0.18em', textTransform:'uppercase', color:'#b87333', background:'transparent', border:'1.5px solid rgba(184,115,51,0.5)', borderRadius:'6px', padding:'13px 40px', cursor:'pointer', transition:'all 0.4s ease' }}
               onMouseEnter={e=>{e.target.style.background='#b87333';e.target.style.color='#0a0a0a';e.target.style.boxShadow='0 0 20px rgba(184,115,51,0.4)';}}
               onMouseLeave={e=>{e.target.style.background='transparent';e.target.style.color='#b87333';e.target.style.boxShadow='none';}}
             >Вижте повече</button>
@@ -404,20 +407,20 @@ const Services = ({ onNavigate }) => {
 // Add photo path and edit bio/since for each member
 const TEAM = [
   {
-    id:1, name:'Цвети Иванова', role:'Основател & Стилист', photo:'assets/before.png', since:2014,
-    bio:'Цвети е основателят на Cveti\'s Secret и носи в себе си над 10 години опит, придобит в реномирани салони в Чикаго и България. Специализира в балаж, омбре и трансформации на руси коси. Нейната мисия е всяка клиентка да се чувства като най-добрата версия на себе си.',
+    id:1, name:'Цвети', role:'Owner', photo:'assets/1.jpeg', since:2014,
+    hours:3200, clients:850, languages:['Английски','Български'],
   },
   {
-    id:2, name:'Мария Петрова', role:'Колорист', photo:'', since:2017,
-    bio:'Мария е майстор в изкуството на цвета. С прецизен усет за нюанси и дълбоко познание на химията на косата, тя превръща всяко боядисване в произведение на изкуството. Специализира в техники за естествен и дълготраен цвят.',
+    id:2, name:'Кари', role:'Manager', photo:'assets/2.jpeg', since:2017,
+    hours:1800, clients:520, languages:['Български'],
   },
   {
-    id:3, name:'Елена Георгиева', role:'Маникюрист', photo:'', since:2019,
-    bio:'Елена внася перфекционизъм и артистичност в грижата за ноктите. Работи с гел и класически техники, с фокус върху дълготрайност и прецизни детайли. Всяко посещение при нея е малък лукс за ръцете.',
+    id:3, name:'Боби', role:'Фризьор', photo:'assets/3.jpeg', since:2019,
+    hours:1200, clients:380, languages:['Български'],
   },
   {
-    id:4, name:'Николета Димова', role:'Гримьор', photo:'', since:2018,
-    bio:'Николета е майсторът зад безупречния грим в Cveti\'s Secret. Специализира в дневен, вечерен и сватбен грим, като умело подчертава естествената красота на всяка клиентка с деликатни и дълготрайни техники.',
+    id:4, name:'Вели', role:'Фризьор', photo:'assets/4.jpeg', since:2018,
+    hours:1500, clients:440, languages:['Български'],
   },
 ];
 
@@ -467,13 +470,28 @@ const TeamMemberOverlay = ({ member, onClose }) => {
             <div style={{ flex:1, textAlign: isMobile ? 'center' : 'left' }}>
               <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, marginBottom:'4px' }}>{member.name}</div>
               <div style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(184,115,51,0.65)', marginBottom:'6px' }}>{member.role}</div>
-              <div style={{ width:'40px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', margin: isMobile ? '0 auto 20px' : '0 0 20px' }} />
-              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '16px' : '18px', fontWeight:300, color:'rgba(240,232,208,0.75)', lineHeight:1.8, letterSpacing:'0.04em', marginBottom:'32px' }}>{member.bio}</div>
+              <div style={{ width:'40px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', margin: isMobile ? '0 auto 24px' : '0 0 24px' }} />
 
-              {/* Experience pill */}
-              <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(184,115,51,0.06)', border:'1px solid rgba(184,115,51,0.18)', borderRadius:'6px', padding:'10px 18px', marginBottom:'28px' }}>
-                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', color:'#9e8e6a', fontStyle:'italic' }}>Опит:</span>
-                <span style={{ fontFamily:"'Cinzel',serif", fontSize:'13px', fontWeight:600, color:'#b87333', letterSpacing:'0.06em' }}>{new Date().getFullYear() - member.since} години</span>
+              {/* Stats grid */}
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'12px', marginBottom:'22px' }}>
+                {[
+                  { label:'Използвани\nчасове', value: member.hours },
+                  { label:'Обслужвани\nклиенти',  value: member.clients },
+                  { label:'Години\nопит',          value: new Date().getFullYear() - member.since },
+                ].map(stat => (
+                  <div key={stat.label} style={{ background:'rgba(184,115,51,0.06)', border:'1px solid rgba(184,115,51,0.18)', borderRadius:'10px', padding:'16px 10px', textAlign:'center' }}>
+                    <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '22px' : '28px', fontWeight:600, color:'#b87333', letterSpacing:'0.02em', lineHeight:1 }}>{stat.value.toLocaleString()}</div>
+                    <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'11px', color:'rgba(240,232,208,0.55)', letterSpacing:'0.08em', marginTop:'7px', textTransform:'uppercase', whiteSpace:'pre-line', lineHeight:1.4 }}>{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Languages */}
+              <div style={{ display:'flex', alignItems:'center', gap:'10px', flexWrap:'wrap', marginBottom:'28px', justifyContent: isMobile ? 'center' : 'flex-start' }}>
+                <span style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.14em', color:'rgba(184,115,51,0.6)', textTransform:'uppercase' }}>Езици:</span>
+                {member.languages.map(lang => (
+                  <span key={lang} style={{ background:'rgba(184,115,51,0.08)', border:'1px solid rgba(184,115,51,0.22)', borderRadius:'20px', padding:'4px 14px', fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', color:'#edd9bc', letterSpacing:'0.06em' }}>{lang}</span>
+                ))}
               </div>
 
               {/* CTA */}
@@ -501,9 +519,9 @@ const TeamMember = ({ member, onClick }) => {
         }
       </div>
       <div style={{ textAlign:'center' }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:'13px', fontWeight:600, letterSpacing:'0.1em', color:hovered?'#edd9bc':'#b87333', transition:'color 0.3s ease', marginBottom:'4px' }}>{member.name}</div>
-        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'#9e8e6a', letterSpacing:'0.06em' }}>{member.role}</div>
-        <div style={{ marginTop:'8px', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.14em', color:hovered?'rgba(184,115,51,0.8)':'rgba(184,115,51,0.4)', textTransform:'uppercase', transition:'color 0.3s ease' }}>Виж повече</div>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:'20px', fontWeight:600, letterSpacing:'0.1em', color:hovered?'#edd9bc':'#b87333', transition:'color 0.3s ease', marginBottom:'4px' }}>{member.name}</div>
+        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'#e0dbce', letterSpacing:'0.06em' }}>{member.role}</div>
+        <div style={{ marginTop:'8px', fontFamily:"'Cinzel',serif", fontSize:'13px', letterSpacing:'0.14em', color:hovered?'rgba(184,115,51,0.8)':'rgba(184,115,51,0.4)', textTransform:'uppercase', transition:'color 0.3s ease' }}>Виж повече</div>
       </div>
     </div>
   );
@@ -551,29 +569,29 @@ const Footer = ({ onNavigate }) => {
         <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr', gap: isMobile ? '36px' : '48px', marginBottom: isMobile ? '36px' : '48px' }}>
           <div>
             <div style={{ fontFamily:"'Cinzel',serif", fontSize:'18px', fontWeight:700, letterSpacing:'0.2em', textTransform:'uppercase', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'6px' }}>Cveti's Secret</div>
-            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'#9e8e6a', letterSpacing:'0.14em', marginBottom:'16px' }}>Beauty Salon</div>
-            <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', fontWeight:300, color:'#6e5e42', lineHeight:1.7, letterSpacing:'0.04em' }}>Вашето ексклузивно убежище за красота в сърцето на София.</p>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'#e0dbce', letterSpacing:'0.14em', marginBottom:'16px' }}>Beauty Salon</div>
+            <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', fontWeight:300, color:'#6e5e42', lineHeight:1.7, letterSpacing:'0.04em' }}>Вашето ексклузивно убежище за красота в сърцето на София.</p>
           </div>
           <div>
             <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.5)', marginBottom:'18px' }}>Навигация</div>
             <div style={{ display:'flex', flexDirection: isMobile ? 'row' : 'column', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: isMobile ? '10px 24px' : '10px' }}>
               {navLinks.map(link => (
-                <span key={link.id} onClick={() => onNavigate(link.id)} style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontWeight:300, color:'#9e8e6a', cursor:'pointer', letterSpacing:'0.06em', transition:'color 0.3s ease' }}
+                <span key={link.id} onClick={() => onNavigate(link.id)} style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontWeight:300, color:'#e0dbce', cursor:'pointer', letterSpacing:'0.06em', transition:'color 0.3s ease' }}
                   onMouseEnter={e => e.target.style.color='#b87333'}
-                  onMouseLeave={e => e.target.style.color='#9e8e6a'}
+                  onMouseLeave={e => e.target.style.color='#e0dbce'}
                 >{link.label}</span>
               ))}
             </div>
           </div>
           <div>
             <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.5)', marginBottom:'18px' }}>Работно Време</div>
-            {[['Пон – Пет','09:00 – 20:00'],['Събота','10:00 – 18:00'],['Неделя','Почивен']].map(([day,time]) => (
+            {[['Пон – Пет','10:00 – 19:00'],['Събота','10:00 – 17:00'],['Неделя','Почивен']].map(([day,time]) => (
               <div key={day} style={{ display:'flex', justifyContent:'space-between', gap:'16px', marginBottom:'8px' }}>
-                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', fontWeight:300, color:'#6e5e42' }}>{day}</span>
-                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', color:time==='Почивен'?'#4a3e2a':'#d4c5a0' }}>{time}</span>
+                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', fontWeight:300, color:'#6e5e42' }}>{day}</span>
+                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', color:time==='Почивен'?'#4a3e2a':'#d4c5a0' }}>{time}</span>
               </div>
             ))}
-            <div style={{ marginTop:'20px', fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'#9e8e6a', letterSpacing:'0.06em' }}>София, Лозенец</div>
+            <div style={{ marginTop:'20px', fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'#e0dbce', letterSpacing:'0.06em' }}>София, Лозенец</div>
           </div>
         </div>
         <div style={{ height:'1px', background:'linear-gradient(90deg,transparent,rgba(184,115,51,0.2),transparent)', marginBottom:'24px' }} />
@@ -611,12 +629,12 @@ const Contact = () => {
           </div>
           <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '48px' : '56px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', margin:'0 0 12px' }}>Запазете час</h2>
           <div style={{ width:'60px', height:'2px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', margin:'0 auto 16px' }} />
-          <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', fontWeight:300, color:'#9e8e6a', letterSpacing:'0.06em' }}>Свържете се с нас за резервация или въпрос</p>
+          <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', fontWeight:300, color:'#e0dbce', letterSpacing:'0.06em' }}>Свържете се с нас за резервация или въпрос</p>
         </div>
         {sent ? (
           <div style={{ textAlign:'center', padding:'40px', border:'1px solid rgba(184,115,51,0.3)', borderRadius:'12px', background:'rgba(184,115,51,0.04)' }}>
             <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'40px', color:'#b87333', marginBottom:'8px' }}>Благодарим Ви!</div>
-            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', color:'#9e8e6a' }}>Ще се свържем с Вас скоро.</div>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', color:'#e0dbce' }}>Ще се свържем с Вас скоро.</div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:'16px' }}>
@@ -659,15 +677,15 @@ const Contact = () => {
             <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginBottom:'10px' }}>Работно Време</div>
             {[['Пон – Пет','09:00 – 20:00'],['Събота','10:00 – 18:00']].map(([d,t])=>(
               <div key={d} style={{ display:'flex', justifyContent:'space-between', marginBottom:'4px' }}>
-                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', fontWeight:300, color:'#6e5e42' }}>{d}</span>
-                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', color:'#d4c5a0' }}>{t}</span>
+                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', fontWeight:300, color:'#6e5e42' }}>{d}</span>
+                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', color:'#d4c5a0' }}>{t}</span>
               </div>
             ))}
           </div>
           <div>
             <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginBottom:'10px' }}>Адрес</div>
             <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontWeight:300, color:'#d4c5a0', lineHeight:1.6 }}>
-              София, Лозенец<br /><span style={{ fontStyle:'italic', color:'#9e8e6a', fontSize:'13px' }}>По договорка</span>
+              София, Лозенец<br /><span style={{ fontStyle:'italic', color:'#e0dbce', fontSize:'13px' }}>По договорка</span>
             </div>
           </div>
         </div>
@@ -680,9 +698,9 @@ const Contact = () => {
 // Set 'before' and 'after' to paths like 'assets/before-balaj.jpg'
 // Leave as '' to show a placeholder until you add the image files
 const BEFORE_AFTER_DATA = [
-  { label: 'Балаж',   before: 'assets/before.png', after: 'assets/after.png' },
-  { label: 'Омбре',   before: '', after: '' },
-  { label: 'Маникюр', before: '', after: '' },
+  { label: 'Текст',   before: 'assets/before.png', after: 'assets/after.png' },
+  { label: 'Текст',   before: 'assets/before2.jpg', after: 'assets/after2.jpg' },
+  { label: 'Текст', before: 'assets/before3.jpg', after: 'assets/after3.jpg' },
 ];
 
 // ── Before/After Slider (touch + mouse) ──────────────────────────
@@ -734,7 +752,7 @@ const BeforeAfterSlider = ({ label, before, after }) => {
       {showHint && (
         <div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', background:'rgba(0,0,0,0.3)', fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.12em', color:'rgba(184,115,51,0.8)', textTransform:'uppercase', flexDirection:'column', gap:'6px', pointerEvents:'none' }}>
           <span style={{ fontSize:'20px' }}>⇔</span>
-          <span>{isMobile ? 'Плъзни' : 'Движи мишката'}</span>
+          <span>{isMobile ? 'Плъзни' : ''}</span>
         </div>
       )}
     </div>
@@ -744,7 +762,7 @@ const BeforeAfterSlider = ({ label, before, after }) => {
 // ── Gallery ───────────────────────────────────────────────────────
 const INSTAGRAM_POSTS = [
   'https://www.instagram.com/p/DWs7LU6jMVh/',
-  'https://www.instagram.com/p/DScSloDDUJY/',
+  'https://www.instagram.com/p/DYNMyHgjT8e/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
   'https://www.instagram.com/p/DScSloDDUJY/',
 ];
 
@@ -797,16 +815,16 @@ const Gallery = () => {
           </div>
           <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '48px' : '56px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', margin:'0 0 12px' }}>Галерия</h2>
           <div style={{ width:'60px', height:'2px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', margin:'0 auto 12px' }} />
-          <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', fontStyle:'italic', color:'#9e8e6a', letterSpacing:'0.06em' }}>Следвайте ни в Instagram · @cvetissecret</p>
+          <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', fontStyle:'italic', color:'#e0dbce', letterSpacing:'0.06em' }}>Последвайте ни в Instagram · @cvetissecret</p>
         </div>
         <div style={{ marginBottom:'40px', paddingRight: isMobile ? '20px' : '40px' }}>
-          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', color:'rgba(184,115,51,0.45)', textTransform:'uppercase', marginBottom:'16px' }}>Преди & След — {isMobile ? 'плъзни' : 'движи мишката'}</div>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'15px', letterSpacing:'0.2em', color:'#e0dbce', textTransform:'uppercase', marginBottom:'16px' }}>Портфолио на екипа {isMobile ? 'плъзни' : ''}</div>
           <div style={{ display:'flex', flexDirection: isMobile ? 'column' : 'row', gap:'20px', alignItems: isMobile ? 'center' : undefined, justifyContent: isMobile ? undefined : 'center', paddingBottom: isMobile ? '0' : '8px' }}>
             {(isMobile ? BEFORE_AFTER_DATA.slice(0,2) : BEFORE_AFTER_DATA).map((d,i) => <BeforeAfterSlider key={i} label={d.label} before={d.before} after={d.after} />)}
           </div>
         </div>
         <div style={{ position:'relative' }}>
-          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', color:'rgba(184,115,51,0.45)', textTransform:'uppercase', marginBottom:'16px' }}>Instagram</div>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'15px', letterSpacing:'0.2em', color:'#e0dbce', textTransform:'uppercase', marginBottom:'16px' }}>Instagram</div>
           {!isMobile && <button onClick={()=>scroll(-1)} style={{ position:'absolute', left:'-20px', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'rgba(10,10,10,0.9)', border:'1px solid rgba(184,115,51,0.3)', borderRadius:'50%', width:'36px', height:'36px', color:'#b87333', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>‹</button>}
           {!isMobile && <button onClick={()=>scroll(1)} style={{ position:'absolute', right:'20px', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'rgba(10,10,10,0.9)', border:'1px solid rgba(184,115,51,0.3)', borderRadius:'50%', width:'36px', height:'36px', color:'#b87333', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>›</button>}
           <div ref={scrollRef} style={{ display:'flex', gap:'16px', overflowX:'auto', paddingBottom:'16px', paddingRight: isMobile ? '20px' : '40px', scrollbarWidth:'none', msOverflowStyle:'none', justifyContent:'center' }}>
