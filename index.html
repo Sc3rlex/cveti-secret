@@ -81,12 +81,13 @@ const Header = ({ activePage, onNavigate }) => {
         <div onClick={() => go('home')} style={{ position:'absolute', left:'50%', transform:'translateX(-50%)', cursor:'pointer' }}>
           <img src="assets/logo-ring-bronze.png" alt="Cveti's Secret" style={{ height:'34px', display:'block' }} />
         </div>
-        {/* Phone */}
+        {/* Phone — скрито временно
         <div style={{ marginLeft:'auto' }}>
           <a href={`tel:${PHONE}`} style={{ display:'flex', alignItems:'center', justifyContent:'center', width:'36px', height:'36px', borderRadius:'50%', border:'1px solid rgba(184,115,51,0.5)', color:'#b87333', textDecoration:'none' }}>
             <PhoneIcon />
           </a>
         </div>
+        */}
       </header>
 
       {/* Drawer */}
@@ -108,11 +109,13 @@ const Header = ({ activePage, onNavigate }) => {
               Академия ✦
             </a>
           </nav>
+          {/* Запази час drawer CTA — скрито временно
           <div style={{ padding:'20px 24px', borderTop:'1px solid rgba(184,115,51,0.08)' }}>
             <a href={`tel:${PHONE}`} style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'8px', padding:'13px', borderRadius:'6px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.14em', textTransform:'uppercase', color:'#0a0a0a', textDecoration:'none' }}>
               <PhoneIcon /> Запази час
             </a>
           </div>
+          */}
         </div>
       </div>
     </>
@@ -140,12 +143,13 @@ const Header = ({ activePage, onNavigate }) => {
           onMouseLeave={e => e.target.style.color='rgba(240,232,208,0.8)'}
         >Академия</a>
       </nav>
-      {/* Phone right */}
+      {/* Phone right — скрито временно
       <a href={`tel:${PHONE}`} style={{ flexShrink:0, display:'flex', alignItems:'center', gap:'9px', padding:'11px 22px', borderRadius:'4px', border:'1px solid rgba(184,115,51,0.5)', color:'#b87333', textDecoration:'none', fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.12em', transition:'all 0.3s ease' }}
         onMouseEnter={e=>{e.currentTarget.style.background='rgba(184,115,51,0.08)';e.currentTarget.style.borderColor='#b87333';}}
         onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor='rgba(184,115,51,0.5)';}}>
         <PhoneIcon /> Запази час
       </a>
+      */}
     </header>
   );
 };
@@ -180,12 +184,14 @@ const Hero = ({ onNavigate }) => {
         <h1 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'clamp(24px,6vw,36px)', fontWeight:400, fontStyle:'italic', lineHeight:1.4, color:'#f0e8d0', margin:'0 0 28px', letterSpacing:'0.02em', opacity:titleVis?1:0, transform:titleVis?'translateY(0)':'translateY(20px)', transition:'opacity 0.8s ease,transform 0.8s ease' }}>
           От Чикаго до България –<br />Cveti's Secret започва с<br />експертиза в русите коси и<br />балеажа и се развива в<br />пространство за цялостна<br />грижа за визията.
         </h1>
+        {/* Запази час hero mobile — скрито временно
         <div style={{ opacity:btnVis?1:0, transform:btnVis?'translateY(0)':'translateY(16px)', transition:'opacity 0.7s ease,transform 0.7s ease' }}>
           <button onClick={() => onNavigate('contact')} style={{ display:'inline-flex', alignItems:'center', gap:'12px', fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.12em', color:'#f0e8d0', background:'transparent', border:'1px solid rgba(240,232,208,0.5)', borderRadius:'4px', padding:'12px 20px 12px 24px', cursor:'pointer' }}>
             Запази час
             <span style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', width:'28px', height:'28px', borderRadius:'50%', background:'rgba(240,232,208,0.12)', fontSize:'20px' }}>↗</span>
           </button>
         </div>
+        */}
       </div>
     </section>
   );
@@ -204,6 +210,7 @@ const Hero = ({ onNavigate }) => {
           <h1 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'clamp(28px,3.5vw,44px)', fontWeight:400, fontStyle:'italic', lineHeight:1.35, color:'#f0e8d0', margin:'0 0 36px', letterSpacing:'0.02em', opacity:titleVis?1:0, transform:titleVis?'translateY(0)':'translateY(20px)', transition:'opacity 0.8s ease,transform 0.8s ease' }}>
             От Чикаго до България –<br />Cveti's Secret започва с<br />експертиза в русите коси и<br />балеажа и се развива в<br />пространство за цялостна<br />грижа за визията.
           </h1>
+          {/* Запази час hero desktop — скрито временно
           <div style={{ opacity:btnVis?1:0, transform:btnVis?'translateY(0)':'translateY(16px)', transition:'opacity 0.7s ease,transform 0.7s ease' }}>
             <button onClick={() => onNavigate('contact')} style={{ display:'inline-flex', alignItems:'center', gap:'12px', fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:400, letterSpacing:'0.12em', color:'#f0e8d0', background:'transparent', border:'1px solid rgba(240,232,208,0.5)', borderRadius:'4px', padding:'12px 20px 12px 24px', cursor:'pointer', transition:'all 0.35s ease' }}
               onMouseEnter={e => { e.currentTarget.style.borderColor='#b87333'; e.currentTarget.style.color='#b87333'; e.currentTarget.style.boxShadow='0 0 16px rgba(184,115,51,0.2)'; }}
@@ -212,6 +219,7 @@ const Hero = ({ onNavigate }) => {
               <span style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', width:'28px', height:'28px', borderRadius:'50%', background:'rgba(240,232,208,0.12)', fontSize:'20px', color:'inherit' }}>↗</span>
             </button>
           </div>
+          */}
         </div>
         <div style={{ flex:'1 1 auto', display:'flex', justifyContent:'flex-end', alignItems:'flex-end', alignSelf:'stretch', position:'relative', opacity:imgVis?1:0, transform:imgVis?'translateX(0)':'translateX(40px)', transition:'opacity 1s ease,transform 1s ease' }}>
           <img src="assets/team.png" alt="Cveti's Secret Team" style={{ height:'100%', maxHeight:'calc(100vh - 64px)', width:'auto', objectFit:'contain', objectPosition:'right bottom', display:'block', maskImage:'linear-gradient(to right,transparent 0%,rgba(0,0,0,0.4) 20%,black 45%)', WebkitMaskImage:'linear-gradient(to right,transparent 0%,rgba(0,0,0,0.4) 20%,black 45%)' }} />
@@ -263,7 +271,7 @@ const ServiceCard = ({ service, mobile, onClick }) => {
   return (
     <div onClick={onClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ background:'#1a1a1a', border:`1px solid ${hovered?'rgba(184,115,51,0.65)':'rgba(184,115,51,0.3)'}`, borderRadius:'12px', boxShadow:hovered?'inset 0 0 24px rgba(184,115,51,0.1),0 8px 40px rgba(0,0,0,0.8),0 0 24px rgba(184,115,51,0.2)':'inset 0 0 20px rgba(184,115,51,0.05),0 4px 24px rgba(0,0,0,0.6)', padding: mobile ? '40px 24px' : '36px 24px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', cursor:'pointer', transform:hovered?'scale(1.02)':'scale(1)', transition:'all 0.4s ease', position:'relative', overflow:'hidden', minHeight: mobile ? '160px' : '140px', gap:'8px' }}>
       <div style={{ position:'absolute', inset:0, background:`radial-gradient(ellipse at center,${hovered?'rgba(184,115,51,0.07)':'rgba(184,115,51,0.03)'} 0%,transparent 70%)`, transition:'all 0.4s ease', pointerEvents:'none' }} />
-      <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: mobile ? '44px' : '36px', background:'linear-gradient(135deg,#edd9bc 0%,#b87333 50%,#7a4520 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, position:'relative', zIndex:1, textAlign:'center' }}>{service.category}</div>
+      <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: mobile ? '44px' : '36px', background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, position:'relative', zIndex:1, textAlign:'center' }}>{service.category}</div>
       <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', letterSpacing:'0.14em', textTransform:'uppercase', color:'#e0dbce', position:'relative', zIndex:1 }}>{service.items.length} услуги</div>
       <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.14em', textTransform:'uppercase', color:hovered?'rgba(184,115,51,0.8)':'rgba(184,115,51,0.35)', position:'relative', zIndex:1, transition:'color 0.3s ease', marginTop:'4px' }}>Виж услугите ↓</div>
     </div>
@@ -318,10 +326,10 @@ const ServicesOverlay = ({ open, onClose, initialCategory }) => {
               {SERVICES_DATA[activeCategory].items.map((item, i) => (
                 <div key={i} style={{ padding:'14px 0', borderBottom:'1px solid rgba(184,115,51,0.08)', opacity:itemsVisible?1:0, transform:itemsVisible?'translateX(0)':'translateX(-12px)', transition:`opacity 0.3s ease ${i*0.05}s,transform 0.3s ease ${i*0.05}s` }}>
                   <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:'10px', gap:'12px' }}>
-                    <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'17px', color:'#f0e8d0', letterSpacing:'0.03em', flex:1 }}>{item.name}</div>
+                    <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'17px', letterSpacing:'0.03em', flex:1, background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{item.name}</div>
                     <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'17px', fontWeight:600, color:'#b87333', flexShrink:0 }}>{item.price}</span>
                   </div>
-                  <a href={item.link || BOOKING_DEFAULT} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', borderRadius:'4px', padding:'8px 16px', textDecoration:'none', display:'inline-block' }}>Запази сега</a>
+                  <a href={item.link || BOOKING_DEFAULT} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'4px', padding:'8px 16px', textDecoration:'none', display:'inline-block' }}>Запази сега</a>
                 </div>
               ))}
             </div>
@@ -345,12 +353,12 @@ const ServicesOverlay = ({ open, onClose, initialCategory }) => {
               {SERVICES_DATA[activeCategory].items.map((item, i) => (
                 <div key={i} style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'16px 0', borderBottom:'1px solid rgba(184,115,51,0.08)', opacity:itemsVisible?1:0, transform:itemsVisible?'translateX(0)':'translateX(-16px)', transition:`opacity 0.4s ease ${i*0.06}s,transform 0.4s ease ${i*0.06}s` }}>
                   <div>
-                    <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'18px', color:'#f0e8d0', letterSpacing:'0.04em' }}>{item.name}</div>
+                    <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'18px', letterSpacing:'0.04em', background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{item.name}</div>
                     <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.14em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginTop:'2px' }}>{SERVICES_DATA[activeCategory].category}</div>
                   </div>
                   <div style={{ display:'flex', alignItems:'center', gap:'20px', flexShrink:0 }}>
                     <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'18px', fontWeight:600, color:'#b87333' }}>{item.price}</span>
-                    <a href={item.link || BOOKING_DEFAULT} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.14em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', borderRadius:'4px', padding:'9px 18px', textDecoration:'none', display:'inline-block', boxShadow:'0 2px 12px rgba(184,115,51,0.25)', whiteSpace:'nowrap', transition:'all 0.3s ease' }}
+                    <a href={item.link || BOOKING_DEFAULT} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.14em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'4px', padding:'9px 18px', textDecoration:'none', display:'inline-block', boxShadow:'0 2px 12px rgba(184,115,51,0.25)', whiteSpace:'nowrap', transition:'all 0.3s ease' }}
                       onMouseEnter={e=>{e.currentTarget.style.opacity='0.85';}}
                       onMouseLeave={e=>{e.currentTarget.style.opacity='1';}}
                     >Запази сега</a>
@@ -494,12 +502,13 @@ const TeamMemberOverlay = ({ member, onClose }) => {
                 ))}
               </div>
 
-              {/* CTA */}
+              {/* CTA Запази час overlay — скрито временно
               <div>
                 <a href={`tel:${PHONE}`} style={{ display:'inline-flex', alignItems:'center', gap:'10px', fontFamily:"'Cinzel',serif", fontSize:'11px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', borderRadius:'5px', padding:'13px 28px', textDecoration:'none', boxShadow:'0 4px 20px rgba(184,115,51,0.3)' }}>
                   <PhoneIcon /> Запази час
                 </a>
               </div>
+              */}
             </div>
           </div>
         )}
@@ -725,10 +734,9 @@ const BeforeAfterSlider = ({ label, before, after }) => {
       onMouseEnter={() => { if (!isMobile) setActive(true); }}
       onMouseMove={e => { if (!isMobile && active) updatePos(e.clientX); }}
       onMouseLeave={() => { if (!isMobile) { setActive(false); setPos(50); } }}
-      onTouchStart={e => { dragging.current = true; setActive(true); setTouchedOnce(true); updatePos(e.touches[0].clientX); }}
       onTouchMove={e => { e.preventDefault(); if (dragging.current) updatePos(e.touches[0].clientX); }}
       onTouchEnd={() => { dragging.current = false; setActive(false); }}
-      style={{ position:'relative', width: isMobile ? '100%' : '300px', maxWidth: isMobile ? '480px' : '300px', height:'300px', borderRadius:'10px', overflow:'hidden', border:'1px solid rgba(184,115,51,0.3)', cursor: isMobile ? 'grab' : 'col-resize', flexShrink:0, userSelect:'none', touchAction:'none' }}
+      style={{ position:'relative', width: isMobile ? '100%' : '300px', maxWidth: isMobile ? '480px' : '300px', height: isMobile ? '420px' : '440px', borderRadius:'10px', overflow:'hidden', border:'1px solid rgba(184,115,51,0.3)', cursor: isMobile ? 'default' : 'col-resize', flexShrink:0, userSelect:'none', touchAction: dragging.current ? 'none' : 'pan-y' }}
     >
       {/* After — background, visible on right */}
       <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg,#1a2a10,#0d1a08,#0a0d0a)', display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden' }}>
@@ -745,7 +753,12 @@ const BeforeAfterSlider = ({ label, before, after }) => {
         }
       </div>
       <div style={{ position:'absolute', top:0, bottom:0, left:`${pos}%`, width:'2px', background:'linear-gradient(180deg,transparent,#b87333 20%,#edd9bc 50%,#b87333 80%,transparent)', transform:'translateX(-50%)', boxShadow:'0 0 8px rgba(184,115,51,0.6)', pointerEvents:'none' }} />
-      <div style={{ position:'absolute', top:'50%', left:`${pos}%`, transform:'translate(-50%,-50%)', width:'36px', height:'36px', borderRadius:'50%', background:'linear-gradient(135deg,#edd9bc,#b87333)', boxShadow:'0 0 12px rgba(184,115,51,0.7)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'12px', color:'#0a0a0a', fontWeight:700, pointerEvents:'none' }}>⇔</div>
+      {/* Handle — touch starts ONLY here on mobile */}
+      <div
+        onTouchStart={e => { e.stopPropagation(); dragging.current = true; setActive(true); setTouchedOnce(true); updatePos(e.touches[0].clientX); }}
+        style={{ position:'absolute', top:'50%', left:`${pos}%`, transform:'translate(-50%,-50%)', width: isMobile ? '56px' : '36px', height: isMobile ? '56px' : '36px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', cursor: isMobile ? 'grab' : 'col-resize', touchAction:'none', zIndex:10 }}>
+        <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'linear-gradient(135deg,#edd9bc,#b87333)', boxShadow:'0 0 12px rgba(184,115,51,0.7)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'12px', color:'#0a0a0a', fontWeight:700, pointerEvents:'none' }}>⇔</div>
+      </div>
       <div style={{ position:'absolute', bottom:'12px', left:'12px', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.12em', color:'rgba(184,115,51,0.7)', textTransform:'uppercase', background:'rgba(0,0,0,0.6)', padding:'4px 8px', borderRadius:'3px' }}>Преди</div>
       <div style={{ position:'absolute', bottom:'12px', right:'12px', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.12em', color:'rgba(184,115,51,0.7)', textTransform:'uppercase', background:'rgba(0,0,0,0.6)', padding:'4px 8px', borderRadius:'3px' }}>След</div>
       <div style={{ position:'absolute', top:'14px', left:'50%', transform:'translateX(-50%)', fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'rgba(240,232,208,0.8)', whiteSpace:'nowrap', background:'rgba(0,0,0,0.5)', padding:'3px 10px', borderRadius:'3px' }}>{label}</div>
