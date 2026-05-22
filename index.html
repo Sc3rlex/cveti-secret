@@ -678,7 +678,7 @@ const Footer = ({ onNavigate }) => {
                 <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', color:time==='Почивен'?'#4a3e2a':'#d4c5a0' }}>{time}</span>
               </div>
             ))}
-            <div style={{ marginTop:'20px', fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'#e0dbce', letterSpacing:'0.06em' }}>София, Лозенец</div>
+            <div style={{ marginTop:'20px', fontFamily:"'Cinzel',serif", fontSize:'13px', color:'#e0dbce', letterSpacing:'0.06em' }}>София жк Лозенец ул. Неразделни 3</div>
           </div>
         </div>
         <div style={{ height:'1px', background:'linear-gradient(90deg,transparent,rgba(184,115,51,0.2),transparent)', marginBottom:'24px' }} />
@@ -772,7 +772,7 @@ const Contact = () => {
           <div>
             <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginBottom:'10px' }}>Адрес</div>
             <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontWeight:300, color:'#d4c5a0', lineHeight:1.6 }}>
-              София, Лозенец<br /><span style={{ fontStyle:'italic', color:'#e0dbce', fontSize:'13px' }}>По договорка</span>
+              София, Лозенец<br /><span style={{ fontStyle:'italic', color:'#e0dbce', fontSize:'13px' }}></span>
             </div>
           </div>
         </div>
@@ -928,9 +928,9 @@ const Gallery = () => {
           {/* Часове */}
           <div style={{ flex: isMobile ? 'unset' : '0 0 auto', width: isMobile ? '100%' : 'auto' }}>
             <div style={{ fontFamily:"'Cinzel',serif", fontSize:'20px', letterSpacing:'0.22em', textTransform:'uppercase', color:'rgba(184,115,51,0.55)', marginBottom:'18px', textAlign: isMobile ? 'center' : 'left' }}>Работно Време</div>
-            {[['Понеделник – Петък','09:00 – 20:00'],['Събота','10:00 – 18:00'],['Неделя','Почивен']].map(([day,time]) => (
+            {[['Понеделник – Петък','10:00 – 19:00'],['Събота','10:00 – 17:00'],['Неделя','Почивен']].map(([day,time]) => (
               <div key={day} style={{ display:'flex', justifyContent:'space-between', gap:'32px', marginBottom:'10px', alignItems:'baseline' }}>
-                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '15px' : '20px', fontWeight:300, color:'rgba(240,232,208,0.55)', letterSpacing:'0.04em' }}>{day}</span>
+                <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '15px' : '20px', fontWeight:300, color:'e0dbce', letterSpacing:'0.04em' }}>{day}</span>
                 <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '15px' : '20px', color: time==='Почивен' ? 'rgba(240,232,208,0.25)' : '#edd9bc', letterSpacing:'0.04em', flexShrink:0 }}>{time}</span>
               </div>
             ))}
@@ -942,7 +942,7 @@ const Gallery = () => {
           {/* Адрес */}
           <div style={{ textAlign: isMobile ? 'center' : 'left' }}>
             <div style={{ fontFamily:"'Cinzel',serif", fontSize:'20px', letterSpacing:'0.22em', textTransform:'uppercase', color:'rgba(184,115,51,0.55)', marginBottom:'18px' }}>Адрес</div>
-            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', fontWeight:300, color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em', lineHeight:1.9 }}>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', fontWeight:300, color:'e0dbce', letterSpacing:'0.06em', lineHeight:1.9 }}>
               София<br />жк Лозенец<br />ул. Неразделни 3
             </div>
           </div>

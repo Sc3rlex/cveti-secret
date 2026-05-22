@@ -62,12 +62,12 @@ const Header = () => {
 
   if (isMobile) return (
     <>
-      <header style={{ position:'fixed', top:0, left:0, right:0, zIndex:100, background:'rgba(10,10,10,0.96)', backdropFilter:'blur(10px)', borderBottom:'1px solid rgba(255,255,255,0.06)', height:'56px', display:'flex', alignItems:'center', padding:'0 16px' }}>
+      <header style={{ position:'fixed', top:0, left:0, right:0, zIndex:100, background:'rgba(10,10,10,0.96)', backdropFilter:'blur(10px)', borderBottom:'1px solid rgba(255,255,255,0.06)', height:'70px', display:'flex', alignItems:'center', padding:'0 16px' }}>
         <button onClick={() => setMenuOpen(true)} style={{ background:'transparent', border:'none', cursor:'pointer', padding:'8px 8px 8px 0', display:'flex', flexDirection:'column', gap:'5px', flexShrink:0 }}>
           {[0,1,2].map(i => <div key={i} style={{ width:'22px', height:'2px', background:'#b87333', borderRadius:'2px' }} />)}
         </button>
         <a href="index.html" style={{ position:'absolute', left:'50%', transform:'translateX(-50%)', cursor:'pointer', textDecoration:'none' }}>
-          <img src="assets/logo-ring-bronze.png" alt="Cveti's Secret" style={{ height:'34px', display:'block' }} />
+          <img src="assets/logo-ring-bronze.png" alt="Cveti's Secret" style={{ height:'48px', display:'block' }} />
         </a>
         <div style={{ marginLeft:'auto' }}>
           <a href={`tel:${PHONE}`} style={{ display:'flex', alignItems:'center', justifyContent:'center', width:'36px', height:'36px', borderRadius:'50%', border:'1px solid rgba(184,115,51,0.5)', color:'#b87333', textDecoration:'none' }}>
@@ -112,13 +112,13 @@ const Header = () => {
       <nav style={{ flex:1, display:'flex', gap:'40px', alignItems:'center', justifyContent:'center' }}>
         {navLinks.map(link => (
           <a key={link.id} href={link.href}
-            style={{ fontFamily:"'Cinzel',serif", fontSize:'14px', letterSpacing:'0.1em', color:'rgba(240,232,208,0.8)', cursor:'pointer', transition:'color 0.3s ease', whiteSpace:'nowrap', textDecoration:'none' }}
+            style={{ fontFamily:"'Cinzel',serif", fontSize:'20px', letterSpacing:'0.1em', color:'rgba(240,232,208,0.8)', cursor:'pointer', transition:'color 0.3s ease', whiteSpace:'nowrap', textDecoration:'none' }}
             onMouseEnter={e => e.target.style.color='#b87333'}
             onMouseLeave={e => e.target.style.color='rgba(240,232,208,0.8)'}
           >{link.label}</a>
         ))}
         <a href="academy.html"
-          style={{ fontFamily:"'Cinzel',serif", fontSize:'14px', letterSpacing:'0.1em', color:'#b87333', cursor:'pointer', transition:'color 0.3s ease', whiteSpace:'nowrap', textDecoration:'none' }}
+          style={{ fontFamily:"'Cinzel',serif", fontSize:'20px', letterSpacing:'0.1em', color:'#b87333', cursor:'pointer', transition:'color 0.3s ease', whiteSpace:'nowrap', textDecoration:'none' }}
         >Академия</a>
       </nav>
       <a href={`tel:${PHONE}`} style={{ flexShrink:0, display:'flex', alignItems:'center', gap:'9px', padding:'11px 22px', borderRadius:'4px', border:'1px solid rgba(184,115,51,0.5)', color:'#b87333', textDecoration:'none', fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.12em', transition:'all 0.3s ease' }}
@@ -191,7 +191,7 @@ const AcademyWizard = () => {
   const Step1 = () => (
     <div>
       <div style={{ textAlign:'center', marginBottom: isMobile ? '32px' : '44px' }}>
-        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, marginBottom:'8px' }}>Избери курс</h3>
+        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'8px', marginBottom:'4px' }}>Избери курс</h3>
         <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em' }}>Кое умение искаш да развиеш?</p>
       </div>
       <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap: isMobile ? '12px' : '16px', marginBottom:'40px' }}>
@@ -212,7 +212,7 @@ const AcademyWizard = () => {
         })}
       </div>
       <div style={{ textAlign:'center' }}>
-        <button onClick={() => canNext1 && setStep(2)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color: canNext1 ? '#0a0a0a' : 'rgba(240,232,208,0.3)', background: canNext1 ? 'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)' : 'rgba(255,255,255,0.06)', border:'none', borderRadius:'6px', padding:'14px 44px', cursor: canNext1 ? 'pointer' : 'not-allowed', transition:'all 0.35s ease', boxShadow: canNext1 ? '0 4px 20px rgba(184,115,51,0.3)' : 'none' }}>
+        <button onClick={() => canNext1 && setStep(2)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color: canNext1 ? '#0a0a0a' : 'rgba(240,232,208,0.3)', background: canNext1 ? '#edd9bc' : 'rgba(255,255,255,0.06)', border:'none', borderRadius:'6px', padding:'14px 44px', cursor: canNext1 ? 'pointer' : 'not-allowed', transition:'all 0.35s ease', boxShadow: canNext1 ? '0 4px 20px rgba(184,115,51,0.25)' : 'none' }}>
           Напред →
         </button>
       </div>
@@ -223,7 +223,7 @@ const AcademyWizard = () => {
   const Step2 = () => (
     <div>
       <div style={{ textAlign:'center', marginBottom: isMobile ? '32px' : '44px' }}>
-        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, marginBottom:'8px' }}>Избери дата</h3>
+        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'8px', marginBottom:'4px' }}>Избери дата</h3>
         <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em' }}>Кога искаш да започнеш?</p>
       </div>
 
@@ -258,8 +258,7 @@ const AcademyWizard = () => {
         <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'14px' }}>Желана дата за начало</div>
         <input
           type="date"
-          value={date}
-          min={new Date().toISOString().split('T')[0]}
+          defaultValue=""
           onChange={e => setDate(e.target.value)}
           className="acad-input"
           style={{ maxWidth: isMobile ? '100%' : '260px', colorScheme:'dark' }}
@@ -271,7 +270,7 @@ const AcademyWizard = () => {
           onMouseEnter={e => e.currentTarget.style.borderColor='rgba(184,115,51,0.5)'}
           onMouseLeave={e => e.currentTarget.style.borderColor='rgba(184,115,51,0.2)'}
         >← Назад</button>
-        <button onClick={() => canNext2 && setStep(3)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color: canNext2 ? '#0a0a0a' : 'rgba(240,232,208,0.3)', background: canNext2 ? 'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)' : 'rgba(255,255,255,0.06)', border:'none', borderRadius:'6px', padding:'14px 44px', cursor: canNext2 ? 'pointer' : 'not-allowed', transition:'all 0.35s ease', boxShadow: canNext2 ? '0 4px 20px rgba(184,115,51,0.3)' : 'none' }}>
+        <button onClick={() => canNext2 && setStep(3)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color: canNext2 ? '#0a0a0a' : 'rgba(240,232,208,0.3)', background: canNext2 ? '#edd9bc' : 'rgba(255,255,255,0.06)', border:'none', borderRadius:'6px', padding:'14px 44px', cursor: canNext2 ? 'pointer' : 'not-allowed', transition:'all 0.35s ease', boxShadow: canNext2 ? '0 4px 20px rgba(184,115,51,0.25)' : 'none' }}>
           Напред →
         </button>
       </div>
@@ -282,7 +281,7 @@ const AcademyWizard = () => {
   const Step3 = () => submitted ? (
     <div style={{ textAlign:'center', padding: isMobile ? '40px 20px' : '60px 40px' }}>
       <div style={{ fontSize:'56px', marginBottom:'20px' }}>✦</div>
-      <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '44px' : '60px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, marginBottom:'14px' }}>Благодарим ти!</h3>
+      <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '44px' : '60px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'10px', marginBottom:'4px' }}>Благодарим ти!</h3>
       <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'18px', fontWeight:300, color:'rgba(240,232,208,0.7)', lineHeight:1.7, marginBottom:'32px', maxWidth:'480px', margin:'0 auto 32px' }}>
         Заявката ти за <strong style={{ color:'#b87333' }}>{course?.title}</strong> беше изпратена успешно. Ще се свържем с теб в рамките на 24 часа за потвърждение.
       </p>
@@ -293,7 +292,7 @@ const AcademyWizard = () => {
   ) : (
     <div>
       <div style={{ textAlign:'center', marginBottom: isMobile ? '32px' : '44px' }}>
-        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.1, marginBottom:'8px' }}>Твоите данни</h3>
+        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'8px', marginBottom:'4px' }}>Твоите данни</h3>
         <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em' }}>Последна стъпка — попълни контактна информация</p>
       </div>
 
@@ -378,7 +377,7 @@ const AcademyHero = () => {
   const [vis, setVis] = React.useState(false);
   React.useEffect(() => { const t = setTimeout(() => setVis(true), 150); return () => clearTimeout(t); }, []);
   return (
-    <section style={{ position:'relative', width:'100%', height: isMobile ? '60vh' : '55vh', minHeight:'360px', background:'#0a0a0a', overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center', paddingTop: isMobile ? '56px' : '76px' }}>
+    <section style={{ position:'relative', width:'100%', height: isMobile ? '60vh' : '55vh', minHeight:'360px', background:'#0a0a0a', overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center', paddingTop: isMobile ? '70px' : '76px' }}>
       <div style={{ position:'absolute', inset:0, background:'radial-gradient(ellipse at 50% 80%, rgba(184,115,51,0.12) 0%, #080808 65%)' }} />
       <div style={{ position:'absolute', bottom:0, left:'50%', transform:'translateX(-50%)', width:'1px', height:'40%', background:'linear-gradient(to bottom,transparent,rgba(184,115,51,0.3))' }} />
       <div style={{ position:'relative', zIndex:2, textAlign:'center', padding:'0 24px', opacity:vis?1:0, transform:vis?'translateY(0)':'translateY(24px)', transition:'opacity 0.9s ease,transform 0.9s ease' }}>
@@ -387,7 +386,7 @@ const AcademyHero = () => {
           <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.7)' }}>Професионално обучение</span>
           <div style={{ width:'32px', height:'1px', background:'linear-gradient(90deg,#b87333,transparent)' }} />
         </div>
-        <h1 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '56px' : '80px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1, marginBottom:'16px' }}>
+        <h1 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '56px' : '80px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'10px', marginBottom:'6px' }}>
           Cveti's Secret Academy
         </h1>
         <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '16px' : '20px', fontWeight:300, fontStyle:'italic', color:'rgba(240,232,208,0.65)', letterSpacing:'0.06em', maxWidth:'540px', margin:'0 auto 28px', lineHeight:1.7 }}>
