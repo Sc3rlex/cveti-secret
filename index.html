@@ -376,15 +376,15 @@ const ServiceCard = ({ service, mobile, onClick }) => {
   return (
     <div onClick={onClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ background:'#1a1a1a', border:`1px solid ${hovered?'rgba(184,115,51,0.65)':'rgba(184,115,51,0.3)'}`, borderRadius:'12px', boxShadow:hovered?'inset 0 0 24px rgba(184,115,51,0.1),0 8px 40px rgba(0,0,0,0.8),0 0 24px rgba(184,115,51,0.2)':'inset 0 0 20px rgba(184,115,51,0.05),0 4px 24px rgba(0,0,0,0.6)', padding: mobile ? '40px 24px' : '36px 24px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', cursor:'pointer', transform:hovered?'scale(1.02)':'scale(1)', transition:'all 0.4s ease', position:'relative', overflow:'hidden', minHeight: mobile ? '160px' : '140px', gap:'8px' }}>
       <div style={{ position:'absolute', inset:0, background:`radial-gradient(ellipse at center,${hovered?'rgba(184,115,51,0.07)':'rgba(184,115,51,0.03)'} 0%,transparent 70%)`, transition:'all 0.4s ease', pointerEvents:'none' }} />
-      <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: mobile ? '44px' : '36px', background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'4px', position:'relative', zIndex:1, textAlign:'center' }}>{service.group}</div>
+      <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: mobile ? '40px' : '32px', background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'10px', position:'relative', zIndex:1, textAlign:'center', maxWidth:'100%', wordBreak:'break-word' }}>{service.group}</div>
       <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', letterSpacing:'0.14em', textTransform:'uppercase', color:'#e0dbce', position:'relative', zIndex:1 }}>{totalItems} услуги</div>
-      <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.14em', textTransform:'uppercase', color:hovered?'rgba(184,115,51,0.8)':'rgba(184,115,51,0.35)', position:'relative', zIndex:1, transition:'color 0.3s ease', marginTop:'4px' }}>Виж услугите ↓</div>
+      <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.14em', textTransform:'uppercase', color:hovered?'#b87333':'rgba(240,232,208,0.55)', position:'relative', zIndex:1, transition:'color 0.3s ease', marginTop:'4px' }}>Виж услугите ↓</div>
     </div>
   );
 };
 
 // Renders a single item row (laser table OR bionic OR standard)
-const ServiceItemRow = ({ item, subName, isMobile, itemsVisible, i }) => {
+const ServiceItemRow = ({ item, subName, isMobile, itemsVisible, i, hideBooking }) => {
   const delay = `${Math.min(i, 12) * 0.05}s`;
   const vis = { opacity:itemsVisible?1:0, transform:itemsVisible?'translateX(0)':'translateX(-12px)', transition:`opacity 0.3s ease ${delay},transform 0.3s ease ${delay}` };
   if (item.prices) {
@@ -432,11 +432,11 @@ const ServiceItemRow = ({ item, subName, isMobile, itemsVisible, i }) => {
     <div style={{ ...vis, padding: isMobile ? '12px 0' : '14px 0', borderBottom:'1px solid rgba(184,115,51,0.08)' }}>
       {isMobile ? (
         <>
-          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:'8px', gap:'12px' }}>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom: hideBooking ? '0' : '8px', gap:'12px' }}>
             <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', letterSpacing:'0.03em', flex:1, background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{item.name}</div>
             <span style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, color:'#b87333', letterSpacing:'0.06em', flexShrink:0 }}>{item.price}</span>
           </div>
-          <a href={bookLink} target={isPhone?'_self':'_blank'} rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'4px', padding:'8px 16px', textDecoration:'none', display:'inline-block' }}>{isPhone?'Обади се':'Запази сега'}</a>
+          {!hideBooking && <a href={bookLink} target={isPhone?'_self':'_blank'} rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'4px', padding:'8px 16px', textDecoration:'none', display:'inline-block' }}>{isPhone?'Обади се':'Запази сега'}</a>}
         </>
       ) : (
         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
@@ -446,10 +446,10 @@ const ServiceItemRow = ({ item, subName, isMobile, itemsVisible, i }) => {
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:'20px', flexShrink:0 }}>
             <span style={{ fontFamily:"'Cinzel',serif", fontSize:'14px', fontWeight:600, color:'#b87333', letterSpacing:'0.06em' }}>{item.price}</span>
-            <a href={bookLink} target={isPhone?'_self':'_blank'} rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.14em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'4px', padding:'9px 18px', textDecoration:'none', display:'inline-block', boxShadow:'0 2px 12px rgba(184,115,51,0.25)', whiteSpace:'nowrap', transition:'all 0.3s ease' }}
+            {!hideBooking && <a href={bookLink} target={isPhone?'_self':'_blank'} rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.14em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'4px', padding:'9px 18px', textDecoration:'none', display:'inline-block', boxShadow:'0 2px 12px rgba(184,115,51,0.25)', whiteSpace:'nowrap', transition:'all 0.3s ease' }}
               onMouseEnter={e=>{e.currentTarget.style.opacity='0.85';}}
               onMouseLeave={e=>{e.currentTarget.style.opacity='1';}}
-            >{isPhone?'Обади се':'Запази сега'}</a>
+            >{isPhone?'Обади се':'Запази сега'}</a>}
           </div>
         </div>
       )}
@@ -495,6 +495,28 @@ const ServicesOverlay = ({ open, onClose, initialGroup }) => {
   if (!group) return null;
   const currentSub = group.subcategories[activeSub] || group.subcategories[0];
   const hasLaser = currentSub && currentSub.items[0] && currentSub.items[0].prices;
+  const hideBooking = group.group === 'Апаратни процедури';
+  const isPermGrim = group.group === 'Перманентен грим';
+  const isAparatni = group.group === 'Апаратни процедури';
+
+  // Expert bio data — fill in Lina's bio text when ready
+  const expertData = isPermGrim
+    ? { initials:'ГК', name:'Габриела Карчина', bio:'Международно признат експерт · над 10 год. опит · специализира в микропигментация · преподавател и съдия на международни шампионати' }
+    : isAparatni
+    ? { initials:'Л', name:'Лина', bio:'Текстът предстои...' /* ← добави биото на Лина тук */ }
+    : null;
+
+  const ExpertBio = ({ compact }) => expertData ? (
+    <div style={{ display:'flex', alignItems:'center', gap: compact ? '10px' : '14px', padding: compact ? '10px 12px' : '12px 16px', marginBottom: compact ? '14px' : '20px', background:'rgba(184,115,51,0.04)', borderLeft:'2px solid rgba(184,115,51,0.4)', borderRadius:'0 6px 6px 0' }}>
+      <div style={{ flexShrink:0, width: compact ? '34px' : '40px', height: compact ? '34px' : '40px', borderRadius:'50%', background:'linear-gradient(135deg,#2a1e08,#1a1208)', border:'1px solid rgba(184,115,51,0.35)', display:'flex', alignItems:'center', justifyContent:'center' }}>
+        <span style={{ fontFamily:"'Cinzel',serif", fontSize: compact ? '12px' : '14px', fontWeight:600, color:'#b87333' }}>{expertData.initials}</span>
+      </div>
+      <div style={{ minWidth:0 }}>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize: compact ? '10px' : '11px', fontWeight:600, letterSpacing:'0.14em', color:'#edd9bc', marginBottom:'3px' }}>{expertData.name}</div>
+        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: compact ? '12px' : '13px', fontStyle:'italic', color:'rgba(240,232,208,0.5)', lineHeight:1.5, letterSpacing:'0.03em' }}>{expertData.bio}</div>
+      </div>
+    </div>
+  ) : null;
 
   return (
     <div style={{ position:'fixed', inset:0, zIndex:200, pointerEvents:open?'all':'none' }}>
@@ -510,8 +532,14 @@ const ServicesOverlay = ({ open, onClose, initialGroup }) => {
             <div style={{ width:'40px', height:'4px', borderRadius:'2px', background:'rgba(184,115,51,0.35)' }} />
           </div>}
           <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding: isMobile ? '10px 20px 14px' : '20px 48px 14px', borderBottom:'1px solid rgba(184,115,51,0.1)' }}>
-            <div>
+            <div style={{ display:'flex', alignItems:'center', gap:'20px', flexWrap:'wrap' }}>
               <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '32px' : '40px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'4px', margin:0 }}>{group.group}</h2>
+              {group.group === 'Апаратни процедури' && (
+                <a href="tel:+359878445664" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.14em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc,#b87333)', borderRadius:'4px', padding: isMobile ? '8px 14px' : '9px 20px', textDecoration:'none', display:'inline-flex', alignItems:'center', gap:'6px', boxShadow:'0 2px 12px rgba(184,115,51,0.3)', whiteSpace:'nowrap', flexShrink:0 }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.68 13.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.6a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 18z"/></svg>
+                  Обади се сега
+                </a>
+              )}
             </div>
             <button onClick={onClose} style={{ background:'transparent', border:'1px solid rgba(184,115,51,0.3)', borderRadius:'50%', width:'36px', height:'36px', color:'#e0dbce', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'sans-serif', flexShrink:0 }}>✕</button>
           </div>
@@ -532,13 +560,14 @@ const ServicesOverlay = ({ open, onClose, initialGroup }) => {
             <div style={{ flex:1, overflowY:'auto', padding:'16px 20px' }}>
               <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'28px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'4px' }}>{currentSub.name}</div>
               <div style={{ width:'36px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', marginBottom:'14px' }} />
+              <ExpertBio compact={true} />
               {hasLaser && (
                 <div style={{ display:'flex', justifyContent:'flex-end', gap:'14px', marginBottom:'8px', paddingRight:'4px' }}>
                   {['1 проц.','3 проц.','6 проц.'].map(l => <div key={l} style={{ minWidth:'52px', textAlign:'center', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.08em', color:'rgba(184,115,51,0.6)', textTransform:'uppercase' }}>{l}</div>)}
                 </div>
               )}
               {currentSub.items.map((item, i) => (
-                <ServiceItemRow key={i} item={item} subName={currentSub.name} isMobile={true} itemsVisible={itemsVisible} i={i} />
+                <ServiceItemRow key={i} item={item} subName={currentSub.name} isMobile={true} itemsVisible={itemsVisible} i={i} hideBooking={hideBooking} />
               ))}
             </div>
           </div>
@@ -559,13 +588,14 @@ const ServicesOverlay = ({ open, onClose, initialGroup }) => {
             <div style={{ flex:1, padding:'24px 48px', overflowY:'auto' }}>
               <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'34px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'6px' }}>{currentSub.name}</div>
               <div style={{ width:'40px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', marginBottom:'20px' }} />
+              <ExpertBio compact={false} />
               {hasLaser && (
                 <div style={{ display:'flex', justifyContent:'flex-end', gap:'14px', marginBottom:'6px', paddingRight:'4px' }}>
                   {['1 процедура','3 процедури','6 процедури'].map(l => <div key={l} style={{ minWidth:'66px', textAlign:'center', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.08em', color:'rgba(184,115,51,0.6)', textTransform:'uppercase' }}>{l}</div>)}
                 </div>
               )}
               {currentSub.items.map((item, i) => (
-                <ServiceItemRow key={i} item={item} subName={currentSub.name} isMobile={false} itemsVisible={itemsVisible} i={i} />
+                <ServiceItemRow key={i} item={item} subName={currentSub.name} isMobile={false} itemsVisible={itemsVisible} i={i} hideBooking={hideBooking} />
               ))}
             </div>
           </div>
@@ -916,10 +946,10 @@ const Contact = () => {
 // ── Before/After Data — set image paths here ─────────────────────
 // 4 entries, one per category. Set instagram to the relevant profile link.
 const BEFORE_AFTER_DATA = [
-  { label:'Коса',               before:'assets/before.png',  after:'assets/after.png',  instagram:'https://www.instagram.com/cvetissecret/' },
-  { label:'Маникюр',            before:'assets/before2.jpg', after:'assets/after2.jpg', instagram:'https://www.instagram.com/nailsanddetails/' },
-  { label:'Апаратни процедури', before:'assets/before3.jpg', after:'assets/after3.jpg', instagram:'https://www.instagram.com/cvetissecret/' },
-  { label:'Перманентен грим',   before:'assets/before4.jpg', after:'assets/after4.jpg', instagram:'https://www.instagram.com/cvetissecret/' },
+  { label:'Коса',               before:'assets/before2.jpg',  after:'assets/after2.jpg',  instagram:'https://www.instagram.com/cvetissecret/' },
+  { label:'Маникюр',            before:'', after:'', instagram:'https://www.instagram.com/nails_and_details_place?igsh=ZGk0NTF1OWw5NTNn' },
+  { label:'Апаратни процедури', before:'assets/before4.png', after:'assets/after4.png', instagram:'https://www.instagram.com/laser.by.lina?igsh=MWJ5M25pN213cDUyMg%3D%3D' },
+  { label:'Перманентен грим',   before:'assets/before.png', after:'assets/after.png', instagram:'https://www.instagram.com/gabriela_karchina_pmu?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' },
 ];
 
 // ── Before/After Slider (touch + mouse) ──────────────────────────
@@ -946,7 +976,7 @@ const BeforeAfterSlider = ({ label, before, after }) => {
       onMouseLeave={() => { if (!isMobile) { setActive(false); setPos(50); } }}
       onTouchMove={e => { e.preventDefault(); if (dragging.current) updatePos(e.touches[0].clientX); }}
       onTouchEnd={() => { dragging.current = false; setActive(false); }}
-      style={{ position:'relative', width: isMobile ? '100%' : '300px', maxWidth: isMobile ? '480px' : '300px', height: isMobile ? '420px' : '440px', borderRadius:'10px', overflow:'hidden', border:'1px solid rgba(184,115,51,0.3)', cursor: isMobile ? 'default' : 'col-resize', flexShrink:0, userSelect:'none', touchAction: dragging.current ? 'none' : 'pan-y' }}
+      style={{ position:'relative', width:'100%', maxWidth: isMobile ? '480px' : '100%', height: isMobile ? '420px' : '440px', borderRadius:'10px', overflow:'hidden', border:'1px solid rgba(184,115,51,0.3)', cursor: isMobile ? 'default' : 'col-resize', userSelect:'none', touchAction: dragging.current ? 'none' : 'pan-y' }}
     >
       {/* After — background, visible on right */}
       <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg,#1a2a10,#0d1a08,#0a0d0a)', display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden' }}>
@@ -984,9 +1014,10 @@ const BeforeAfterSlider = ({ label, before, after }) => {
 
 // ── Gallery ───────────────────────────────────────────────────────
 const INSTAGRAM_POSTS = [
-  'https://www.instagram.com/p/DWs7LU6jMVh/',
   'https://www.instagram.com/p/DYNMyHgjT8e/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
-  'https://www.instagram.com/p/DScSloDDUJY/',
+  'https://www.instagram.com/p/DWs7LU6jMVh/',
+  'https://www.instagram.com/p/DLjyMUqocAi/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+  'https://www.instagram.com/p/DDJisAuIIIL/',
 ];
 
 // Loads Instagram embed.js once, then processes all blockquotes
@@ -1037,28 +1068,45 @@ const Gallery = () => {
             <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg,rgba(184,115,51,0.4),transparent)' }} />
           </div>
           <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '48px' : '56px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', margin:'0 0 4px', paddingBottom:'10px' }}>Галерия</h2>
-          <div style={{ width:'60px', height:'2px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', margin:'0 auto 12px' }} />
-          <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'#e0dbce', letterSpacing:'0.06em' }}>Последвайте ни в Instagram · @cvetissecret</p>
+          <div style={{ width:'60px', height:'2px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', margin:'0 auto' }} />
         </div>
         <div style={{ marginBottom:'40px', paddingRight: isMobile ? '20px' : '40px' }}>
           <div style={{ fontFamily:"'Cinzel',serif", fontSize:'15px', letterSpacing:'0.2em', color:'#e0dbce', textTransform:'uppercase', marginBottom:'24px' }}>Портфолио на екипа</div>
-          <div style={{ display:'flex', flexDirection:'column', gap:'36px' }}>
-            {BEFORE_AFTER_DATA.map((d,i) => (
-              <div key={i}>
-                <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '30px' : '36px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'12px', paddingBottom:'4px', lineHeight:1.3 }}>{d.label}</div>
-                <div style={{ display:'flex', flexDirection: isMobile ? 'column' : 'row', gap:'20px', alignItems: isMobile ? 'center' : 'flex-start' }}>
+          {isMobile ? (
+            /* Mobile: stacked column */
+            <div style={{ display:'flex', flexDirection:'column', gap:'36px' }}>
+              {BEFORE_AFTER_DATA.map((d,i) => (
+                <div key={i}>
+                  <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'30px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'12px', paddingBottom:'4px', lineHeight:1.3 }}>{d.label}</div>
                   <BeforeAfterSlider label={d.label} before={d.before} after={d.after} />
+                  <div style={{ marginTop:'14px', display:'flex', alignItems:'center', gap:'10px' }}>
+                    <div style={{ width:'20px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', flexShrink:0 }} />
+                    <a href={d.instagram} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', fontStyle:'italic', color:'rgba(240,232,208,0.6)', letterSpacing:'0.06em', textDecoration:'none', transition:'color 0.3s ease' }}
+                      onMouseEnter={e=>e.currentTarget.style.color='#b87333'}
+                      onMouseLeave={e=>e.currentTarget.style.color='rgba(240,232,208,0.6)'}
+                    >Разгледайте пълното портфолио →</a>
+                  </div>
                 </div>
-                <div style={{ marginTop:'16px', display:'flex', alignItems:'center', gap:'10px' }}>
-                  <div style={{ width:'20px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)' }} />
-                  <a href={d.instagram} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '14px' : '15px', fontStyle:'italic', color:'rgba(240,232,208,0.6)', letterSpacing:'0.06em', textDecoration:'none', transition:'color 0.3s ease' }}
-                    onMouseEnter={e=>e.currentTarget.style.color='#b87333'}
-                    onMouseLeave={e=>e.currentTarget.style.color='rgba(240,232,208,0.6)'}
-                  >Разгледайте пълното портфолио →</a>
+              ))}
+            </div>
+          ) : (
+            /* Desktop: all 4 side by side in one row */
+            <div style={{ display:'flex', gap:'20px', alignItems:'flex-start' }}>
+              {BEFORE_AFTER_DATA.map((d,i) => (
+                <div key={i} style={{ flex:'1 1 0', minWidth:0, display:'flex', flexDirection:'column' }}>
+                  <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'32px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'10px', paddingBottom:'4px', lineHeight:1.3 }}>{d.label}</div>
+                  <BeforeAfterSlider label={d.label} before={d.before} after={d.after} />
+                  <div style={{ marginTop:'14px', display:'flex', alignItems:'center', gap:'8px' }}>
+                    <div style={{ width:'16px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', flexShrink:0 }} />
+                    <a href={d.instagram} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'rgba(240,232,208,0.6)', letterSpacing:'0.05em', textDecoration:'none', transition:'color 0.3s ease', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}
+                      onMouseEnter={e=>e.currentTarget.style.color='#b87333'}
+                      onMouseLeave={e=>e.currentTarget.style.color='rgba(240,232,208,0.6)'}
+                    >Пълно портфолио →</a>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
         <div style={{ position:'relative' }}>
           <div style={{ fontFamily:"'Cinzel',serif", fontSize:'15px', letterSpacing:'0.2em', color:'#e0dbce', textTransform:'uppercase', marginBottom:'16px' }}>Instagram</div>
