@@ -168,7 +168,7 @@ const Hero = ({ onNavigate }) => {
     return () => [t1,t2,t3,t4].forEach(clearTimeout);
   }, []);
 
-  const hH = isMobile ? 56 : 76;
+  const hH = isMobile ? 70 : 76;
 
   if (isMobile) return (
     <section style={{ position:'relative', width:'100%', minHeight:'100vh', background:'#0d0d0d', overflow:'hidden', display:'flex', alignItems:'flex-end', paddingTop:`${hH}px` }}>
@@ -177,7 +177,7 @@ const Hero = ({ onNavigate }) => {
       <div style={{ position:'relative', zIndex:2, width:'100%', padding:'0 24px 60px' }}>
         <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'16px', opacity:tagVis?1:0, transform:tagVis?'translateY(0)':'translateY(12px)', transition:'opacity 0.6s ease,transform 0.6s ease' }}>
           <div style={{ width:'24px', height:'2px', background:'linear-gradient(90deg,#edd9bc,#b87333)' }} />
-          <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', letterSpacing:'0.08em', color:'rgba(240,232,208,0.75)' }}>С над 10 години опит</span>
+          <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', letterSpacing:'0.08em', color:'rgba(240,232,208,0.75)' }}>С над 20 години опит</span>
         </div>
         <h1 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'clamp(24px,6vw,36px)', fontWeight:400, fontStyle:'italic', lineHeight:1.4, color:'#f0e8d0', margin:'0 0 28px', letterSpacing:'0.02em', opacity:titleVis?1:0, transform:titleVis?'translateY(0)':'translateY(20px)', transition:'opacity 0.8s ease,transform 0.8s ease' }}>
           От Чикаго до България –<br />Cveti's Secret започва с<br />експертиза в русите коси и<br />балеажа и се развива в<br />пространство за цялостна<br />грижа за визията.
@@ -203,7 +203,7 @@ const Hero = ({ onNavigate }) => {
         <div style={{ flex:'0 0 auto', maxWidth:'420px', paddingBottom:'40px', paddingTop:'20px' }}>
           <div style={{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'20px', opacity:tagVis?1:0, transform:tagVis?'translateY(0)':'translateY(12px)', transition:'opacity 0.6s ease,transform 0.6s ease' }}>
             <div style={{ width:'28px', height:'2px', background:'linear-gradient(90deg,#edd9bc,#b87333)' }} />
-            <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', letterSpacing:'0.08em', color:'rgba(240,232,208,0.7)' }}>С над 10 години опит</span>
+            <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', letterSpacing:'0.08em', color:'rgba(240,232,208,0.7)' }}>С над 20 години опит</span>
           </div>
           <h1 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'clamp(28px,3.5vw,44px)', fontWeight:400, fontStyle:'italic', lineHeight:1.35, color:'#f0e8d0', margin:'0 0 36px', letterSpacing:'0.02em', opacity:titleVis?1:0, transform:titleVis?'translateY(0)':'translateY(20px)', transition:'opacity 0.8s ease,transform 0.8s ease', maxWidth:'480px' }}>
             От Чикаго до България – Cveti's Secret започва с експертиза в русите коси и балеажа и се развива в пространство за цялостна грижа за визията.
@@ -228,108 +228,258 @@ const Hero = ({ onNavigate }) => {
 };
 
 // ── Services ──────────────────────────────────────────────────────
-// Set each item's 'link' to the booking URL for that specific service.
-// Leave as '' to fall back to the default booking page.
-const BOOKING_DEFAULT = 'https://www.fresha.com'; // default fallback URL
+const BOOKING_DEFAULT = 'https://www.fresha.com';
+const PERM_PHONE = 'tel:+359878445664';
 
+// Structure: { group, subcategories: [{ name, items: [{name, price?, prices?, packPrice?, link?}] }] }
+// items with prices[] = laser (1/3/6 proc), items with price+packPrice = bionic
 const SERVICES_DATA = [
-  { category:'Сешоари и прически', items:[
-    { name:'Прическа',              price:'61,33 €',       link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17955778&pId=1251448&cartId=cac7e362-236b-4982-a588-e6bd4dde2ef4' },
-    { name:'Подстригване + Сешоар', price:'от 30,68 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15324389&pId=1251448' },
-    { name:'Маша',                  price:'от 25,57 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15295768&pId=1251448' },
-    { name:'Сешоар прав + преса',   price:'от 23,01 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15295743&pId=1251448' },
-    { name:'Мъжко подстригване',    price:'от 20,45 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17646655&pId=1251448&cartId=0349db5c-1bba-4a5a-b42a-6d6b7918a166' },
-    { name:'Сешоар прав/небрежен',  price:'от 25,57 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15289882&pId=1251448' },
-  ]},
-  { category:'Боядисване', items:[
-    { name:'Боя корен + тонер + сешоар',            price:'от 95 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A22735901&pId=1251448&cartId=fbcc1131-a2ca-4201-af31-273911556622' },
-    { name:'Обезцветяване корен + тонер + сешоар',  price:'от 95 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A22735875&pId=1251448&cartId=5886883a-5928-4ca2-b8b6-59235a08cc3f' },
-    { name:'Тонер + сешоар',                        price:'от 81,81 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682355&pId=1251448&cartId=e8227cd2-5d80-4943-8a53-f66d371d3a35' },
-    { name:'Боядисване цяла коса + сешоар',         price:'от 95 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15326779&pId=1251448' },
-    { name:'Боя корен + сешоар',                    price:'от 65 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682303&pId=1251448&cartId=433380f9-7283-458f-8e60-839186ed4816' },
-    { name:'Добавка подстригване',                  price:'от 65 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682266&pId=1251448&cartId=98bec827-0260-4973-bb48-bf81dea14fc3' },
-  ]},
-  { category:'Балеаж', items:[
-    { name:'Корекция на цвят',  price:'от 230 €',       link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A23787471&pId=1251448' },
-    { name:'Балеаж контур',     price:'от 127,83 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15327573&pId=1251448' },
-    { name:'Балеаж',            price:'от 178,96 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15289884&pId=1251448' },
-  ]},
-  { category:'Терапии', items:[
-    { name:'Терапия Innovatis',   price:'от 80 €',       link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A23209612&pId=1251448' },
-    { name:'Терапия + сешоар',    price:'от 61,36 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15324487&pId=1251448' },
-    { name:'Кератинова терапия ', price:'от 178,96 €',   link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15324462&pId=1251448' },
-  ]},
-  { category:'Поставяне на екстеншъни', items:[
-    { name:'Екстеншъни поставяне',   price:'от 15,34 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15326447&pId=1251448' },
+  { group:'Коса', subcategories:[
+    { name:'Сешоари и прически', items:[
+      { name:'Прическа',              price:'61,33 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17955778&pId=1251448&cartId=cac7e362-236b-4982-a588-e6bd4dde2ef4' },
+      { name:'Подстригване + Сешоар', price:'от 30,68 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15324389&pId=1251448' },
+      { name:'Маша',                  price:'от 25,57 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15295768&pId=1251448' },
+      { name:'Сешоар прав + преса',   price:'от 23,01 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15295743&pId=1251448' },
+      { name:'Мъжко подстригване',    price:'от 20,45 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17646655&pId=1251448&cartId=0349db5c-1bba-4a5a-b42a-6d6b7918a166' },
+      { name:'Сешоар прав/небрежен',  price:'от 25,57 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15289882&pId=1251448' },
+    ]},
+    { name:'Боядисване', items:[
+      { name:'Боя корен + тонер + сешоар',           price:'от 95 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A22735901&pId=1251448&cartId=fbcc1131-a2ca-4201-af31-273911556622' },
+      { name:'Обезцветяване корен + тонер + сешоар', price:'от 95 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A22735875&pId=1251448&cartId=5886883a-5928-4ca2-b8b6-59235a08cc3f' },
+      { name:'Тонер + сешоар',                       price:'от 81,81 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682355&pId=1251448&cartId=e8227cd2-5d80-4943-8a53-f66d371d3a35' },
+      { name:'Боядисване цяла коса + сешоар',        price:'от 95 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15326779&pId=1251448' },
+      { name:'Боя корен + сешоар',                   price:'от 65 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682303&pId=1251448&cartId=433380f9-7283-458f-8e60-839186ed4816' },
+      { name:'Добавка подстригване',                 price:'от 65 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682266&pId=1251448&cartId=98bec827-0260-4973-bb48-bf81dea14fc3' },
+    ]},
+    { name:'Балеаж', items:[
+      { name:'Корекция на цвят', price:'от 230 €',     link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A23787471&pId=1251448' },
+      { name:'Балеаж контур',    price:'от 127,83 €',  link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15327573&pId=1251448' },
+      { name:'Балеаж',           price:'от 178,96 €',  link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15289884&pId=1251448' },
+    ]},
+    { name:'Терапии', items:[
+      { name:'Терапия Innovatis',    price:'от 80 €',      link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A23209612&pId=1251448' },
+      { name:'Терапия + сешоар',     price:'от 61,36 €',   link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15324487&pId=1251448' },
+      { name:'Кератинова терапия',   price:'от 178,96 €',  link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15324462&pId=1251448' },
+    ]},
+    { name:'Екстеншъни', items:[
+      { name:'Екстеншъни поставяне', price:'от 15,34 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15326447&pId=1251448' },
+    ]},
   ]},
 
-  { category:'Нокти', items:[
-    { name:'Маникюр с Гел Лак',   price:'от 23 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8315279' },
-    { name:'Маникюр с цветна база',   price:'от 23 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A17893279' },
-    { name:'Апаратен маникюр',   price:'от 23 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A9351581' },
+  { group:'Маникюр', subcategories:[
+    { name:'Маникюр', items:[
+      { name:'Маникюр с Гел Лак',    price:'от 23 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8315279' },
+      { name:'Маникюр с цветна база',price:'от 23 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A17893279' },
+      { name:'Апаратен маникюр',     price:'от 23 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A9351581' },
+    ]},
+    { name:'Гел Маникюр', items:[
+      { name:'Ноктопластика',                                              price:'от 41 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8315277' },
+      { name:'Гел върху естествени нокти / поддръжка на ноктопластика',   price:'от 28 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8555790' },
+    ]},
+    { name:'Педикюр', items:[
+      { name:'Експресен педикюр с гел лак',  price:'от 60 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A20313592' },
+      { name:'Педикюр',                      price:'от 29 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8975416' },
+      { name:'Педикюр с гел лак',            price:'от 33 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8315275' },
+      { name:'Маникюр + педикюр с гел лак',  price:'от 64 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A16856632' },
+      { name:'Само лак на крачета',           price:'от 29 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8975433' },
+    ]},
+    { name:'Декорации', items:[
+      { name:'Ръчно рисувана декорация', price:'от 2 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A20654302' },
+      { name:'3D Декорация',             price:'от 3 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A20654186' },
+      { name:'Котешко око',              price:'от 3 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A19925727&cartId=e0f673bb-00fa-4937-9cea-69079c4fc5fd' },
+      { name:'Пигмент на 10 нокътя',     price:'от 5 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A12830597' },
+      { name:'Омбре маникюр',            price:'от 5 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A9351676' },
+    ]},
+    { name:'Допълнителни', items:[
+      { name:'Сваляне на гел',           price:'10 €',    link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A26355584&cartId=83ea1dd2-7f5f-4c6c-b54e-99e5c2b58dc3' },
+      { name:'Корекция',                 price:'5 €',     link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A23881371&cartId=2fc2badf-0567-4af7-9af1-33387ac495e7' },
+      { name:'Изграждане на 1 нокът',    price:'от 3 €',  link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A23881371&cartId=2fc2badf-0567-4af7-9af1-33387ac495e7' },
+      { name:'Сваляне на гел лак',       price:'7 €',     link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A23881371&cartId=2fc2badf-0567-4af7-9af1-33387ac495e7' },
+      { name:'Поправка на нокът/лепене', price:'от 2 €',  link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A23881371&cartId=2fc2badf-0567-4af7-9af1-33387ac495e7' },
+    ]},
   ]},
-  { category:'Гел нокти', items:[
-    { name:'Ноктопластика',   price:'от 41 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8315277' },
-    { name:'Гел върху естествени нокти/ поддръжка на ноктопластика',   price:'от 28 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8555790' },
+
+  { group:'Апаратни процедури', subcategories:[
+    { name:'Лазерна епилация Жени', items:[
+      { name:'Горна устна',        prices:['12.78 €','33.24 €','61.36 €'] },
+      { name:'Брадичка',           prices:['12.78 €','33.24 €','61.36 €'] },
+      { name:'Бакенбарди',         prices:['12.78 €','33.24 €','61.36 €'] },
+      { name:'Врат',               prices:['15.34 €','35.79 €','66.47 €'] },
+      { name:'Цяло лице',          prices:['30.68 €','66.47 €','122.71 €'] },
+      { name:'Ареоли',             prices:['12.78 €','33.24 €','61.36 €'] },
+      { name:'Коремна линия',      prices:['15.34 €','35.79 €','66.47 €'] },
+      { name:'Корем',              prices:['28.12 €','61.36 €','102.26 €'] },
+      { name:'Кръст',              prices:['30.68 €','81.81 €','148.29 €'] },
+      { name:'Ръце 1/2',           prices:['40.90 €','102.26 €','194.33 €'] },
+      { name:'Ръце цели',          prices:['51.13 €','117.61 €','214.78 €'] },
+      { name:'Мишници',            prices:['25.56 €','61.36 €','107.27 €'] },
+      { name:'Интимна зона',       prices:['46.02 €','102.26 €','199.33 €'] },
+      { name:'Бикини',             prices:['25.56 €','66.47 €','122.71 €'] },
+      { name:'Седалище',           prices:['35.79 €','76.69 €','143.17 €'] },
+      { name:'Бедра + колене',     prices:['66.47 €','153.39 €','281.27 €'] },
+      { name:'Подбедрици + колене',prices:['66.47 €','153.39 €','281.27 €'] },
+      { name:'Цели крака',         prices:['112.48 €','245.40 €','455.10 €'] },
+      { name:'Цяло тяло',          prices:['281.27 €','562.42 €','971.54 €'] },
+    ]},
+    { name:'Лазерна епилация Мъже', items:[
+      { name:'Скули',              prices:['15.34 €','35.79 €','66.47 €'] },
+      { name:'Врат',               prices:['25.56 €','61.36 €','102.26 €'] },
+      { name:'Гърди',              prices:['61.36 €','153.39 €','281.27 €'] },
+      { name:'Корем',              prices:['40.90 €','112.48 €','204.52 €'] },
+      { name:'Рамене',             prices:['40.90 €','112.48 €','204.52 €'] },
+      { name:'Гръб',               prices:['61.36 €','153.39 €','281.27 €'] },
+      { name:'Кръст',              prices:['40.90 €','112.48 €','204.52 €'] },
+      { name:'Гръб + кръст',       prices:['97.16 €','281.27 €','511.29 €'] },
+      { name:'Ръце 1/2',           prices:['51.13 €','127.82 €','230.17 €'] },
+      { name:'Ръце цели',          prices:['76.69 €','204.52 €','383.47 €'] },
+      { name:'Мишници',            prices:['30.68 €','66.47 €','211.48 €'] },
+      { name:'Бедра + колене',     prices:['81.81 €','204.52 €','357.90 €'] },
+      { name:'Подбедрици + колене',prices:['81.81 €','204.52 €','357.90 €'] },
+      { name:'Цели крака',         prices:['132.94 €','332.42 €','562.42 €'] },
+      { name:'Ареоли',             prices:['15.34 €','35.29 €','66.47 €'] },
+      { name:'Седалище',           prices:['51.13 €','127.82 €','230.17 €'] },
+      { name:'Цяло тяло',          prices:['357.90 €','706.78 €','1278.23 €'] },
+    ]},
+    { name:'BIONIC 10D GREEN SLIM', items:[
+      { name:'Корем / гръб (паласки) – 50 мин',          price:'65 €',  packPrice:'550 €' },
+      { name:'Бедра (отпред и отзад) – 50 мин',          price:'65 €',  packPrice:'550 €' },
+      { name:'Седалище – 30 мин',                         price:'55 €',  packPrice:'465 €' },
+      { name:'Ръце – 50 мин',                             price:'65 €',  packPrice:'550 €' },
+      { name:'Седалище + бедра – 70 мин',                 price:'100 €', packPrice:'820 €' },
+      { name:'Корем / гръб + бедра – 90 мин',            price:'110 €', packPrice:'925 €' },
+      { name:'Корем / гръб + бедра + седалище – 120 мин',price:'135 €', packPrice:'1160 €' },
+      { name:'Endorollers – 12 процедури',                price:'450 €' },
+    ]},
+    { name:'Дермабразио & Козметика', items:[
+      { name:'Водно дермабразио',                         price:'70 €' },
+      { name:'Оксид женели',                              price:'60 €' },
+      { name:'Диамантено микро дермабразио',              price:'40 €' },
+      { name:'Лазерно подмладяване – 1 процедура',        price:'50 €' },
+      { name:'Лазерно подмладяване – пакет 5 процедури',  price:'200 €' },
+    ]},
   ]},
-  { category:'Педикюр', items:[
-    { name:'Eкспресен педикюр с гел лак',   price:'от 60 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A20313592' },
-    { name:'Педикюр',   price:'от 29 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8975416' },
-    { name:'Педикюр с гел лак',   price:'от 33 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8315275' },
-    { name:'Маникюр + педикюр с гел лак',   price:'от 64 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A16856632' },
-    { name:'Само лак на крачета',   price:'от 29 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A8975433' },
-  ]},
-  { category:'Декорации', items:[
-    { name:'Ръчно рисувана декорация',   price:'от 2 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A20654302' },
-    { name:'3D Декорация',   price:'от 3 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A20654186' },
-    { name:'Котешко око',   price:'от 3 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A19925727&cartId=e0f673bb-00fa-4937-9cea-69079c4fc5fd' },
-    { name:'Пигмент на 10 нокътя',   price:'от 5 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A12830597' },
-    { name:'Омбре маникюр',   price:'от 5 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g?service=s%3A9351676' },
-  ]},
-  { category:'Други услуги', items:[
-    { name:'Сваляне на гел',   price:'10 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A26355584&cartId=83ea1dd2-7f5f-4c6c-b54e-99e5c2b58dc3' },
-    { name:'Корекция',   price:'5 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A23881371&cartId=2fc2badf-0567-4af7-9af1-33387ac495e7' },
-    { name:'Изграждане на 1 нокът',   price:'от 3 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A23881371&cartId=2fc2badf-0567-4af7-9af1-33387ac495e7' },
-    { name:'Сваляне на гел лак',   price:'7 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A23881371&cartId=2fc2badf-0567-4af7-9af1-33387ac495e7' },
-    { name:'Поправка на нокът/лепене',   price:'от 2 €', link:'https://www.fresha.com/en-GB/a/nails-and-details-sofiya-ulica-nerazdelni-3-afgjjd4g/booking?offerItems=sv%3A23881371&cartId=2fc2badf-0567-4af7-9af1-33387ac495e7' },
+
+  { group:'Перманентен грим', subcategories:[
+    { name:'Перманентен грим', items:[
+      { name:'Микроблейдинг',                              price:'250 €', link:PERM_PHONE },
+      { name:'Powder Brows (микропигментация вежди)',       price:'250 €', link:PERM_PHONE },
+      { name:'Aquarelle Lips (микропигментация на устни)',  price:'250 €', link:PERM_PHONE },
+      { name:'Soft Liner (опушена очна линия)',             price:'200 €', link:PERM_PHONE },
+      { name:'Междумиглен контур',                          price:'150 €', link:PERM_PHONE },
+    ]},
   ]},
 ];
 
 const ServiceCard = ({ service, mobile, onClick }) => {
   const [hovered, setHovered] = React.useState(false);
+  const totalItems = service.subcategories.reduce((acc, sub) => acc + sub.items.length, 0);
   return (
     <div onClick={onClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ background:'#1a1a1a', border:`1px solid ${hovered?'rgba(184,115,51,0.65)':'rgba(184,115,51,0.3)'}`, borderRadius:'12px', boxShadow:hovered?'inset 0 0 24px rgba(184,115,51,0.1),0 8px 40px rgba(0,0,0,0.8),0 0 24px rgba(184,115,51,0.2)':'inset 0 0 20px rgba(184,115,51,0.05),0 4px 24px rgba(0,0,0,0.6)', padding: mobile ? '40px 24px' : '36px 24px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', cursor:'pointer', transform:hovered?'scale(1.02)':'scale(1)', transition:'all 0.4s ease', position:'relative', overflow:'hidden', minHeight: mobile ? '160px' : '140px', gap:'8px' }}>
       <div style={{ position:'absolute', inset:0, background:`radial-gradient(ellipse at center,${hovered?'rgba(184,115,51,0.07)':'rgba(184,115,51,0.03)'} 0%,transparent 70%)`, transition:'all 0.4s ease', pointerEvents:'none' }} />
-      <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: mobile ? '44px' : '36px', background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'4px', position:'relative', zIndex:1, textAlign:'center' }}>{service.category}</div>
-      <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', letterSpacing:'0.14em', textTransform:'uppercase', color:'#e0dbce', position:'relative', zIndex:1 }}>{service.items.length} услуги</div>
+      <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: mobile ? '44px' : '36px', background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'4px', position:'relative', zIndex:1, textAlign:'center' }}>{service.group}</div>
+      <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', letterSpacing:'0.14em', textTransform:'uppercase', color:'#e0dbce', position:'relative', zIndex:1 }}>{totalItems} услуги</div>
       <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.14em', textTransform:'uppercase', color:hovered?'rgba(184,115,51,0.8)':'rgba(184,115,51,0.35)', position:'relative', zIndex:1, transition:'color 0.3s ease', marginTop:'4px' }}>Виж услугите ↓</div>
     </div>
   );
 };
 
-const ServicesOverlay = ({ open, onClose, initialCategory }) => {
+// Renders a single item row (laser table OR bionic OR standard)
+const ServiceItemRow = ({ item, subName, isMobile, itemsVisible, i }) => {
+  const delay = `${Math.min(i, 12) * 0.05}s`;
+  const vis = { opacity:itemsVisible?1:0, transform:itemsVisible?'translateX(0)':'translateX(-12px)', transition:`opacity 0.3s ease ${delay},transform 0.3s ease ${delay}` };
+  if (item.prices) {
+    // Laser: show 1/3/6 price table row
+    return (
+      <div style={{ ...vis, padding:'10px 0', borderBottom:'1px solid rgba(184,115,51,0.08)' }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:'8px', flexWrap: isMobile ? 'wrap' : 'nowrap' }}>
+          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '15px' : '17px', letterSpacing:'0.03em', flex:1, minWidth:'120px', background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{item.name}</div>
+          <div style={{ display:'flex', gap: isMobile ? '8px' : '14px', flexShrink:0 }}>
+            {item.prices.map((p, pi) => (
+              <div key={pi} style={{ textAlign:'center', minWidth: isMobile ? '52px' : '66px' }}>
+                <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '10px' : '12px', fontWeight:600, color:'#b87333', letterSpacing:'0.04em' }}>{p}</div>
+                <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '9px' : '10px', color:'rgba(184,115,51,0.5)', letterSpacing:'0.06em', marginTop:'2px' }}>{pi===0?'1 проц.':pi===1?'3 проц.':'6 проц.'}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (item.packPrice) {
+    // BIONIC: single + pack price
+    return (
+      <div style={{ ...vis, padding:'10px 0', borderBottom:'1px solid rgba(184,115,51,0.08)' }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:'8px', flexWrap: isMobile ? 'wrap' : 'nowrap' }}>
+          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '15px' : '17px', letterSpacing:'0.03em', flex:1, background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{item.name}</div>
+          <div style={{ display:'flex', gap:'14px', flexShrink:0, alignItems:'center' }}>
+            <div style={{ textAlign:'center' }}>
+              <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '11px' : '13px', fontWeight:600, color:'#b87333' }}>{item.price}</div>
+              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'9px', color:'rgba(184,115,51,0.5)', letterSpacing:'0.06em', marginTop:'1px' }}>единична</div>
+            </div>
+            <div style={{ textAlign:'center' }}>
+              <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '11px' : '13px', fontWeight:600, color:'#edd9bc' }}>{item.packPrice}</div>
+              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'9px', color:'rgba(240,232,208,0.35)', letterSpacing:'0.06em', marginTop:'1px' }}>пакет 10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  // Standard item
+  const bookLink = item.link || BOOKING_DEFAULT;
+  const isPhone = bookLink.startsWith('tel:');
+  return (
+    <div style={{ ...vis, padding: isMobile ? '12px 0' : '14px 0', borderBottom:'1px solid rgba(184,115,51,0.08)' }}>
+      {isMobile ? (
+        <>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:'8px', gap:'12px' }}>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', letterSpacing:'0.03em', flex:1, background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{item.name}</div>
+            <span style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, color:'#b87333', letterSpacing:'0.06em', flexShrink:0 }}>{item.price}</span>
+          </div>
+          <a href={bookLink} target={isPhone?'_self':'_blank'} rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'4px', padding:'8px 16px', textDecoration:'none', display:'inline-block' }}>{isPhone?'Обади се':'Запази сега'}</a>
+        </>
+      ) : (
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+          <div>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'18px', letterSpacing:'0.04em', background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{item.name}</div>
+            <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.14em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginTop:'2px' }}>{subName}</div>
+          </div>
+          <div style={{ display:'flex', alignItems:'center', gap:'20px', flexShrink:0 }}>
+            <span style={{ fontFamily:"'Cinzel',serif", fontSize:'14px', fontWeight:600, color:'#b87333', letterSpacing:'0.06em' }}>{item.price}</span>
+            <a href={bookLink} target={isPhone?'_self':'_blank'} rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.14em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'4px', padding:'9px 18px', textDecoration:'none', display:'inline-block', boxShadow:'0 2px 12px rgba(184,115,51,0.25)', whiteSpace:'nowrap', transition:'all 0.3s ease' }}
+              onMouseEnter={e=>{e.currentTarget.style.opacity='0.85';}}
+              onMouseLeave={e=>{e.currentTarget.style.opacity='1';}}
+            >{isPhone?'Обади се':'Запази сега'}</a>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const ServicesOverlay = ({ open, onClose, initialGroup }) => {
   const isMobile = useIsMobile();
-  const [activeCategory, setActiveCategory] = React.useState(initialCategory ?? 0);
+  const [activeSub, setActiveSub] = React.useState(0);
   const [itemsVisible, setItemsVisible] = React.useState(false);
   const [dragY, setDragY] = React.useState(0);
   const touchStartY = React.useRef(0);
   const dragging = React.useRef(false);
+  const groupIdx = initialGroup ?? 0;
+  const group = SERVICES_DATA[groupIdx];
 
   React.useEffect(() => {
-    if (open) { setActiveCategory(initialCategory ?? 0); setItemsVisible(false); const t = setTimeout(() => setItemsVisible(true), 200); return () => clearTimeout(t); }
-  }, [open, initialCategory]);
+    if (open) { setActiveSub(0); setItemsVisible(false); const t = setTimeout(() => setItemsVisible(true), 200); return () => clearTimeout(t); }
+  }, [open, initialGroup]);
 
   React.useEffect(() => {
     if (open) { setItemsVisible(false); const t = setTimeout(() => setItemsVisible(true), 80); return () => clearTimeout(t); }
-  }, [activeCategory]);
+  }, [activeSub]);
 
   React.useEffect(() => {
     if (open) document.body.style.overflow = 'hidden';
     else { document.body.style.overflow = ''; setDragY(0); }
     return () => { document.body.style.overflow = ''; };
   }, [open]);
-
-  const selectCat = i => { setActiveCategory(i); };
 
   const onTouchStart = e => { touchStartY.current = e.touches[0].clientY; dragging.current = true; };
   const onTouchMove = e => {
@@ -341,6 +491,10 @@ const ServicesOverlay = ({ open, onClose, initialCategory }) => {
     dragging.current = false;
     if (dragY > 90) { setDragY(0); onClose(); } else setDragY(0);
   };
+
+  if (!group) return null;
+  const currentSub = group.subcategories[activeSub] || group.subcategories[0];
+  const hasLaser = currentSub && currentSub.items[0] && currentSub.items[0].prices;
 
   return (
     <div style={{ position:'fixed', inset:0, zIndex:200, pointerEvents:open?'all':'none' }}>
@@ -355,67 +509,63 @@ const ServicesOverlay = ({ open, onClose, initialCategory }) => {
           {isMobile && <div style={{ display:'flex', justifyContent:'center', padding:'10px 0 2px' }}>
             <div style={{ width:'40px', height:'4px', borderRadius:'2px', background:'rgba(184,115,51,0.35)' }} />
           </div>}
-          {/* Header */}
-          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding: isMobile ? '10px 20px 14px' : '24px 48px 16px', borderBottom:'1px solid rgba(184,115,51,0.1)' }}>
-          <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '34px' : '42px', background:'linear-gradient(135deg,#edd9bc,#e0dbce 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'4px' }}>Нашите услуги</h2>
-          <button onClick={onClose} style={{ background:'transparent', border:'1px solid rgba(184,115,51,0.3)', borderRadius:'50%', width:'36px', height:'36px', color:'#e0dbce', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'sans-serif', flexShrink:0 }}>✕</button>
-          </div>{/* /header row */}
-        </div>{/* /drag zone */}
+          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding: isMobile ? '10px 20px 14px' : '20px 48px 14px', borderBottom:'1px solid rgba(184,115,51,0.1)' }}>
+            <div>
+              <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '32px' : '40px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'4px', margin:0 }}>{group.group}</h2>
+            </div>
+            <button onClick={onClose} style={{ background:'transparent', border:'1px solid rgba(184,115,51,0.3)', borderRadius:'50%', width:'36px', height:'36px', color:'#e0dbce', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'sans-serif', flexShrink:0 }}>✕</button>
+          </div>
+        </div>
 
         {isMobile ? (
-          // Mobile: tabs on top, items below
           <div style={{ display:'flex', flexDirection:'column', flex:1, overflow:'hidden' }}>
-            <div className="cat-tabs" style={{ display:'flex', overflowX:'auto', borderBottom:'1px solid rgba(184,115,51,0.1)', flexShrink:0, scrollbarWidth:'none' }}>
-              {SERVICES_DATA.map((cat, i) => (
-                <div key={i} onClick={() => selectCat(i)} style={{ padding:'12px 18px', cursor:'pointer', flexShrink:0, fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.1em', textTransform:'uppercase', color: activeCategory===i ? '#b87333' : 'rgba(240,232,208,0.5)', borderBottom: activeCategory===i ? '2px solid #b87333' : '2px solid transparent', background: activeCategory===i ? 'rgba(184,115,51,0.04)' : 'transparent', transition:'all 0.2s ease', whiteSpace:'nowrap' }}>
-                  {cat.category}
-                </div>
-              ))}
-            </div>
-            <div style={{ flex:1, overflowY:'auto', padding:'16px 20px' }}>
-              <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'32px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'4px' }}>{SERVICES_DATA[activeCategory].category}</div>
-              <div style={{ width:'36px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', marginBottom:'20px' }} />
-              {SERVICES_DATA[activeCategory].items.map((item, i) => (
-                <div key={i} style={{ padding:'14px 0', borderBottom:'1px solid rgba(184,115,51,0.08)', opacity:itemsVisible?1:0, transform:itemsVisible?'translateX(0)':'translateX(-12px)', transition:`opacity 0.3s ease ${i*0.05}s,transform 0.3s ease ${i*0.05}s` }}>
-                  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:'10px', gap:'12px' }}>
-                    <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'17px', letterSpacing:'0.03em', flex:1, background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{item.name}</div>
-                    <span style={{ fontFamily:"'Cinzel',serif", fontSize:'13px', fontWeight:600, color:'#b87333', letterSpacing:'0.06em', flexShrink:0 }}>{item.price}</span>
+            {/* Subcategory tabs */}
+            {group.subcategories.length > 1 && (
+              <div className="cat-tabs" style={{ display:'flex', overflowX:'auto', borderBottom:'1px solid rgba(184,115,51,0.1)', flexShrink:0, scrollbarWidth:'none' }}>
+                {group.subcategories.map((sub, i) => (
+                  <div key={i} onClick={() => setActiveSub(i)} style={{ padding:'10px 16px', cursor:'pointer', flexShrink:0, fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.1em', textTransform:'uppercase', color: activeSub===i ? '#b87333' : 'rgba(240,232,208,0.5)', borderBottom: activeSub===i ? '2px solid #b87333' : '2px solid transparent', background: activeSub===i ? 'rgba(184,115,51,0.04)' : 'transparent', transition:'all 0.2s ease', whiteSpace:'nowrap' }}>
+                    {sub.name}
                   </div>
-                  <a href={item.link || BOOKING_DEFAULT} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'4px', padding:'8px 16px', textDecoration:'none', display:'inline-block' }}>Запази сега</a>
+                ))}
+              </div>
+            )}
+            <div style={{ flex:1, overflowY:'auto', padding:'16px 20px' }}>
+              <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'28px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'4px' }}>{currentSub.name}</div>
+              <div style={{ width:'36px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', marginBottom:'14px' }} />
+              {hasLaser && (
+                <div style={{ display:'flex', justifyContent:'flex-end', gap:'14px', marginBottom:'8px', paddingRight:'4px' }}>
+                  {['1 проц.','3 проц.','6 проц.'].map(l => <div key={l} style={{ minWidth:'52px', textAlign:'center', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.08em', color:'rgba(184,115,51,0.6)', textTransform:'uppercase' }}>{l}</div>)}
                 </div>
+              )}
+              {currentSub.items.map((item, i) => (
+                <ServiceItemRow key={i} item={item} subName={currentSub.name} isMobile={true} itemsVisible={itemsVisible} i={i} />
               ))}
             </div>
           </div>
         ) : (
-          // Desktop: side by side
           <div style={{ display:'flex', flex:1, overflow:'hidden' }}>
-            <div style={{ width:'240px', flexShrink:0, borderRight:'1px solid rgba(184,115,51,0.1)', padding:'24px 0', overflowY:'auto' }}>
-              {SERVICES_DATA.map((cat, i) => (
-                <div key={i} onClick={() => selectCat(i)} style={{ padding:'14px 32px', cursor:'pointer', fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.12em', textTransform:'uppercase', color:activeCategory===i?'#b87333':'rgba(240,232,208,0.5)', background:activeCategory===i?'rgba(184,115,51,0.06)':'transparent', borderLeft:activeCategory===i?'2px solid #b87333':'2px solid transparent', transition:'all 0.25s ease' }}
-                  onMouseEnter={e=>{ if(activeCategory!==i) e.currentTarget.style.color='rgba(240,232,208,0.8)'; }}
-                  onMouseLeave={e=>{ if(activeCategory!==i) e.currentTarget.style.color='rgba(240,232,208,0.5)'; }}>
-                  {cat.category}
-                  <span style={{ display:'block', fontFamily:"'Cormorant Garamond',serif", fontSize:'11px', textTransform:'none', letterSpacing:'0.04em', color:'rgba(158,142,106,0.6)', marginTop:'2px', fontStyle:'italic' }}>{cat.items.length} услуги</span>
+            {/* Left sidebar: subcategories */}
+            <div style={{ width:'220px', flexShrink:0, borderRight:'1px solid rgba(184,115,51,0.1)', padding:'20px 0', overflowY:'auto' }}>
+              {group.subcategories.map((sub, i) => (
+                <div key={i} onClick={() => setActiveSub(i)} style={{ padding:'13px 28px', cursor:'pointer', fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.12em', textTransform:'uppercase', color:activeSub===i?'#b87333':'rgba(240,232,208,0.5)', background:activeSub===i?'rgba(184,115,51,0.06)':'transparent', borderLeft:activeSub===i?'2px solid #b87333':'2px solid transparent', transition:'all 0.25s ease' }}
+                  onMouseEnter={e=>{ if(activeSub!==i) e.currentTarget.style.color='rgba(240,232,208,0.8)'; }}
+                  onMouseLeave={e=>{ if(activeSub!==i) e.currentTarget.style.color='rgba(240,232,208,0.5)'; }}>
+                  {sub.name}
+                  <span style={{ display:'block', fontFamily:"'Cormorant Garamond',serif", fontSize:'11px', textTransform:'none', letterSpacing:'0.04em', color:'rgba(158,142,106,0.55)', marginTop:'2px', fontStyle:'italic' }}>{sub.items.length} услуги</span>
                 </div>
               ))}
             </div>
+            {/* Right content */}
             <div style={{ flex:1, padding:'24px 48px', overflowY:'auto' }}>
-              <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'36px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'8px' }}>{SERVICES_DATA[activeCategory].category}</div>
-              <div style={{ width:'40px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', marginBottom:'28px' }} />
-              {SERVICES_DATA[activeCategory].items.map((item, i) => (
-                <div key={i} style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'16px 0', borderBottom:'1px solid rgba(184,115,51,0.08)', opacity:itemsVisible?1:0, transform:itemsVisible?'translateX(0)':'translateX(-16px)', transition:`opacity 0.4s ease ${i*0.06}s,transform 0.4s ease ${i*0.06}s` }}>
-                  <div>
-                    <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'18px', letterSpacing:'0.04em', background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>{item.name}</div>
-                    <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.14em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginTop:'2px' }}>{SERVICES_DATA[activeCategory].category}</div>
-                  </div>
-                  <div style={{ display:'flex', alignItems:'center', gap:'20px', flexShrink:0 }}>
-                    <span style={{ fontFamily:"'Cinzel',serif", fontSize:'14px', fontWeight:600, color:'#b87333', letterSpacing:'0.06em' }}>{item.price}</span>
-                    <a href={item.link || BOOKING_DEFAULT} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', fontWeight:600, letterSpacing:'0.14em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'4px', padding:'9px 18px', textDecoration:'none', display:'inline-block', boxShadow:'0 2px 12px rgba(184,115,51,0.25)', whiteSpace:'nowrap', transition:'all 0.3s ease' }}
-                      onMouseEnter={e=>{e.currentTarget.style.opacity='0.85';}}
-                      onMouseLeave={e=>{e.currentTarget.style.opacity='1';}}
-                    >Запази сега</a>
-                  </div>
+              <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'34px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'6px' }}>{currentSub.name}</div>
+              <div style={{ width:'40px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', marginBottom:'20px' }} />
+              {hasLaser && (
+                <div style={{ display:'flex', justifyContent:'flex-end', gap:'14px', marginBottom:'6px', paddingRight:'4px' }}>
+                  {['1 процедура','3 процедури','6 процедури'].map(l => <div key={l} style={{ minWidth:'66px', textAlign:'center', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.08em', color:'rgba(184,115,51,0.6)', textTransform:'uppercase' }}>{l}</div>)}
                 </div>
+              )}
+              {currentSub.items.map((item, i) => (
+                <ServiceItemRow key={i} item={item} subName={currentSub.name} isMobile={false} itemsVisible={itemsVisible} i={i} />
               ))}
             </div>
           </div>
@@ -428,13 +578,12 @@ const ServicesOverlay = ({ open, onClose, initialCategory }) => {
 const Services = ({ onNavigate }) => {
   const isMobile = useIsMobile();
   const [overlayOpen, setOverlayOpen] = React.useState(false);
-  const [overlayCategory, setOverlayCategory] = React.useState(0);
-  const openAt = i => { setOverlayCategory(i); setOverlayOpen(true); };
-  const displayed = isMobile ? SERVICES_DATA.slice(0, 3) : SERVICES_DATA.slice(0, 6);
+  const [overlayGroup, setOverlayGroup] = React.useState(0);
+  const openAt = i => { setOverlayGroup(i); setOverlayOpen(true); };
   const pad = isMobile ? '70px 20px' : '100px 40px';
   return (
     <>
-      <ServicesOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} initialCategory={overlayCategory} />
+      <ServicesOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} initialGroup={overlayGroup} />
       <section style={{ background:'#111111', padding:pad, position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', bottom:0, left:0, width:'300px', height:'300px', background:'radial-gradient(circle,rgba(184,115,51,0.06) 0%,transparent 70%)', pointerEvents:'none' }} />
         <div style={{ position:'absolute', top:0, right:0, width:'200px', height:'200px', background:'radial-gradient(circle,rgba(184,115,51,0.05) 0%,transparent 70%)', pointerEvents:'none' }} />
@@ -448,14 +597,8 @@ const Services = ({ onNavigate }) => {
             <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '48px' : '56px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', margin:'0 0 4px', paddingBottom:'10px' }}>Нашите услуги</h2>
             <div style={{ width:'60px', height:'2px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', margin:'0 auto' }} />
           </div>
-          <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)', gap: isMobile ? '16px' : '24px', marginBottom: isMobile ? '32px' : '48px' }}>
-            {displayed.map((s,i) => <ServiceCard key={i} service={s} mobile={isMobile} onClick={() => openAt(i)} />)}
-          </div>
-          <div style={{ textAlign:'center' }}>
-            <button onClick={() => openAt(0)} style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'20px', fontWeight:600, letterSpacing:'0.18em', textTransform:'uppercase', color:'#b87333', background:'transparent', border:'1.5px solid rgba(184,115,51,0.5)', borderRadius:'6px', padding:'13px 40px', cursor:'pointer', transition:'all 0.4s ease' }}
-              onMouseEnter={e=>{e.target.style.background='#b87333';e.target.style.color='#0a0a0a';e.target.style.boxShadow='0 0 20px rgba(184,115,51,0.4)';}}
-              onMouseLeave={e=>{e.target.style.background='transparent';e.target.style.color='#b87333';e.target.style.boxShadow='none';}}
-            >Вижте повече</button>
+          <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap: isMobile ? '16px' : '24px' }}>
+            {SERVICES_DATA.map((s,i) => <ServiceCard key={i} service={s} mobile={isMobile} onClick={() => openAt(i)} />)}
           </div>
         </div>
       </section>
@@ -463,26 +606,7 @@ const Services = ({ onNavigate }) => {
   );
 };
 
-// ── Team ──────────────────────────────────────────────────────────
-// Add photo path and edit bio/since for each member
-const TEAM = [
-  {
-    id:1, name:'Цвети', role:'Owner', photo:'assets/1.jpeg', since:2014,
-    hours:3200, clients:850, languages:['Английски','Български'],
-  },
-  {
-    id:2, name:'Кари', role:'Manager', photo:'assets/2.jpeg', since:2017,
-    hours:1800, clients:520, languages:['Български'],
-  },
-  {
-    id:3, name:'Боби', role:'Фризьор', photo:'assets/3.jpeg', since:2019,
-    hours:1200, clients:380, languages:['Български'],
-  },
-  {
-    id:4, name:'Вели', role:'Фризьор', photo:'assets/4.jpeg', since:2018,
-    hours:1500, clients:440, languages:['Български'],
-  },
-];
+// ── Academy Promo ─────────────────────────────────────────────────
 
 const TeamMemberOverlay = ({ member, onClose }) => {
   const open = !!member;
@@ -595,49 +719,57 @@ const TeamMemberOverlay = ({ member, onClose }) => {
   );
 };
 
-const TeamMember = ({ member, onClick }) => {
-  const [hovered, setHovered] = React.useState(false);
-  return (
-    <div onClick={onClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'14px', cursor:'pointer', transition:'all 0.4s ease', transform:hovered?'translateY(-4px)':'translateY(0)' }}>
-      <div style={{ width:'130px', height:'130px', borderRadius:'50%', background:'linear-gradient(135deg,#2a1e08 0%,#1a1208 50%,#1a1a1a 100%)', boxShadow:hovered?'0 0 0 3px #b87333,0 0 28px rgba(184,115,51,0.65)':'0 0 0 3px #b87333,0 0 12px rgba(184,115,51,0.4)', display:'flex', alignItems:'center', justifyContent:'center', transition:'box-shadow 0.4s ease', overflow:'hidden', flexShrink:0 }}>
-        {member.photo
-          ? <img src={member.photo} alt={member.name} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'top center', display:'block' }} />
-          : <div style={{ fontFamily:"'Cinzel',serif", fontSize:'32px', fontWeight:600, background:'linear-gradient(135deg,#edd9bc,#b87333)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', opacity:0.5 }}>{member.name.charAt(0)}</div>
-        }
-      </div>
-      <div style={{ textAlign:'center' }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:'20px', fontWeight:600, letterSpacing:'0.1em', background:'linear-gradient(135deg,#f8edd8,#edd9bc,#d4b870)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', transition:'opacity 0.3s ease', marginBottom:'4px', opacity:hovered?1:0.85 }}>{member.name}</div>
-        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'#e0dbce', letterSpacing:'0.06em' }}>{member.role}</div>
-        <div style={{ marginTop:'8px', fontFamily:"'Cinzel',serif", fontSize:'13px', letterSpacing:'0.14em', color:hovered?'rgba(184,115,51,0.8)':'rgba(184,115,51,0.4)', textTransform:'uppercase', transition:'color 0.3s ease' }}>Виж повече</div>
-      </div>
-    </div>
-  );
-};
-
-const Team = () => {
+const AcademyPromo = () => {
   const isMobile = useIsMobile();
-  const [selected, setSelected] = React.useState(null);
+  const features = [
+    { icon:'✦', title:'Професионални курсове', desc:'Балеаж, боядисване, маникюр, апаратни процедури и перманентен грим – всичко под един покрив.' },
+    { icon:'✦', title:'Сертификати', desc:'Всеки завършил курс получава официален сертификат, признат в бранша.' },
+    { icon:'✦', title:'Малки групи', desc:'Персонализирано внимание – максимум 4 студента на модул.' },
+    { icon:'✦', title:'Практика в салон', desc:'Реални клиенти, реален опит – под супервизия на майсторите.' },
+  ];
   return (
-    <>
-      <TeamMemberOverlay member={selected} onClose={() => setSelected(null)} />
-      <section style={{ background:'#0a0a0a', padding: isMobile ? '70px 20px' : '100px 40px', position:'relative', overflow:'hidden' }}>
-        <div style={{ position:'absolute', top:0, left:'50%', transform:'translateX(-50%)', width:'400px', height:'200px', background:'radial-gradient(ellipse at center,rgba(184,115,51,0.06) 0%,transparent 70%)', pointerEvents:'none' }} />
-        <div style={{ maxWidth:'1200px', margin:'0 auto' }}>
-          <div style={{ textAlign:'center', marginBottom: isMobile ? '48px' : '64px' }}>
-            <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'12px' }}>
-              <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg,transparent,rgba(184,115,51,0.4))' }} />
-              <span style={{ color:'#b87333', fontSize:'16px' }}>✦</span>
-              <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg,rgba(184,115,51,0.4),transparent)' }} />
-            </div>
-            <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '48px' : '56px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', margin:'0 0 4px', paddingBottom:'10px' }}>Нашият екип</h2>
-            <div style={{ width:'60px', height:'2px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', margin:'0 auto' }} />
+    <section style={{ background:'#0a0a0a', padding: isMobile ? '70px 20px' : '100px 40px', position:'relative', overflow:'hidden' }}>
+      <div style={{ position:'absolute', top:0, left:'50%', transform:'translateX(-50%)', width:'500px', height:'300px', background:'radial-gradient(ellipse at center,rgba(184,115,51,0.07) 0%,transparent 70%)', pointerEvents:'none' }} />
+      <div style={{ position:'absolute', bottom:0, right:0, width:'300px', height:'300px', background:'radial-gradient(circle,rgba(184,115,51,0.05) 0%,transparent 70%)', pointerEvents:'none' }} />
+      <div style={{ maxWidth:'1100px', margin:'0 auto' }}>
+        <div style={{ textAlign:'center', marginBottom: isMobile ? '44px' : '64px' }}>
+          <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'12px' }}>
+            <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg,transparent,rgba(184,115,51,0.4))' }} />
+            <span style={{ color:'#b87333', fontSize:'16px' }}>✦</span>
+            <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg,rgba(184,115,51,0.4),transparent)' }} />
           </div>
-          <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap: isMobile ? '36px 20px' : '48px 32px', justifyItems:'center' }}>
-            {TEAM.map(m => <TeamMember key={m.id} member={m} onClick={() => setSelected(m)} />)}
-          </div>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '10px' : '11px', letterSpacing:'0.22em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'10px' }}>Cveti's Secret</div>
+          <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '52px' : '64px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', margin:'0 0 4px', paddingBottom:'10px', lineHeight:1.2 }}>Академия за красота</h2>
+          <div style={{ width:'60px', height:'2px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', margin:'0 auto 20px' }} />
+          <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '16px' : '18px', fontWeight:300, color:'#e0dbce', letterSpacing:'0.06em', lineHeight:1.7, maxWidth:'560px', margin:'0 auto' }}>
+            Превърни страстта си към красотата в кариера. Учи от майстори с над 20 години опит в България и Чикаго.
+          </p>
         </div>
-      </section>
-    </>
+
+        {/* Feature grid */}
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: isMobile ? '16px' : '24px', marginBottom: isMobile ? '44px' : '60px' }}>
+          {features.map((f, i) => (
+            <div key={i} style={{ background:'rgba(184,115,51,0.04)', border:'1px solid rgba(184,115,51,0.18)', borderRadius:'12px', padding: isMobile ? '24px 16px' : '32px 20px', textAlign:'center' }}>
+              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'22px', color:'#b87333', marginBottom:'12px' }}>{f.icon}</div>
+              <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '10px' : '11px', letterSpacing:'0.14em', textTransform:'uppercase', color:'#edd9bc', marginBottom:'10px', lineHeight:1.4 }}>{f.title}</div>
+              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '13px' : '14px', fontWeight:300, color:'rgba(240,232,208,0.55)', lineHeight:1.65, letterSpacing:'0.03em' }}>{f.desc}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div style={{ display:'flex', flexDirection: isMobile ? 'column' : 'row', alignItems:'center', justifyContent:'center', gap: isMobile ? '16px' : '24px' }}>
+          <a href="academy.html" style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '11px' : '12px', fontWeight:600, letterSpacing:'0.2em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc 0%,#b87333 50%,#7a4520 100%)', borderRadius:'5px', padding: isMobile ? '14px 32px' : '15px 44px', textDecoration:'none', display:'inline-block', boxShadow:'0 4px 20px rgba(184,115,51,0.3)', transition:'all 0.4s ease', textAlign:'center' }}
+            onMouseEnter={e=>{e.currentTarget.style.opacity='0.88';e.currentTarget.style.boxShadow='0 6px 32px rgba(184,115,51,0.5)';}}
+            onMouseLeave={e=>{e.currentTarget.style.opacity='1';e.currentTarget.style.boxShadow='0 4px 20px rgba(184,115,51,0.3)';}}
+          >Разгледай курсовете</a>
+          <a href="academy.html" style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '15px' : '16px', fontWeight:300, letterSpacing:'0.08em', color:'rgba(240,232,208,0.6)', textDecoration:'none', display:'inline-flex', alignItems:'center', gap:'6px', transition:'color 0.3s ease' }}
+            onMouseEnter={e=>{e.currentTarget.style.color='#b87333';}}
+            onMouseLeave={e=>{e.currentTarget.style.color='rgba(240,232,208,0.6)';}}
+          >Запиши се сега →</a>
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -782,12 +914,12 @@ const Contact = () => {
 };
 
 // ── Before/After Data — set image paths here ─────────────────────
-// Set 'before' and 'after' to paths like 'assets/before-balaj.jpg'
-// Leave as '' to show a placeholder until you add the image files
+// 4 entries, one per category. Set instagram to the relevant profile link.
 const BEFORE_AFTER_DATA = [
-  { label: 'Текст',   before: 'assets/before.png', after: 'assets/after.png' },
-  { label: 'Текст',   before: 'assets/before2.jpg', after: 'assets/after2.jpg' },
-  { label: 'Текст', before: 'assets/before3.jpg', after: 'assets/after3.jpg' },
+  { label:'Коса',               before:'assets/before.png',  after:'assets/after.png',  instagram:'https://www.instagram.com/cvetissecret/' },
+  { label:'Маникюр',            before:'assets/before2.jpg', after:'assets/after2.jpg', instagram:'https://www.instagram.com/nailsanddetails/' },
+  { label:'Апаратни процедури', before:'assets/before3.jpg', after:'assets/after3.jpg', instagram:'https://www.instagram.com/cvetissecret/' },
+  { label:'Перманентен грим',   before:'assets/before4.jpg', after:'assets/after4.jpg', instagram:'https://www.instagram.com/cvetissecret/' },
 ];
 
 // ── Before/After Slider (touch + mouse) ──────────────────────────
@@ -909,9 +1041,23 @@ const Gallery = () => {
           <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'#e0dbce', letterSpacing:'0.06em' }}>Последвайте ни в Instagram · @cvetissecret</p>
         </div>
         <div style={{ marginBottom:'40px', paddingRight: isMobile ? '20px' : '40px' }}>
-          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'15px', letterSpacing:'0.2em', color:'#e0dbce', textTransform:'uppercase', marginBottom:'16px' }}>Портфолио на екипа {isMobile ? 'плъзни' : ''}</div>
-          <div style={{ display:'flex', flexDirection: isMobile ? 'column' : 'row', gap:'20px', alignItems: isMobile ? 'center' : undefined, justifyContent: isMobile ? undefined : 'center', paddingBottom: isMobile ? '0' : '8px' }}>
-            {(isMobile ? BEFORE_AFTER_DATA.slice(0,2) : BEFORE_AFTER_DATA).map((d,i) => <BeforeAfterSlider key={i} label={d.label} before={d.before} after={d.after} />)}
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'15px', letterSpacing:'0.2em', color:'#e0dbce', textTransform:'uppercase', marginBottom:'24px' }}>Портфолио на екипа</div>
+          <div style={{ display:'flex', flexDirection:'column', gap:'36px' }}>
+            {BEFORE_AFTER_DATA.map((d,i) => (
+              <div key={i}>
+                <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '30px' : '36px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'12px', paddingBottom:'4px', lineHeight:1.3 }}>{d.label}</div>
+                <div style={{ display:'flex', flexDirection: isMobile ? 'column' : 'row', gap:'20px', alignItems: isMobile ? 'center' : 'flex-start' }}>
+                  <BeforeAfterSlider label={d.label} before={d.before} after={d.after} />
+                </div>
+                <div style={{ marginTop:'16px', display:'flex', alignItems:'center', gap:'10px' }}>
+                  <div style={{ width:'20px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)' }} />
+                  <a href={d.instagram} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '14px' : '15px', fontStyle:'italic', color:'rgba(240,232,208,0.6)', letterSpacing:'0.06em', textDecoration:'none', transition:'color 0.3s ease' }}
+                    onMouseEnter={e=>e.currentTarget.style.color='#b87333'}
+                    onMouseLeave={e=>e.currentTarget.style.color='rgba(240,232,208,0.6)'}
+                  >Разгледайте пълното портфолио →</a>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <div style={{ position:'relative' }}>
@@ -1015,7 +1161,7 @@ const App = () => {
       <SectionDivider />
       <div id="services"><Services onNavigate={handleNavigate} /></div>
       <SectionDivider />
-      <div id="salon"><Team /></div>
+      <div id="salon"><AcademyPromo /></div>
       <SectionDivider />
       <div id="gallery"><Gallery /></div>
       <Footer onNavigate={handleNavigate} />
