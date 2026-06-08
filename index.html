@@ -515,7 +515,7 @@ const ServicesOverlay = ({ open, onClose, initialGroup }) => {
   const expertData = isPermGrim
     ? { initials:'ГК', name:'Габриела Карчина', bio:'Международно признат експерт · над 10 год. опит · специализира в микропигментация · преподавател и съдия на международни шампионати' }
     : isAparatni
-    ? { initials:'Л', name:'Лина', bio:'Текстът предстои...' /* ← добави биото на Лина тук */ }
+    ? { initials:'ЛО', name:'Лина Овагетов', bio:'Над 7 год. опит в апаратна естетика · развива експертиза в Маями · съвременни методи за лице и тяло · индивидуален подход към всеки клиент' }
     : null;
 
   const ExpertBio = ({ compact }) => expertData ? (
@@ -959,13 +959,13 @@ const Contact = () => {
 // 4 entries, one per category. Set instagram to the relevant profile link.
 const BEFORE_AFTER_DATA = [
   { label:'Коса',               before:'assets/before2.jpg',  after:'assets/after2.jpg',  instagram:'https://www.instagram.com/cvetissecret/' },
-  { label:'Маникюр',            before:'', after:'', instagram:'https://www.instagram.com/nails_and_details_place?igsh=ZGk0NTF1OWw5NTNn' },
+  { label:'Маникюр',            combinedSrc:'assets/manicure-ba.jpg', instagram:'https://www.instagram.com/nails_and_details_place?igsh=ZGk0NTF1OWw5NTNn' },
   { label:'Апаратни процедури', before:'assets/before4.png', after:'assets/after4.png', instagram:'https://www.instagram.com/laser.by.lina?igsh=MWJ5M25pN213cDUyMg%3D%3D' },
   { label:'Перманентен грим',   before:'assets/before.png', after:'assets/after.png', instagram:'https://www.instagram.com/gabriela_karchina_pmu?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' },
 ];
 
 // ── Before/After Slider (touch + mouse) ──────────────────────────
-const BeforeAfterSlider = ({ label, before, after }) => {
+const BeforeAfterSlider = ({ label, before, after, combinedSrc }) => {
   const isMobile = useIsMobile();
   const [pos, setPos] = React.useState(50);
   const [active, setActive] = React.useState(false);
@@ -992,14 +992,18 @@ const BeforeAfterSlider = ({ label, before, after }) => {
     >
       {/* After — background, visible on right */}
       <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg,#1a2a10,#0d1a08,#0a0d0a)', display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden' }}>
-        {after
+        {combinedSrc
+          ? <img src={combinedSrc} alt="после" style={{ position:'absolute', right:0, top:'50%', transform:'translateY(-50%)', height:'100%', width:'auto', display:'block' }} />
+          : after
           ? <img src={after} alt="после" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
           : <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.14em', color:'rgba(184,115,51,0.3)', textTransform:'uppercase' }}>После</span>
         }
       </div>
       {/* Before — clipped, visible on left */}
       <div style={{ position:'absolute', inset:0, clipPath:`inset(0 ${100-pos}% 0 0)`, transition: active?'none':'clip-path 0.05s ease', background:'linear-gradient(135deg,#2a1e08,#1a1208,#0d0d0d)', display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden' }}>
-        {before
+        {combinedSrc
+          ? <img src={combinedSrc} alt="преди" style={{ position:'absolute', left:0, top:'50%', transform:'translateY(-50%)', height:'100%', width:'auto', display:'block' }} />
+          : before
           ? <img src={before} alt="преди" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
           : <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.14em', color:'rgba(184,115,51,0.3)', textTransform:'uppercase' }}>Преди</span>
         }
@@ -1090,7 +1094,7 @@ const Gallery = () => {
               {BEFORE_AFTER_DATA.map((d,i) => (
                 <div key={i}>
                   <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'30px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'12px', paddingBottom:'4px', lineHeight:1.3 }}>{d.label}</div>
-                  <BeforeAfterSlider label={d.label} before={d.before} after={d.after} />
+                  <BeforeAfterSlider label={d.label} before={d.before} after={d.after} combinedSrc={d.combinedSrc} />
                   <div style={{ marginTop:'14px', display:'flex', alignItems:'center', gap:'10px' }}>
                     <div style={{ width:'20px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', flexShrink:0 }} />
                     <a href={d.instagram} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'14px', fontStyle:'italic', color:'rgba(240,232,208,0.6)', letterSpacing:'0.06em', textDecoration:'none', transition:'color 0.3s ease' }}
@@ -1107,7 +1111,7 @@ const Gallery = () => {
               {BEFORE_AFTER_DATA.map((d,i) => (
                 <div key={i} style={{ flex:'1 1 0', minWidth:0, display:'flex', flexDirection:'column' }}>
                   <div style={{ fontFamily:"'Great Vibes',cursive", fontSize:'32px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', marginBottom:'10px', paddingBottom:'4px', lineHeight:1.3 }}>{d.label}</div>
-                  <BeforeAfterSlider label={d.label} before={d.before} after={d.after} />
+                  <BeforeAfterSlider label={d.label} before={d.before} after={d.after} combinedSrc={d.combinedSrc} />
                   <div style={{ marginTop:'14px', display:'flex', alignItems:'center', gap:'8px' }}>
                     <div style={{ width:'16px', height:'1px', background:'linear-gradient(90deg,#edd9bc,#b87333)', flexShrink:0 }} />
                     <a href={d.instagram} target="_blank" rel="noopener noreferrer" style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'13px', fontStyle:'italic', color:'rgba(240,232,208,0.6)', letterSpacing:'0.05em', textDecoration:'none', transition:'color 0.3s ease', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}
