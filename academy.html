@@ -131,48 +131,83 @@ const Header = () => {
 };
 
 // ── Academy data ──────────────────────────────────────────────────
-const COURSES = [
-  { id:'cut',    icon:'✂',  title:'Подстригване',       subtitle:'Техники за рязане & оформяне', duration:'2 дни' },
-  { id:'color',  icon:'🎨', title:'Боядисване & Балаж', subtitle:'Колоризация, омбре, кичури',    duration:'3 дни' },
-  { id:'style',  icon:'💫', title:'Прически & Плитки',  subtitle:'Официални & ежедневни стилове', duration:'2 дни' },
-  { id:'tools',  icon:'💨', title:'Маша & Изправяне',   subtitle:'Работа с уреди & термозащита',  duration:'1 ден'  },
-  { id:'nails',  icon:'💅', title:'Маникюр & Педикюр',  subtitle:'Гел, акрил & класически техники',duration:'3 дни' },
-  { id:'makeup', icon:'💄', title:'Грим',               subtitle:'Дневен, вечерен & сватбен грим', duration:'2 дни' },
-  { id:'full',   icon:'⭐', title:'Пълна програма',     subtitle:'Всички модули включени',         duration:'2 сед.' },
+const MODULES = [
+  { id:'full',     title:'Цялостно обучение',     subtitle:'Всички модули включени',        featured:true, fullWidth:true },
+  { id:'color',    title:'Колористика',           subtitle:'Техники за боядисване & нюанси'                               },
+  { id:'balayage', title:'Балеаж',                subtitle:'Sunlights, ombre & freehand'                                  },
+  { id:'correct',  title:'Цветови корекции',      subtitle:'Корекция на тонове & нюанси'                                  },
+  { id:'cut',      title:'Подстригване',          subtitle:'Класически & модерни стрижки'                                 },
+  { id:'style',    title:'Стайлинг',              subtitle:'Прически & оформяне'                                          },
+  { id:'trich',    title:'Трихология',            subtitle:'Здраве & грижа за косата'                                     },
+  { id:'keratin',  title:'Кератинови Екстеншъни', subtitle:'Поставяне & поддръжка',         fullWidth:true                },
 ];
 
-const DURATIONS = [
-  { id:'demo',    label:'Демо урок',      desc:'1–2 ч.  · Запознавателно занятие' },
-  { id:'weekend', label:'Уикенд курс',    desc:'Събота + Неделя · 2 пълни дни' },
-  { id:'week',    label:'Седмичен курс',  desc:'5 дни · Пон – Пет' },
-  { id:'full',    label:'Пълна програма', desc:'По договаряне · Индивидуален план' },
+const COURSES_PLAN = [
+  {
+    id: 'basic',
+    title: 'Основно обучение',
+    duration: '1 месец',
+    price: '2 200 €',
+    includes: [
+      'Теория на цвета',
+      'Колористика & техники за боядисване',
+      'Балеаж & ombre',
+      'Цветови корекции',
+      'Техники за подстригване',
+      'Стайлинг & прически',
+      'Основи на трихологията',
+      'Кератинови процедури',
+      'Практика върху реални модели',
+      'Всички материали включени',
+      'Международен сертификат',
+    ]
+  },
+  {
+    id: 'advanced',
+    title: 'Надграждащо обучение',
+    duration: '2 дни',
+    price: '1 500 €',
+    includes: [
+      'Усъвършенствани техники',
+      'Индивидуален подход',
+      'Работа с реални клиенти',
+      'Сертификат за надградено ниво',
+    ]
+  }
 ];
+
+// ── Module icons ──────────────────────────────────────────────────
+const ModuleIcon = ({ id, size=24 }) => {
+  const p = { width:size, height:size, viewBox:'0 0 24 24', fill:'none', stroke:'currentColor', strokeWidth:1.5, strokeLinecap:'round', strokeLinejoin:'round' };
+  switch(id) {
+    case 'full':     return <svg {...p}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
+    case 'color':    return <svg {...p}><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10c0 1.657-1.343 3-3 3h-2a1 1 0 0 0-1 1v1a2 2 0 0 1-2 2"/><circle cx="7" cy="11" r="1.2" fill="currentColor"/><circle cx="11" cy="8" r="1.2" fill="currentColor"/><circle cx="17" cy="11" r="1.2" fill="currentColor"/></svg>;
+    case 'balayage': return <svg {...p}><path d="M3 17 15 5m-4 16 8-8m-4 8 6-6"/><circle cx="19" cy="5" r="2"/></svg>;
+    case 'correct':  return <svg {...p}><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>;
+    case 'cut':      return <svg {...p}><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></svg>;
+    case 'style':    return <svg {...p}><path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>;
+    case 'trich':    return <svg {...p}><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>;
+    case 'keratin':  return <svg {...p}><path d="M12 2c-2 4-4 6-4 10a4 4 0 0 0 8 0c0-4-2-6-4-10z"/><path d="M12 12v10m-3-3h6"/></svg>;
+    default:         return <svg {...p}><circle cx="12" cy="12" r="10"/></svg>;
+  }
+};
 
 // ── Wizard ────────────────────────────────────────────────────────
 const AcademyWizard = () => {
   const isMobile = useIsMobile();
   const [step, setStep] = React.useState(1);
-  const [course, setCourse] = React.useState(null);
-  const [duration, setDuration] = React.useState(null);
-  const [date, setDate] = React.useState('');
-  const [form, setForm] = React.useState({ name:'', phone:'', email:'', notes:'' });
-  const [submitted, setSubmitted] = React.useState(false);
+  const [module, setModule] = React.useState(null);
+  const [coursePlan, setCoursePlan] = React.useState(null);
 
-  const canNext1 = !!course;
-  const canNext2 = !!duration && !!date;
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  const canNext1 = !!module;
 
   // Step indicator
   const StepDot = ({ n, label }) => {
-    const done    = step > n;
-    const active  = step === n;
+    const done   = step > n;
+    const active = step === n;
     return (
       <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
-        <div style={{ width:'36px', height:'36px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, background: done ? '#b87333' : active ? 'transparent' : 'transparent', border: done ? 'none' : active ? '2px solid #b87333' : '2px solid rgba(184,115,51,0.25)', transition:'all 0.4s ease' }}>
+        <div style={{ width:'36px', height:'36px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, background: done ? '#b87333' : 'transparent', border: done ? 'none' : active ? '2px solid #b87333' : '2px solid rgba(184,115,51,0.25)', transition:'all 0.4s ease' }}>
           {done
             ? <span style={{ color:'#0a0a0a', fontSize:'14px', fontWeight:700 }}>✓</span>
             : <span style={{ fontFamily:"'Cinzel',serif", fontSize:'13px', fontWeight:600, color: active ? '#b87333' : 'rgba(184,115,51,0.35)' }}>{n}</span>
@@ -183,34 +218,55 @@ const AcademyWizard = () => {
     );
   };
 
-  const StepConnector = ({ n }) => (
-    <div style={{ flex:1, height:'1px', background: step > n ? 'linear-gradient(90deg,#b87333,rgba(184,115,51,0.4))' : 'rgba(184,115,51,0.15)', transition:'background 0.4s ease', margin:'0 8px' }} />
+  const StepConnector = () => (
+    <div style={{ flex:1, height:'1px', background: step > 1 ? 'linear-gradient(90deg,#b87333,rgba(184,115,51,0.4))' : 'rgba(184,115,51,0.15)', transition:'background 0.4s ease', margin:'0 8px' }} />
   );
 
-  // ── Step 1 — Choose course ──
+  // ── Step 1 — Choose module ──
   const Step1 = () => (
     <div>
-      <div style={{ textAlign:'center', marginBottom: isMobile ? '32px' : '44px' }}>
-        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'8px', marginBottom:'4px' }}>Избери курс</h3>
+      {/* Intro */}
+      <div style={{ background:'rgba(184,115,51,0.05)', border:'1px solid rgba(184,115,51,0.15)', borderRadius:'14px', padding: isMobile ? '24px 20px' : '32px 40px', marginBottom: isMobile ? '36px' : '48px', display:'flex', flexDirection: isMobile ? 'column' : 'row', gap:'28px', alignItems: isMobile ? 'flex-start' : 'center' }}>
+        <div style={{ flexShrink:0, width: isMobile ? '52px' : '64px', height: isMobile ? '52px' : '64px', borderRadius:'50%', background:'linear-gradient(135deg,rgba(237,217,188,0.15),rgba(184,115,51,0.1))', border:'1px solid rgba(184,115,51,0.3)', display:'flex', alignItems:'center', justifyContent:'center', color:'#b87333' }}>
+          <ModuleIcon id="full" size={isMobile ? 24 : 30} />
+        </div>
+        <div>
+          <div style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '30px' : '38px', background:'linear-gradient(135deg,#edd9bc,#b87333)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.2, paddingBottom:'4px', marginBottom:'8px' }}>Hair Secrets Academy</div>
+          <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '15px' : '17px', fontWeight:300, color:'rgba(240,232,208,0.75)', lineHeight:1.75, maxWidth:'600px' }}>
+            Обучителният проект на <span style={{ color:'#edd9bc', fontStyle:'italic' }}>Цветелина Михайлова</span> — стилист с над 20 години опит в индустрията на красотата. Академията предлага модулни курсове по цвят, стрижка и грижа за косата с индивидуален подход и малки групи за максимална ефективност.
+          </p>
+        </div>
+      </div>
+
+      <div style={{ textAlign:'center', marginBottom: isMobile ? '28px' : '36px' }}>
+        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'8px', marginBottom:'4px' }}>Избери модул</h3>
         <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em' }}>Кое умение искаш да развиеш?</p>
       </div>
-      <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap: isMobile ? '12px' : '16px', marginBottom:'40px' }}>
-        {COURSES.map(c => {
-          const sel = course?.id === c.id;
+
+      {/* Module grid */}
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '10px' : '14px', marginBottom:'40px' }}>
+        {MODULES.map(m => {
+          const sel = module?.id === m.id;
+          const isFullW = m.fullWidth && !isMobile;
           return (
-            <div key={c.id} onClick={() => setCourse(c)}
-              style={{ background: sel ? 'rgba(184,115,51,0.12)' : '#1a1a1a', border:`1.5px solid ${sel ? '#b87333' : 'rgba(184,115,51,0.2)'}`, borderRadius:'12px', padding: isMobile ? '18px 12px' : '22px 16px', cursor:'pointer', textAlign:'center', transition:'all 0.3s ease', boxShadow: sel ? '0 0 24px rgba(184,115,51,0.2)' : 'none', transform: sel ? 'translateY(-2px)' : 'translateY(0)' }}
-              onMouseEnter={e => { if(!sel) e.currentTarget.style.borderColor='rgba(184,115,51,0.5)'; }}
-              onMouseLeave={e => { if(!sel) e.currentTarget.style.borderColor='rgba(184,115,51,0.2)'; }}
+            <div key={m.id} onClick={() => setModule(m)}
+              style={{ gridColumn: isFullW ? '1 / -1' : 'auto', background: sel ? 'rgba(184,115,51,0.12)' : m.featured ? 'rgba(184,115,51,0.07)' : '#1a1a1a', border:`1.5px solid ${sel ? '#b87333' : m.featured ? 'rgba(184,115,51,0.4)' : 'rgba(184,115,51,0.2)'}`, borderRadius:'12px', padding: isFullW ? (isMobile ? '18px 16px' : '22px 28px') : (isMobile ? '16px 14px' : '20px 18px'), cursor:'pointer', display:'flex', alignItems:'center', gap: isFullW ? '20px' : '14px', transition:'all 0.3s ease', boxShadow: sel ? '0 0 20px rgba(184,115,51,0.18)' : m.featured ? '0 0 16px rgba(184,115,51,0.08)' : 'none', transform: sel ? 'translateY(-1px)' : 'none' }}
+              onMouseEnter={e => { if(!sel) e.currentTarget.style.borderColor='rgba(184,115,51,0.55)'; }}
+              onMouseLeave={e => { if(!sel) e.currentTarget.style.borderColor = m.featured ? 'rgba(184,115,51,0.4)' : 'rgba(184,115,51,0.2)'; }}
             >
-              <div style={{ fontSize: isMobile ? '28px' : '32px', marginBottom:'8px', lineHeight:1 }}>{c.icon}</div>
-              <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '10px' : '12px', fontWeight:600, letterSpacing:'0.1em', color: sel ? '#edd9bc' : '#b87333', marginBottom:'6px' }}>{c.title}</div>
-              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', color:'rgba(240,232,208,0.45)', lineHeight:1.4, marginBottom:'10px' }}>{c.subtitle}</div>
-              <div style={{ display:'inline-block', background:'rgba(184,115,51,0.1)', border:'1px solid rgba(184,115,51,0.2)', borderRadius:'12px', padding:'3px 10px', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.1em', color:'rgba(184,115,51,0.7)' }}>{c.duration}</div>
+              <div style={{ flexShrink:0, width: isFullW ? '44px' : '36px', height: isFullW ? '44px' : '36px', borderRadius:'50%', background: sel ? 'rgba(184,115,51,0.2)' : 'rgba(184,115,51,0.08)', display:'flex', alignItems:'center', justifyContent:'center', color: sel ? '#edd9bc' : '#b87333', transition:'all 0.3s ease' }}>
+                <ModuleIcon id={m.id} size={isFullW ? 22 : 18} />
+              </div>
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ fontFamily:"'Cinzel',serif", fontSize: isFullW ? (isMobile ? '13px' : '15px') : (isMobile ? '11px' : '13px'), fontWeight:600, letterSpacing:'0.1em', color: sel ? '#edd9bc' : m.featured ? '#d4c5a0' : '#b87333', marginBottom:'4px', transition:'color 0.3s ease' }}>{m.title}</div>
+                <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '12px' : '13px', color:'rgba(240,232,208,0.45)', lineHeight:1.4 }}>{m.subtitle}</div>
+              </div>
+              {sel && <div style={{ flexShrink:0, width:'20px', height:'20px', borderRadius:'50%', background:'#b87333', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'10px', color:'#0a0a0a', fontWeight:700 }}>✓</div>}
             </div>
           );
         })}
       </div>
+
       <div style={{ textAlign:'center' }}>
         <button onClick={() => canNext1 && setStep(2)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color: canNext1 ? '#0a0a0a' : 'rgba(240,232,208,0.3)', background: canNext1 ? '#edd9bc' : 'rgba(255,255,255,0.06)', border:'none', borderRadius:'6px', padding:'14px 44px', cursor: canNext1 ? 'pointer' : 'not-allowed', transition:'all 0.35s ease', boxShadow: canNext1 ? '0 4px 20px rgba(184,115,51,0.25)' : 'none' }}>
           Напред →
@@ -219,130 +275,90 @@ const AcademyWizard = () => {
     </div>
   );
 
-  // ── Step 2 — Choose duration + date ──
+  // ── Step 2 — Choose course plan + call CTA ──
   const Step2 = () => (
     <div>
-      <div style={{ textAlign:'center', marginBottom: isMobile ? '32px' : '44px' }}>
-        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'8px', marginBottom:'4px' }}>Избери дата</h3>
-        <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em' }}>Кога искаш да започнеш?</p>
+      <div style={{ textAlign:'center', marginBottom: isMobile ? '28px' : '36px' }}>
+        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'8px', marginBottom:'4px' }}>Избери продължителност</h3>
+        <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em' }}>Избери обучение, което отговаря на твоите нужди</p>
       </div>
 
-      {/* Selected course reminder */}
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'12px', marginBottom:'36px' }}>
-        <div style={{ background:'rgba(184,115,51,0.08)', border:'1px solid rgba(184,115,51,0.25)', borderRadius:'8px', padding:'10px 20px', display:'inline-flex', alignItems:'center', gap:'10px' }}>
-          <span style={{ fontSize:'20px' }}>{course?.icon}</span>
-          <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.12em', color:'#b87333' }}>{course?.title}</span>
+      {/* Selected module chip */}
+      <div style={{ display:'flex', justifyContent:'center', marginBottom:'32px' }}>
+        <div style={{ background:'rgba(184,115,51,0.08)', border:'1px solid rgba(184,115,51,0.25)', borderRadius:'24px', padding:'9px 20px', display:'inline-flex', alignItems:'center', gap:'10px' }}>
+          <div style={{ color:'#b87333' }}><ModuleIcon id={module?.id} size={16} /></div>
+          <span style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', letterSpacing:'0.12em', color:'#b87333' }}>{module?.title}</span>
         </div>
       </div>
 
-      {/* Duration */}
-      <div style={{ marginBottom:'32px' }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'14px' }}>Продължителност</div>
-        <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap:'12px' }}>
-          {DURATIONS.map(d => {
-            const sel = duration?.id === d.id;
-            return (
-              <div key={d.id} onClick={() => setDuration(d)}
-                style={{ background: sel ? 'rgba(184,115,51,0.1)' : '#1a1a1a', border:`1.5px solid ${sel ? '#b87333' : 'rgba(184,115,51,0.2)'}`, borderRadius:'10px', padding:'14px 16px', cursor:'pointer', transition:'all 0.3s ease' }}
-              >
-                <div style={{ fontFamily:"'Cinzel',serif", fontSize:'11px', fontWeight:600, letterSpacing:'0.1em', color: sel ? '#edd9bc' : '#b87333', marginBottom:'4px' }}>{d.label}</div>
-                <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', color:'rgba(240,232,208,0.4)', lineHeight:1.4 }}>{d.desc}</div>
+      {/* Course plan cards */}
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '16px' : '20px', marginBottom:'32px' }}>
+        {COURSES_PLAN.map(plan => {
+          const sel = coursePlan?.id === plan.id;
+          return (
+            <div key={plan.id} onClick={() => setCoursePlan(plan)}
+              style={{ background: sel ? 'rgba(184,115,51,0.1)' : '#1a1a1a', border:`1.5px solid ${sel ? '#b87333' : 'rgba(184,115,51,0.2)'}`, borderRadius:'14px', padding: isMobile ? '20px 18px' : '24px 22px', cursor:'pointer', transition:'all 0.3s ease', boxShadow: sel ? '0 0 24px rgba(184,115,51,0.2)' : 'none', transform: sel ? 'translateY(-2px)' : 'none' }}
+              onMouseEnter={e => { if(!sel) e.currentTarget.style.borderColor='rgba(184,115,51,0.5)'; }}
+              onMouseLeave={e => { if(!sel) e.currentTarget.style.borderColor='rgba(184,115,51,0.2)'; }}
+            >
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:'6px' }}>
+                <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '13px' : '15px', fontWeight:600, letterSpacing:'0.1em', color: sel ? '#edd9bc' : '#b87333' }}>{plan.title}</div>
+                <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '15px' : '17px', fontWeight:700, color: sel ? '#edd9bc' : '#d4c5a0', flexShrink:0, marginLeft:'12px' }}>{plan.price}</div>
               </div>
-            );
-          })}
-        </div>
+              <div style={{ display:'inline-flex', alignItems:'center', gap:'6px', background:'rgba(184,115,51,0.1)', border:'1px solid rgba(184,115,51,0.2)', borderRadius:'12px', padding:'3px 10px', marginBottom:'16px' }}>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#b87333" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                <span style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.1em', color:'rgba(184,115,51,0.8)' }}>{plan.duration}</span>
+              </div>
+              <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:'6px' }}>
+                {plan.includes.map(item => (
+                  <li key={item} style={{ display:'flex', alignItems:'flex-start', gap:'8px', fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '13px' : '14px', color:'rgba(240,232,208,0.65)', lineHeight:1.4 }}>
+                    <span style={{ color:'#b87333', flexShrink:0, marginTop:'1px', fontSize:'11px' }}>✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Date picker */}
-      <div style={{ marginBottom:'40px' }}>
-        <div style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'14px' }}>Желана дата за начало</div>
-        <input
-          type="date"
-          defaultValue=""
-          onChange={e => setDate(e.target.value)}
-          className="acad-input"
-          style={{ maxWidth: isMobile ? '100%' : '260px', colorScheme:'dark' }}
-        />
-      </div>
+      {/* Summary + CTA */}
+      {coursePlan && (
+        <div style={{ background:'rgba(184,115,51,0.06)', border:'1px solid rgba(184,115,51,0.2)', borderRadius:'12px', padding: isMobile ? '20px 18px' : '24px 28px', marginBottom:'28px' }}>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(184,115,51,0.5)', marginBottom:'16px' }}>Резюме на избора ти</div>
+          <div style={{ display:'flex', flexWrap:'wrap', gap: isMobile ? '16px' : '32px' }}>
+            {[
+              { label:'Модул',          value: module?.title     },
+              { label:'Обучение',       value: coursePlan.title  },
+              { label:'Продължителност',value: coursePlan.duration},
+              { label:'Цена',           value: coursePlan.price  },
+            ].map(({ label, value }) => (
+              <div key={label}>
+                <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.5)', marginBottom:'4px' }}>{label}</div>
+                <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', color:'#edd9bc' }}>{value}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ height:'1px', background:'rgba(184,115,51,0.15)', margin:'20px 0' }} />
+          <div style={{ textAlign:'center' }}>
+            <a href={`tel:${PHONE}`} style={{ display:'inline-flex', alignItems:'center', gap:'10px', fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', border:'none', borderRadius:'6px', padding:'15px 40px', textDecoration:'none', boxShadow:'0 4px 24px rgba(184,115,51,0.35)', cursor:'pointer', transition:'all 0.35s ease' }}>
+              <PhoneIcon /> Обади се сега
+            </a>
+          </div>
+        </div>
+      )}
 
       <div style={{ display:'flex', justifyContent:'center', gap:'16px', flexWrap:'wrap' }}>
         <button onClick={() => setStep(1)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(240,232,208,0.5)', background:'transparent', border:'1px solid rgba(184,115,51,0.2)', borderRadius:'6px', padding:'13px 32px', cursor:'pointer', transition:'all 0.3s ease' }}
           onMouseEnter={e => e.currentTarget.style.borderColor='rgba(184,115,51,0.5)'}
           onMouseLeave={e => e.currentTarget.style.borderColor='rgba(184,115,51,0.2)'}
         >← Назад</button>
-        <button onClick={() => canNext2 && setStep(3)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color: canNext2 ? '#0a0a0a' : 'rgba(240,232,208,0.3)', background: canNext2 ? '#edd9bc' : 'rgba(255,255,255,0.06)', border:'none', borderRadius:'6px', padding:'14px 44px', cursor: canNext2 ? 'pointer' : 'not-allowed', transition:'all 0.35s ease', boxShadow: canNext2 ? '0 4px 20px rgba(184,115,51,0.25)' : 'none' }}>
-          Напред →
-        </button>
+        {!coursePlan && (
+          <a href={`tel:${PHONE}`} style={{ display:'inline-flex', alignItems:'center', gap:'8px', fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(240,232,208,0.3)', background:'rgba(255,255,255,0.04)', border:'1px solid rgba(184,115,51,0.15)', borderRadius:'6px', padding:'13px 32px', textDecoration:'none', cursor:'default', pointerEvents:'none' }}>
+            <PhoneIcon /> Обади се сега
+          </a>
+        )}
       </div>
-    </div>
-  );
-
-  // ── Step 3 — Personal details ──
-  const Step3 = () => submitted ? (
-    <div style={{ textAlign:'center', padding: isMobile ? '40px 20px' : '60px 40px' }}>
-      <div style={{ fontSize:'56px', marginBottom:'20px' }}>✦</div>
-      <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '44px' : '60px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'10px', marginBottom:'4px' }}>Благодарим ти!</h3>
-      <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'18px', fontWeight:300, color:'rgba(240,232,208,0.7)', lineHeight:1.7, marginBottom:'32px', maxWidth:'480px', margin:'0 auto 32px' }}>
-        Заявката ти за <strong style={{ color:'#b87333' }}>{course?.title}</strong> беше изпратена успешно. Ще се свържем с теб в рамките на 24 часа за потвърждение.
-      </p>
-      <a href="index.html" style={{ display:'inline-flex', alignItems:'center', gap:'10px', fontFamily:"'Cinzel',serif", fontSize:'11px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', borderRadius:'5px', padding:'13px 28px', textDecoration:'none', boxShadow:'0 4px 20px rgba(184,115,51,0.3)' }}>
-        Към сайта
-      </a>
-    </div>
-  ) : (
-    <div>
-      <div style={{ textAlign:'center', marginBottom: isMobile ? '32px' : '44px' }}>
-        <h3 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '40px' : '52px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'8px', marginBottom:'4px' }}>Твоите данни</h3>
-        <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', fontStyle:'italic', color:'rgba(240,232,208,0.55)', letterSpacing:'0.06em' }}>Последна стъпка — попълни контактна информация</p>
-      </div>
-
-      {/* Summary card */}
-      <div style={{ background:'rgba(184,115,51,0.06)', border:'1px solid rgba(184,115,51,0.2)', borderRadius:'10px', padding:'16px 20px', marginBottom:'32px', display:'flex', flexWrap:'wrap', gap:'20px', justifyContent:'center' }}>
-        <div style={{ textAlign:'center' }}>
-          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginBottom:'4px' }}>Курс</div>
-          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', color:'#edd9bc' }}>{course?.icon} {course?.title}</div>
-        </div>
-        <div style={{ width:'1px', background:'rgba(184,115,51,0.2)', alignSelf:'stretch' }} />
-        <div style={{ textAlign:'center' }}>
-          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginBottom:'4px' }}>Продължителност</div>
-          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', color:'#edd9bc' }}>{duration?.label}</div>
-        </div>
-        <div style={{ width:'1px', background:'rgba(184,115,51,0.2)', alignSelf:'stretch' }} />
-        <div style={{ textAlign:'center' }}>
-          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', color:'rgba(184,115,51,0.5)', textTransform:'uppercase', marginBottom:'4px' }}>Дата</div>
-          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'16px', color:'#edd9bc' }}>{new Date(date + 'T00:00:00').toLocaleDateString('bg-BG', { day:'numeric', month:'long', year:'numeric' })}</div>
-        </div>
-      </div>
-
-      <form onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:'16px', maxWidth:'560px', margin:'0 auto' }}>
-        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap:'16px' }}>
-          <div>
-            <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'8px' }}>Имена *</div>
-            <input required className="acad-input" placeholder="Три имена" value={form.name} onChange={e => setForm(f=>({...f, name:e.target.value}))} />
-          </div>
-          <div>
-            <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'8px' }}>Телефон *</div>
-            <input required className="acad-input" placeholder="+359 ..." type="tel" value={form.phone} onChange={e => setForm(f=>({...f, phone:e.target.value}))} />
-          </div>
-        </div>
-        <div>
-          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'8px' }}>Имейл</div>
-          <input className="acad-input" placeholder="example@mail.com" type="email" value={form.email} onChange={e => setForm(f=>({...f, email:e.target.value}))} />
-        </div>
-        <div>
-          <div style={{ fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'8px' }}>Допълнителни въпроси</div>
-          <textarea className="acad-input" placeholder="Напиши ако имаш въпроси или специални изисквания..." value={form.notes} onChange={e => setForm(f=>({...f, notes:e.target.value}))} />
-        </div>
-        <div style={{ display:'flex', justifyContent:'center', gap:'16px', flexWrap:'wrap', marginTop:'8px' }}>
-          <button type="button" onClick={() => setStep(2)} style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(240,232,208,0.5)', background:'transparent', border:'1px solid rgba(184,115,51,0.2)', borderRadius:'6px', padding:'13px 32px', cursor:'pointer', transition:'all 0.3s ease' }}
-            onMouseEnter={e => e.currentTarget.style.borderColor='rgba(184,115,51,0.5)'}
-            onMouseLeave={e => e.currentTarget.style.borderColor='rgba(184,115,51,0.2)'}
-          >← Назад</button>
-          <button type="submit" style={{ fontFamily:"'Cinzel',serif", fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', border:'none', borderRadius:'6px', padding:'14px 44px', cursor:'pointer', transition:'all 0.35s ease', boxShadow:'0 4px 20px rgba(184,115,51,0.3)' }}>
-            Изпрати заявката ✦
-          </button>
-        </div>
-      </form>
     </div>
   );
 
@@ -352,19 +368,16 @@ const AcademyWizard = () => {
       <div style={{ maxWidth:'960px', margin:'0 auto' }}>
 
         {/* Step indicators */}
-        <div style={{ display:'flex', alignItems:'center', justifyContent:'center', marginBottom: isMobile ? '48px' : '64px', maxWidth:'480px', margin:'0 auto', marginBottom: isMobile ? '48px' : '64px' }}>
-          <StepDot n={1} label="Избери курс" />
-          <StepConnector n={1} />
-          <StepDot n={2} label="Дата & срок" />
-          <StepConnector n={2} />
-          <StepDot n={3} label="Твоите данни" />
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'center', maxWidth:'360px', margin:'0 auto', marginBottom: isMobile ? '48px' : '64px' }}>
+          <StepDot n={1} label="Избери модул" />
+          <StepConnector />
+          <StepDot n={2} label="Продължителност" />
         </div>
 
         {/* Step panels */}
         <div style={{ opacity:1, transition:'opacity 0.3s ease' }}>
           {step === 1 && <Step1 />}
           {step === 2 && <Step2 />}
-          {step === 3 && <Step3 />}
         </div>
       </div>
     </section>
@@ -390,10 +403,10 @@ const AcademyHero = () => {
           Cveti's Secret Academy
         </h1>
         <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '16px' : '20px', fontWeight:300, fontStyle:'italic', color:'rgba(240,232,208,0.65)', letterSpacing:'0.06em', maxWidth:'540px', margin:'0 auto 28px', lineHeight:1.7 }}>
-          Научи занаята от майсторите. Избери своя курс, запази дата и стартирай кариерата си в красотата.
+          Модулни курсове по цвят, стрижка и грижа за косата с Цветелина Михайлова — стартирай кариерата си в красотата.
         </p>
         <div style={{ display:'flex', alignItems:'center', gap:'16px', justifyContent:'center', flexWrap:'wrap' }}>
-          {['7 курса','Сертификат','Малки групи'].map(badge => (
+          {['8 модула','Сертификат','Малки групи'].map(badge => (
             <span key={badge} style={{ background:'rgba(184,115,51,0.08)', border:'1px solid rgba(184,115,51,0.25)', borderRadius:'20px', padding:'6px 16px', fontFamily:"'Cinzel',serif", fontSize:'9px', letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(184,115,51,0.8)' }}>{badge}</span>
           ))}
         </div>
