@@ -361,11 +361,11 @@ const SERVICES_DATA = [
 
   { group:'Перманентен грим', subcategories:[
     { name:'Перманентен грим', items:[
-      { name:'Микроблейдинг',                              price:'250 €', link:PERM_PHONE },
-      { name:'Powder Brows (микропигментация вежди)',       price:'250 €', link:PERM_PHONE },
-      { name:'Aquarelle Lips (микропигментация на устни)',  price:'250 €', link:PERM_PHONE },
-      { name:'Soft Liner (опушена очна линия)',             price:'200 €', link:PERM_PHONE },
-      { name:'Междумиглен контур',                          price:'150 €', link:PERM_PHONE },
+      { name:'Микроблейдинг',                              price:'300 €', link:PERM_PHONE },
+      { name:'Powder Brows (микропигментация вежди)',       price:'300 €', link:PERM_PHONE },
+      { name:'Aquarelle Lips (микропигментация на устни)',  price:'300 €', link:PERM_PHONE },
+      { name:'Soft Liner (опушена очна линия)',             price:'250 €', link:PERM_PHONE },
+      { name:'Междумиглен контур',                          price:'200 €', link:PERM_PHONE },
     ]},
   ]},
 ];
@@ -626,7 +626,7 @@ const Services = ({ onNavigate }) => {
   return (
     <>
       <ServicesOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} initialGroup={overlayGroup} />
-      <section style={{ background:'#111111', padding:pad, position:'relative', overflow:'hidden' }}>
+      <section style={{ background:'#0a0a0a', padding:pad, position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', bottom:0, left:0, width:'300px', height:'300px', background:'radial-gradient(circle,rgba(184,115,51,0.06) 0%,transparent 70%)', pointerEvents:'none' }} />
         <div style={{ position:'absolute', top:0, right:0, width:'200px', height:'200px', background:'radial-gradient(circle,rgba(184,115,51,0.05) 0%,transparent 70%)', pointerEvents:'none' }} />
         <div style={{ maxWidth:'1200px', margin:'0 auto' }}>
@@ -764,9 +764,9 @@ const TeamMemberOverlay = ({ member, onClose }) => {
 const AcademyPromo = () => {
   const isMobile = useIsMobile();
   const features = [
-    { icon:'✦', title:'Професионални курсове', desc:'Балеаж, боядисване, маникюр, апаратни процедури и перманентен грим – всичко под един покрив.' },
+    { icon:'✦', title:'Професионални курсове', desc:'Колористика, Балеаж, Цветови корекции, Подстригване, Стайлинг, Трихология, Кератинови екстеншъни' },
     { icon:'✦', title:'Сертификати', desc:'Всеки завършил курс получава официален сертификат, признат в бранша.' },
-    { icon:'✦', title:'Малки групи', desc:'Персонализирано внимание – максимум 4 студента на модул.' },
+    { icon:'✦', title:'Малки групи', desc:'Персонализирано внимание ' },
     { icon:'✦', title:'Практика в салон', desc:'Реални клиенти, реален опит – под супервизия на майсторите.' },
   ];
   return (
@@ -959,7 +959,7 @@ const Contact = () => {
 // 4 entries, one per category. Set instagram to the relevant profile link.
 const BEFORE_AFTER_DATA = [
   { label:'Коса',               before:'assets/before2.jpg',  after:'assets/after2.jpg',  instagram:'https://www.instagram.com/cvetissecret/' },
-  { label:'Маникюр',            combinedSrc:'assets/manicure-ba.jpg', instagram:'https://www.instagram.com/nails_and_details_place?igsh=ZGk0NTF1OWw5NTNn' },
+  { label:'Маникюр',            before:'assets/BEFORE5.jpg',  after:'assets/AFTER 5.jpg',instagram:'https://www.instagram.com/nails_and_details_place?igsh=ZGk0NTF1OWw5NTNn' },
   { label:'Апаратни процедури', before:'assets/before4.png', after:'assets/after4.png', instagram:'https://www.instagram.com/laser.by.lina?igsh=MWJ5M25pN213cDUyMg%3D%3D' },
   { label:'Перманентен грим',   before:'assets/before.png', after:'assets/after.png', instagram:'https://www.instagram.com/gabriela_karchina_pmu?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' },
 ];
