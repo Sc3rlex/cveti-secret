@@ -34,7 +34,7 @@ const useIsMobile = () => {
   return m;
 };
 
-const PHONE = '+359000000000';
+const PHONE = '+359988992002';
 
 const PhoneIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -135,7 +135,7 @@ const MODULES = [
   { id:'full',     title:'Цялостно обучение',     subtitle:'Всички модули включени',        featured:true, fullWidth:true },
   { id:'color',    title:'Колористика',           subtitle:'Техники за боядисване & нюанси'                               },
   { id:'balayage', title:'Балеаж',                subtitle:'Sunlights, ombre & freehand'                                  },
-  { id:'correct',  title:'Цветови корекции',      subtitle:'Корекция на тонове & нюанси'                                  },
+  { id:'correct',  title:'Официални прически',     subtitle:'Официални & ежедневни стилове'                                },
   { id:'cut',      title:'Подстригване',          subtitle:'Класически & модерни стрижки'                                 },
   { id:'style',    title:'Стайлинг',              subtitle:'Прически & оформяне'                                          },
   { id:'trich',    title:'Трихология',            subtitle:'Здраве & грижа за косата'                                     },
@@ -166,7 +166,7 @@ const COURSES_PLAN = [
     id: 'advanced',
     title: 'Надграждащо обучение',
     duration: '2 дни',
-    price: '1 500 €',
+    price: '1 200 €',
     includes: [
       'Усъвършенствани техники',
       'Индивидуален подход',
@@ -386,7 +386,7 @@ const AcademyHero = () => {
           <div style={{ width:'32px', height:'1px', background:'linear-gradient(90deg,#b87333,transparent)' }} />
         </div>
         <h1 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '56px' : '80px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', lineHeight:1.3, paddingBottom:'10px', marginBottom:'6px' }}>
-          Cveti's Secret Academy
+          Hair Secrets Academy
         </h1>
         <div style={{ display:'flex', alignItems:'center', gap:'16px', justifyContent:'center', flexWrap:'wrap' }}>
           {['8 модула','Сертификат','Малки групи'].map(badge => (
@@ -442,7 +442,7 @@ const Footer = () => {
         </div>
         <div style={{ height:'1px', background:'linear-gradient(90deg,transparent,rgba(184,115,51,0.2),transparent)', marginBottom:'24px' }} />
         <div style={{ display:'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent:'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? '12px' : '0' }}>
-          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', color:'#4a3e2a', letterSpacing:'0.06em' }}>© {new Date().getFullYear()} Cveti's Secret Academy. Всички права запазени.</div>
+          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'12px', color:'#4a3e2a', letterSpacing:'0.06em' }}>© {new Date().getFullYear()} Hair Secrets Academy. Всички права запазени.</div>
           <div style={{ display:'flex', gap:'20px' }}>
             {['Facebook','Instagram'].map(s => (
               <span key={s} style={{ fontFamily:"'Cinzel',serif", fontSize:'10px', letterSpacing:'0.14em', color:'#6e5e42', cursor:'pointer', textTransform:'uppercase', transition:'color 0.3s ease' }}
