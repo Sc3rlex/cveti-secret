@@ -41,7 +41,7 @@ const useIsMobile = () => {
 };
 
 // Update this phone number
-const PHONE = '+359000000000';
+const PHONE = '+359889300988';
 
 const PhoneIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -249,7 +249,7 @@ const SERVICES_DATA = [
       { name:'Тонер + сешоар',                       price:'от 81,81 €', link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682355&pId=1251448&cartId=e8227cd2-5d80-4943-8a53-f66d371d3a35' },
       { name:'Боядисване цяла коса + сешоар',        price:'от 95 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A15326779&pId=1251448' },
       { name:'Боя корен + сешоар',                   price:'от 65 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682303&pId=1251448&cartId=433380f9-7283-458f-8e60-839186ed4816' },
-      { name:'Добавка подстригване',                 price:'от 65 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682266&pId=1251448&cartId=98bec827-0260-4973-bb48-bf81dea14fc3' },
+      { name:'Добавка подстригване',                 price:'от 30 €',    link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln/booking?offerItems=sv%3A17682266&pId=1251448&cartId=98bec827-0260-4973-bb48-bf81dea14fc3' },
     ]},
     { name:'Балеаж', items:[
       { name:'Корекция на цвят', price:'от 230 €',     link:'https://www.fresha.com/bg/a/cvetis-secret-beauty-salon-sofia-ulitsa-nerazdelni-3-z342blln?service=s%3A23787471&pId=1251448' },
@@ -778,7 +778,7 @@ const AcademyPromo = () => {
             <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg,rgba(184,115,51,0.4),transparent)' }} />
           </div>
           <div style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '10px' : '11px', letterSpacing:'0.22em', textTransform:'uppercase', color:'rgba(184,115,51,0.6)', marginBottom:'10px' }}>Cveti's Secret</div>
-          <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '52px' : '64px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', margin:'0 0 4px', paddingBottom:'10px', lineHeight:1.2 }}>Академия за красота</h2>
+          <h2 style={{ fontFamily:"'Great Vibes',cursive", fontSize: isMobile ? '52px' : '64px', background:'linear-gradient(135deg,#edd9bc,#b87333 50%,#7a4520)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', margin:'0 0 4px', paddingBottom:'10px', lineHeight:1.2 }}>Hair Secrets Academy</h2>
           <div style={{ width:'60px', height:'2px', background:'linear-gradient(90deg,#edd9bc,#b87333,#7a4520)', margin:'0 auto 20px' }} />
           <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '16px' : '18px', fontWeight:300, color:'#e0dbce', letterSpacing:'0.06em', lineHeight:1.7, maxWidth:'560px', margin:'0 auto' }}>
             Превърни страстта си към красотата в кариера. Учи от майстори с над 20 години опит в България и Чикаго.
@@ -797,15 +797,11 @@ const AcademyPromo = () => {
         </div>
 
         {/* CTA */}
-        <div style={{ display:'flex', flexDirection: isMobile ? 'column' : 'row', alignItems:'center', justifyContent:'center', gap: isMobile ? '16px' : '24px' }}>
-          <a href="academy.html" style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '11px' : '12px', fontWeight:600, letterSpacing:'0.2em', textTransform:'uppercase', color:'#0a0a0a', background:'linear-gradient(90deg,#edd9bc 0%,#b87333 50%,#7a4520 100%)', borderRadius:'5px', padding: isMobile ? '14px 32px' : '15px 44px', textDecoration:'none', display:'inline-block', boxShadow:'0 4px 20px rgba(184,115,51,0.3)', transition:'all 0.4s ease', textAlign:'center' }}
+        <div style={{ textAlign:'center' }}>
+          <a href="academy.html" style={{ fontFamily:"'Cinzel',serif", fontSize: isMobile ? '11px' : '12px', fontWeight:600, letterSpacing:'0.2em', textTransform:'uppercase', color:'#0a0a0a', background:'#edd9bc', borderRadius:'5px', padding: isMobile ? '14px 32px' : '15px 44px', textDecoration:'none', display:'inline-block', boxShadow:'0 4px 20px rgba(184,115,51,0.3)', transition:'all 0.4s ease', textAlign:'center' }}
             onMouseEnter={e=>{e.currentTarget.style.opacity='0.88';e.currentTarget.style.boxShadow='0 6px 32px rgba(184,115,51,0.5)';}}
             onMouseLeave={e=>{e.currentTarget.style.opacity='1';e.currentTarget.style.boxShadow='0 4px 20px rgba(184,115,51,0.3)';}}
-          >Разгледай курсовете</a>
-          <a href="academy.html" style={{ fontFamily:"'Cormorant Garamond',serif", fontSize: isMobile ? '15px' : '16px', fontWeight:300, letterSpacing:'0.08em', color:'rgba(240,232,208,0.6)', textDecoration:'none', display:'inline-flex', alignItems:'center', gap:'6px', transition:'color 0.3s ease' }}
-            onMouseEnter={e=>{e.currentTarget.style.color='#b87333';}}
-            onMouseLeave={e=>{e.currentTarget.style.color='rgba(240,232,208,0.6)';}}
-          >Запиши се сега →</a>
+          >Разгледай модулите</a>
         </div>
       </div>
     </section>
